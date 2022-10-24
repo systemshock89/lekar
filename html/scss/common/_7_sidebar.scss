@@ -1,0 +1,289 @@
+.sidebar{
+  aside{
+    > div:not(:last-child){
+      margin-bottom: 30px;
+    }
+  }
+}
+
+// прилипающий vertical-menu
+//.sidebar{
+//  aside,
+//  .vertical-menu-container{
+//    height: 100%;
+//    .vertical-menu{
+//      position: sticky;
+//      top: 70px;
+//    }
+//  }
+//}
+//.page-content{
+//  overflow: inherit;
+//}
+//.content-column{
+//  overflow: hidden;
+//}
+// /прилипающий vertical-menu
+
+@mixin vertical-menu() {
+/*==========  VERTICAL MENU  ==========*/
+.vertical-menu-container {
+  .h2 {
+    @include media((
+            min-height: (all: 43px, lg: 33px)
+    ));
+  }
+}
+
+.vertical-menu ul {
+  @extend %list-unstyled;
+  @include media((
+          font-size: (lg: 14px)
+  ));
+
+  // 1 level vertical-menu
+  &.level1 {
+    border: 1px solid #ebeef1;
+    border-bottom: none;
+
+    > li {
+      > .item-wrap > .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        min-height: 42px;
+        @include media((
+                padding: (all: 6px 25px 6px 12px, lg: 6px 20px 6px 12px),
+        ));
+
+
+        text-decoration: none;
+        color: $default-font-color;
+        border-bottom: 1px solid #ebeef1;
+        line-height: 1.2;
+
+        span {
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+      > .item-wrap > .item:hover,
+      &.active > .item-wrap > .item,
+      &.selected > .item-wrap > .item {
+        background-color: $accent-color3;
+        color: #fff;
+
+        + .submenu-btn {
+          color: #fff;
+        }
+      }
+
+      > .item-wrap {
+        position: relative;
+
+        .submenu-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+          right: 0;
+          text-decoration: none;
+
+          @include media((
+                  width: (all: 30px, lg: 25px),
+          ));
+          height: 100%;
+          color: #ACACAC;
+          font-size: 13px;
+
+          &:after {
+            content: "\f054";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+          }
+
+          &:hover {
+            color: $default-font-color;
+          }
+
+          &.submenu-btn-show:after {
+            content: "\f078";
+          }
+
+          &.submenu-btn-hide:after {
+            content: "\f054" !important;
+          }
+        }
+      }
+
+      &.active > .item-wrap > .submenu-btn,
+      &.selected > .item-wrap > .submenu-btn {
+        color: #fff;
+
+        &:after {
+          content: "\f078";
+        }
+
+        &:hover {
+          opacity: .8;
+        }
+      }
+
+      &.active,
+      &.selected {
+        ul.level2 {
+          display: block;
+        }
+      }
+    }
+  }
+
+  // 2 level vertical-menu
+  &.level2 {
+    display: none;
+    border-top: none;
+    background-color: #f5f6f7;
+    padding: 6px 0;
+
+    > li {
+      > .item {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        padding: 6px 15px;
+        color: #666666;
+        line-height: 1.2;
+
+        span {
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+      > .item:hover,
+      &.active > .item,
+      &.selected > .item {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // vertical-menu animate
+  > li:not(.selected) {
+    a {
+      span {
+        display: block;
+        transition: transform 0.1s ease-in-out;
+      }
+
+      &:hover {
+        span {
+          transition: transform 0.1s ease-in-out;
+          transform: translateX(10px);
+        }
+      }
+    }
+  }
+}
+/*==========  /VERTICAL MENU  ==========*/
+/**/
+/**/
+}
+
+@mixin filter() {
+/*==========  FILTER  ==========*/
+.nc_netshop_filter-wrap {
+  background: #e8eff6;
+
+  .nc_netshop_filter-title {
+    font-weight: bold;
+    color: #fff;
+    background: $accent-color2;
+    @include media((
+            font-size: (all: 18px, lg: 16px, md: 14px),
+    ));
+    padding: 10px;
+  }
+
+  .nc_netshop_filter_row {
+    border-bottom: 1px solid #dfe3e8;
+    @include media((
+            padding: (all: 20px, lg: 10px),
+    ));
+
+    .nc_netshop_filter_label {
+      font-weight: bold;
+      @include media((
+              margin-bottom: (all: 10px, lg: 5px),
+      ));
+
+      label {
+        margin-bottom: 0;
+        cursor: auto;
+      }
+    }
+
+    select {
+      width: 100%;
+    }
+
+    &.nc_netshop_filter_row_range {
+      .nc_netshop_filter_field {
+        display: flex;
+
+        label {
+          margin-bottom: 0;
+          width: 50%;
+
+          input {
+            width: 100%;
+          }
+
+          &:last-child {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .range-slider {
+        margin-top: 15px;
+
+        .noUi-connect {
+
+        }
+
+        .noUi-handle {
+          //transition: background 0.1s ease-in-out;
+          &:before,
+          &:after {
+            display: none;
+          }
+
+          &:hover {
+            //transition: background 0.1s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+
+  .nc_netshop_filter_actions {
+    display: flex;
+    padding: 10px;
+
+    button {
+      width: 50%;
+
+      &:last-child {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+/*==========  /FILTER  ==========*/
+/**/
+/**/
+}

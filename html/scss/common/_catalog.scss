@@ -1,0 +1,2579 @@
+/*==========  CATALOGS  ==========*/
+@mixin catalog-products() {
+  /* catalog-products */
+  .catalog-products {
+    .item {
+      height: 100%;
+      border: 1px solid #eaebec;
+      background: #fff;
+      @include media((
+              padding: (all: 15px, lg: 10px),
+      ));
+
+      display: flex;
+      flex-direction: column;
+      .item-bottom,
+      .item-bottom2{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .img-container {
+        display: block;
+        text-decoration: none;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 300px);
+        max-height: var(--img-height, 200px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(300, 200);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        .not-available{
+          @extend %not-available;
+        }
+        .labels-container {
+          @extend %labels-container;
+        }
+        .dopimages {
+          @extend %dopimages;
+        }
+      }
+
+      .name {
+        @include media((
+                margin-top: (all:15px, xs: 10px)
+        ));
+        color: $default-font-color;
+        text-decoration: none;
+        line-height: 1.2;
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      @extend %price-container;
+      .price-container {
+        @include media((
+                margin-top: (all:15px, xs: 10px)
+        ));
+        .old-price{
+          @include media((
+                  display: (xs: none)
+          ));
+        }
+        &.no-skidka{
+          @include media((
+                  padding-bottom: (all: 23px, xs: 0)
+          ));
+        }
+      }
+      .price-container-block2{
+        @include media((
+                display: (xs: none)
+        ));
+      }
+      .catalog-products-row {
+        @include media((
+                margin-top: (all:15px, xs: 10px)
+        ));
+      }
+      .tovars-counter {
+        @include tovars-counter($height: 30px);
+      }
+      .catalog-button-wrapper{
+        text-align: center;
+        margin-top: 5px;
+      }
+      .button {
+        font-size: 14px;
+        min-width: inherit;
+        min-height: 30px;
+      }
+
+      .catalog-item-bottom {
+        margin-top: 5px;
+        @include media((
+                display: (xs: none)
+        ));
+        .catalog-item-reviews {
+          text-decoration: none;
+          font-size: 12px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        .catalog-item-compare {
+          @extend %tovar-compare;
+        }
+      }
+
+    }
+  }
+
+  %not-available{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(#fff,.75);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:before{
+      content: 'Нет в наличии';
+      color: $default-font-color;
+      font-family: "Roboto Slab", sans-serif;
+      border-top:2px solid $default-font-color;
+      border-bottom:2px solid $default-font-color;
+      position: absolute;
+    }
+  }
+
+  %labels-container {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    text-align: left;
+    z-index: 1;
+    .label {
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: 3px;
+      font-size: 12px;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 4px;
+      padding: 0 3px;
+      color: #fff;
+      min-width: 53px;
+      &.akcia {
+        background: #fb3030;
+      }
+      &.hit {
+        background: #ff8707;
+      }
+      &.sovet {
+        background: #84d412;
+      }
+      &.new {
+        background: #4fa1f3;
+      }
+    }
+  }
+
+  %dopimages {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2; // чтоб перекрывало надпись "нет в наличии"
+    @include media((
+            display: ( sm:none)
+    ));
+    .dopimages-item {
+      margin: 0 2px;
+      min-width: 7px;
+      max-width: 32px;
+      border: 0;
+      background: transparent;
+      position: relative;
+      height: 100%;
+      &:before {
+        content: '';
+        height: 7px;
+        background: #666666;
+        border: 1px solid #fff;
+        position: absolute;
+        left: 0;
+        bottom: 4px;
+        width: 100%;
+      }
+      &.selected:before{
+        background: #993831;
+      }
+    }
+  }
+
+  %price-container {
+    .price {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 18px;
+      color: #000;
+      white-space: nowrap;
+    }
+    .old-price {
+      margin-left: 12px;
+      display: inline-block;
+      vertical-align: middle;
+      color: #666666;
+      text-decoration: line-through;
+      white-space: nowrap;
+    }
+    .price-container-block2 {
+      margin-top: 5px;
+    }
+    .skidka,
+    .economy {
+      float: left;
+      font-size: 12px;
+      color: #000;
+      border-radius: 3px;
+      background-color: #ffd02e;
+      padding: 0 8px;
+      margin-right: 3px;
+    }
+  }
+
+  %tovar-compare {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+    margin-bottom: 3px;
+    .far {
+      color: #9B9B9B;
+      transition: color 0.1s ease-in-out;
+    }
+    .text {
+      display: inline-block;
+      vertical-align: top;
+    }
+    &:hover {
+      .far {
+        color: $default-font-color;
+        transition: color 0.1s ease-in-out;
+      }
+      .text {
+        text-decoration: underline;
+      }
+    }
+  }
+  /**/
+
+  .catalog-products2{
+    .item{
+      border: 1px solid #eaebec;
+      background: #fff;
+      transition: box-shadow 0.1s ease-in-out;
+      @include media((
+              padding: (all:15px, sm:10px)
+      ));
+      &:not(:last-child){
+        @include media((
+                margin-bottom: (all:30px, sm:15px)
+        ));
+      }
+      .img-container {
+        display: block;
+        text-decoration: none;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 300px);
+        max-height: var(--img-height, 200px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(300, 200);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+        .no-img{
+          @include media((
+                  font-size: (sm:5rem, xs:4rem)
+          ));
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        .not-available{
+          @extend %not-available;
+        }
+        .labels-container {
+          @extend %labels-container;
+        }
+
+        .dopimages {
+          @extend %dopimages;
+        }
+      }
+
+      .name {
+        color: $default-font-color;
+        text-decoration: none;
+        line-height: 1.2;
+        display: inline-block;
+        font-weight: bold;
+        @include media((
+                font-size: (lg:14px)
+        ));
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      .text{
+        margin-top: 10px;
+        line-height: 1.2;
+        @include media((
+                font-size: (lg:14px),
+                margin-bottom: (sm:10px)
+        ));
+      }
+      .catalog-products-wrapper{
+        margin-top: 15px;
+      }
+      @extend %price-container;
+      .tovars-counter {
+        @include tovars-counter($height: 30px);
+        @include media((
+                margin-bottom: (xs: 10px)
+        ));
+      }
+      .button {
+        font-size: 14px;
+        min-width: 100%;
+        min-height: 30px;
+      }
+      &:hover {
+        box-shadow: 0 0 10px rgba(159, 159, 159, 0.4);
+        transition: box-shadow 0.1s ease-in-out;
+      }
+    }
+  }
+
+  .catalog-products3{
+    .item{
+      border: 1px solid #eaebec;
+      background: #fff;
+      transition: box-shadow 0.1s ease-in-out;
+      @include media((
+              padding: (all:15px, sm:10px)
+      ));
+
+      .img-container {
+        display: block;
+        text-decoration: none;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 300px);
+        max-height: var(--img-height, 200px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(300, 200);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+        .no-img{
+          @include media((
+                  font-size: (all:5rem, lg:3rem)
+          ));
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        .not-available{
+          @extend %not-available;
+          &:before{
+            display: none;
+          }
+          &:after{
+            content: "\f05e";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: $default-font-color;
+            position: absolute;
+            z-index: 1;
+            @include media((
+                    font-size: (all:2rem, lg:3rem)
+            ));
+          }
+        }
+        .labels-container {
+          @extend %labels-container;
+        }
+        .dopimages {
+          @extend %dopimages;
+        }
+      }
+
+      .name {
+        color: $default-font-color;
+        text-decoration: none;
+        line-height: 1.2;
+        display: inline-block;
+        @include media((
+                font-size: (lg:14px),
+                margin-bottom: (sm:10px)
+        ));
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      @extend %price-container;
+      .price-container {
+        .old-price{
+          @include media((
+                  margin-left: (all: 12px, lg:0, sm:12px)
+          ));
+        }
+      }
+      .tovars-counter {
+        @include tovars-counter($height: 30px);
+        @include media((
+                margin-bottom: (lg: 2px)
+        ));
+      }
+      .button {
+        font-size: 14px;
+        min-width: 100%;
+        min-height: 30px;
+      }
+      &:hover {
+        box-shadow: 0 0 10px rgba(159, 159, 159, 0.4);
+        transition: box-shadow 0.1s ease-in-out;
+        position: relative;
+      }
+    }
+  }
+}
+
+.doctor-list{
+  .item{
+    position: relative;
+    height: 100%;
+    z-index: 1;
+    @include media((
+            padding: (all: 20px 40px 40px 20px, lg: 10px 20px 20px 10px),
+    ));
+    &:after,
+    &:before{
+      content: '';
+      position: absolute;
+      z-index: -1;
+      @include media((
+              width: (all: calc(100% - 20px), lg: calc(100% - 10px)),
+              height: (all: calc(100% - 20px), lg: calc(100% - 10px)),
+      ));
+    }
+    &:after{
+      top: 0;
+      left: 0;
+      border-radius: 20px;
+      background-color: $accent-color-yellow3;
+    }
+    &:before{
+      border-radius: 30px;
+      background: #fff;
+      @include media((
+              top: (all: 20px, lg: 10px),
+              left: (all: 20px, lg: 10px),
+              border: (all: 7px solid $accent-color-yellow2, lg: 5px solid $accent-color-yellow2),
+      ));
+    }
+    .img-container {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: var(--img-width, 240px);
+      max-height: var(--img-height, 240px);
+      width:100%; // fix max-width bug if parent display:flex
+      img{
+        max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      }
+
+      // соотношение сторон переопределяется в cms
+      @include aspect-ratio(240, 240);
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+        transition: all 0.2s linear;
+      }
+    }
+    a.img-container:hover{
+      opacity: .8;
+    }
+    .name{
+      @include media((
+              margin-top: (all: 15px, lg: 10px),
+              font-size: (all: 16px, lg: 14px),
+              line-height: (all: 1.25, lg: 1.1),
+      ));
+      color: $accent-color;
+      font-weight: 700;
+      display: inline-block;
+      text-decoration: none;
+      &:hover{
+        color: $accent-color-yellow4;
+      }
+    }
+    .prof{
+      text-overflow: ellipsis;
+      overflow: hidden;
+      @include media((
+              margin-top: (all: 10px, lg: 5px),
+              line-height: (lg: 1.2),
+      ));
+    }
+    .descr{
+      font-size: 10px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      @include media((
+              margin-top: (all: 10px, lg: 5px)
+      ));
+      p:not(:last-child){
+        margin-bottom: 5px;
+      }
+      p:last-child{
+        margin-bottom: 0;
+      }
+    }
+
+  }
+}
+
+.doctor-list2{
+  .item{
+    position: relative;
+    height: 100%;
+    z-index: 1;
+    @include media((
+            padding: (all: 20px 40px 40px 20px, lg: 10px 20px 20px 10px),
+    ));
+    &:after,
+    &:before{
+      content: '';
+      position: absolute;
+      z-index: -1;
+      @include media((
+              width: (all: calc(100% - 20px), lg: calc(100% - 10px)),
+              height: (all: calc(100% - 20px), lg: calc(100% - 10px)),
+      ));
+    }
+    &:after{
+      top: 0;
+      left: 0;
+      border-radius: 20px;
+      background-color: $accent-color-yellow3;
+    }
+    &:before{
+      border-radius: 30px;
+      background: #fff;
+      @include media((
+              top: (all: 20px, lg: 10px),
+              left: (all: 20px, lg: 10px),
+              border: (all: 7px solid $accent-color-yellow2, lg: 5px solid $accent-color-yellow2),
+      ));
+    }
+    .img-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+
+      @include media((
+              width: (all: var(--img-width, 240px), lg: inherit!important),
+              height: (all: var(--img-height, 240px), lg: inherit!important),
+              max-width: (lg: 240px),
+              max-height: (lg: 240px),
+      ));
+      img{
+        max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      }
+
+      //display: block;
+      //max-width: var(--img-width, 240px);
+      //max-height: var(--img-height, 240px);
+      //width:100%; // fix max-width bug if parent display:flex
+      //img{
+      //  max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      //}
+
+      // соотношение сторон переопределяется в cms
+      @include aspect-ratio(240, 240);
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+        transition: all 0.2s linear;
+      }
+    }
+    a.img-container:hover{
+      opacity: .8;
+    }
+    .text-container{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .name{
+      @include media((
+              font-size: (all: 16px, md: 14px),
+              line-height: (all: 1.25, lg: 1.1),
+              margin-top: (all: 5px, md: 10px),
+      ));
+      color: $accent-color;
+      font-weight: 700;
+      display: inline-block;
+      text-decoration: none;
+      &:hover{
+        color: $accent-color-yellow4;
+      }
+    }
+    .prof{
+      text-overflow: ellipsis;
+      overflow: hidden;
+      @include media((
+              margin-top: (all: 10px, lg: 5px),
+              line-height: (lg: 1.2),
+      ));
+    }
+    .table-time-wrap{
+      &.loading{
+        aspect-ratio: 495 / 145;
+        //background: #ffde82;
+        //background: #FAFAFA;
+        position: relative;
+        &:before {
+          content: '';
+          @extend %spinner;
+          top: 50%;
+          left: 50%;
+          margin-top: -25px;
+          margin-left: -25px;
+        }
+      }
+
+      .table-time-hidden{
+        display: none;
+      }
+      .table-time-btn{
+        display: inline-block;
+        margin-top: 5px;
+        text-decoration: underline;
+        &:hover{
+          text-decoration: none;
+        }
+      }
+      .red-color{
+        margin-top: 5px;
+      }
+    }
+    .time{
+      font-size: 12px;
+      margin-top: 5px;
+      margin-left: -3px;
+      margin-right: -3px;
+      td, th{
+        padding: 2px 3px;
+        vertical-align: top;
+      }
+      th{
+        width: 120px;
+        line-height: 1.2;
+        @include media((
+                padding-right: (all: 10px, xs: 5px),
+        ));
+      }
+      td{
+        white-space: break-spaces;
+        line-height: 1.4;
+      }
+
+      tr {
+        td, th {
+          transition: background 0.1s ease-in-out, border 0.1s ease-in-out;
+        }
+        &:hover{
+          td, th {
+            transition: background 0.1s ease-in-out, border 0.1s ease-in-out;
+            background-color: $accent-color-btn-gradient1;
+          }
+        }
+      }
+    }
+    .button{
+      margin-top: 10px;
+    }
+    > .row{
+      height: 100%;
+      @include media((
+              flex-wrap: (all: nowrap, md: wrap),
+              flex-direction: (md: column),
+      ));
+      .col-xl.col-lg-8{
+        flex-grow: 1;
+      }
+      // на случай, если текст будет большим, чтобы картинка не съезжала
+      //> .col {
+      //  @include media((
+      //          width: (all: calc(100% - var(--img-width, 240px) - 15px - 15px), lg: inherit)
+      //  ));
+      //}
+    }
+
+  }
+}
+
+@mixin catalog-gallery() {
+  /* catalog-gallery-album */
+  .catalog-gallery-album {
+    .item {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      @include media((
+              padding-bottom: (all: 40px, lg: 20px),
+      ));
+      .img-border{
+        &:after,
+        &:before{
+          content: '';
+          position: absolute;
+          @include media((
+                  width: (all: calc(100% + 40px), lg: calc(100% + 20px)),
+                  height: (all: calc(100% + 40px), lg: calc(100% + 20px)),
+          ));
+        }
+        &:after{
+          top: 0;
+          left: 0;
+          border-radius: 30px;
+          z-index: -1;
+          @include media((
+                  border: (all: 7px solid $accent-color-yellow2, lg: 5px solid $accent-color-yellow2),
+          ));
+          background: #fff;
+        }
+        &:before{
+          @include media((
+                  top: (all: -20px, lg: -10px),
+                  left: (all: -20px, lg: -10px),
+                  border: (all: 20px solid $accent-color-yellow3, lg: 10px solid $accent-color-yellow3),
+          ));
+          border-radius: 20px;
+          z-index: 1;
+        }
+      }
+      .img-container {
+        @include media((
+                margin-top: (all: 20px, lg: 10px),
+                margin-left: (all: 20px, lg: 10px),
+        ));
+        max-width: var(--img-width, 410px);
+        max-height: var(--img-height, 274px);
+        //width:100%; // fix max-width bug if parent display:flex
+        @include media((
+                width: (all: calc(100% - 60px), lg: calc(100% - 30px)),
+        ));
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+          z-index: 1;
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(410, 274);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+          transition: all 0.2s linear;
+        }
+      }
+      .name {
+        display: block;
+        @include media((
+                margin-top: (all: 50px, lg: 30px)
+        ));
+        color: $default-font-color;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      &:hover{
+        .img-container img {
+          opacity: .8;
+        }
+      }
+    }
+  }
+
+  /* catalog-gallery */
+  .catalog-gallery {
+    .item {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      @include media((
+              padding-bottom: (all: 40px, lg: 20px),
+      ));
+      .img-border{
+        &:after,
+        &:before{
+          content: '';
+          position: absolute;
+          @include media((
+                  width: (all: calc(100% + 40px), lg: calc(100% + 20px)),
+                  height: (all: calc(100% + 40px), lg: calc(100% + 20px)),
+          ));
+        }
+        &:after{
+          top: 0;
+          left: 0;
+          border-radius: 30px;
+          //z-index: -1;
+          @include media((
+                  border: (all: 7px solid $accent-color-yellow2, lg: 5px solid $accent-color-yellow2),
+          ));
+          background: #fff;
+          //z-index: 1;
+        }
+        &:before{
+          @include media((
+                  top: (all: -20px, lg: -10px),
+                  left: (all: -20px, lg: -10px),
+                  border: (all: 20px solid $accent-color-yellow3, lg: 10px solid $accent-color-yellow3),
+          ));
+          border-radius: 20px;
+          z-index: 1;
+        }
+      }
+      .img-container {
+        @include media((
+                margin-top: (all: 20px, lg: 10px),
+                margin-left: (all: 20px, lg: 10px),
+        ));
+        max-width: var(--img-width, 410px);
+        max-height: var(--img-height, 274px);
+        //width:100%; // fix max-width bug if parent display:flex
+        @include media((
+                width: (all: calc(100% - 60px), lg: calc(100% - 30px)),
+        ));
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+          z-index: 1;
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(410, 274);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+          transition: all 0.2s linear;
+        }
+      }
+      .name {
+        display: block;
+        @include media((
+                margin-top: (all: 50px, lg: 30px)
+        ));
+        color: $default-font-color;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      &:hover{
+        .img-container img {
+          opacity: .8;
+        }
+      }
+    }
+  }
+
+  // притягивание ФОТО из альбомов
+  .catalog-gallery-wrap{
+    .catalog-gallery{
+      &:not(:last-child){
+        @include media((
+                margin-bottom: (all: 30px, xs:15px),
+        ));
+      }
+
+      //ячейки
+      div.row-mb-30-minus:last-child{
+        //margin-bottom: -30px;
+        @include media((
+                margin-bottom: (all: -30px, xs: -15px)
+        ));
+      }
+    }
+  }
+}
+
+@mixin catalog-gallery-fluid() {
+  /* catalog-gallery-album-fluid */
+  .catalog-gallery-album-fluid {
+    .container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    @extend %catalog-gallery-fluid-margin;
+    .item {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      -webkit-appearance: button;
+      .img-container {
+        overflow: hidden;
+        img {
+          -webkit-appearance: button;
+        }
+        &:after {
+          display: none;
+        }
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 650px);
+        max-height: var(--img-height, 434px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(650, 434);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+          transition: all 0.2s linear;
+        }
+      }
+      .name {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+
+        opacity: 0;
+        color: #fff;
+        @include media((
+                font-size: (all: 18px, sm: 14px)
+        ));
+        text-overflow: ellipsis;
+        overflow: hidden;
+        transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+        &:after {
+          margin-top: 8px;
+          display: block;
+          width: 100%;
+          height: 60px;
+          z-index: 1;
+          content: "\f03e";
+          font-family: 'Font Awesome 5 Free';
+          font-size: 50px;
+          color: #fff;
+          text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+        }
+      }
+      &:hover {
+        .img-container {
+          img,
+          .no-img {
+            transform: scale(1.1, 1.1);
+          }
+        }
+        .name {
+          transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+          opacity: 1;
+          background: rgba(#1e1e1e, .87);
+        }
+      }
+    }
+
+    &.carousel-slider-custom .owl-carousel{
+      .owl-nav{
+        [class*=owl-]{
+          &.owl-prev{
+            left: 30px;
+          }
+          &.owl-next{
+            right: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  /* catalog-gallery-fluid */
+  .catalog-gallery-fluid {
+    .container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    @extend %catalog-gallery-fluid-margin;
+    .item {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      -webkit-appearance: button;
+      .img-container {
+        overflow: hidden;
+        img {
+          -webkit-appearance: button;
+        }
+        &:after {
+          display: none;
+        }
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 650px);
+        max-height: var(--img-height, 434px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(650, 434);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+          transition: all 0.2s linear;
+        }
+      }
+      .name {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; // https://github.com/fancyapps/fancybox/issues/1546
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+
+        opacity: 0;
+        color: #fff;
+        line-height: 1.2;
+        @include media((
+                font-size: (all: 18px, sm: 14px)
+        ));
+        text-overflow: ellipsis;
+        overflow: hidden;
+        transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+        &:after {
+          margin-top: 8px;
+          display: block;
+          width: 100%;
+          height: 60px;
+          z-index: 1;
+          content: "\f00e";
+          font-family: 'Font Awesome 5 Free';
+          font-size: 42px;
+          font-weight: 900;
+          color: #fff;
+          text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+        }
+      }
+      &:hover {
+        .img-container img {
+          transform: scale(1.1, 1.1);
+        }
+        .name {
+          transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+          opacity: 1;
+          background: rgba(#1e1e1e, .87);
+        }
+      }
+    }
+
+    &.carousel-slider-custom .owl-carousel{
+      .owl-nav{
+        [class*=owl-]{
+          &.owl-prev{
+            left: 30px;
+          }
+          &.owl-next{
+            right: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .catalog-gallery-fluid,
+    .catalog-gallery-album-fluid{
+      .container-fluid{
+        padding-left: 15px;
+        padding-right: 15px;
+        max-width: 540px;
+        > .row{
+          @include row-mini(30px);
+          > [class*="col-"]{
+            margin-bottom: 30px;
+          }
+        }
+      }
+      .item{
+        -webkit-appearance: inherit;
+        .img-container {
+          img{
+            -webkit-appearance: inherit;
+          }
+        }
+        .name{
+          opacity: 1;
+          position: relative;
+          display: block;
+          color: $default-font-color;
+
+          background: transparent!important;
+          &:after {
+            display: none;
+          }
+          &:not(:empty){
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 575px) {
+    .catalog-gallery-fluid,
+    .catalog-gallery-album-fluid{
+      .container-fluid{
+        max-width: inherit;
+        > .row{
+          @include row-mini(15px);
+          > [class*="col-"]{
+            margin-bottom: 15px;
+          }
+        }
+      }
+      .item{
+        .name{
+          &:not(:empty){
+            margin-top: 7px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+%catalog-gallery-fluid-margin{
+
+  .container-fluid:not(:last-child){
+    //margin-bottom: 30px;
+    @include media((
+            margin-bottom: (all: 30px, xs: 15px)
+    ));
+  }
+
+  // Случай, когда последним блоком является блок row с ячейками, у которых есть нижний отступ mb-30.
+  // Такому блоку необходимо подставить к row класс row-mb-30-minus, добавив тем самым отрицательный отступ к row
+  // В галерее на всю ширину такие ячейки появляются только на экране sm, т.е. это делать надо на sm и xs
+  &:not(.block-padding-disabled){
+    > .container-fluid{
+      //ячейки
+      > div.row-mb-30-minus:last-child{
+        @include media((
+                margin-bottom: (sm: -30px, xs: -15px)
+        ));
+      }
+    }
+  }
+
+  // Если за картинками такой галереи идут элементы (текст снизу, пагинация или кнопка)
+  // они расположены в container
+  // Добавляем им отступы от картинок галереи (кроме мобильных, где галерея превращается в обычную)
+  .container-fluid,
+  .tpl-block-list-objects{
+    + .container{
+      @include media((
+              margin-top: (all: -30px, sm: 0)
+      ));
+      > div:first-child{
+        @include media((
+                margin-top: (all: 60px, sm: 0)
+        ));
+      }
+    }
+  }
+
+}
+
+@mixin catalog-sections() {
+  /* catalog-sections */
+  .catalog-sections {
+    .item {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      .img-border{
+        @include media((
+                padding: (all: 10px, xs: 5px)
+        ));
+        border: 1px solid #eaebec;
+        background: #fff;
+        transition: box-shadow 0.1s ease-in-out;
+        .img-container {
+          margin-left: auto;
+          margin-right: auto;
+
+          max-width: var(--img-width, 410px);
+          max-height: var(--img-height, 257px);
+          width:100%; // fix max-width bug if parent display:flex
+          img{
+            max-height: 100%; //чтобы вписать в область длинную узкую картинку
+          }
+
+          // соотношение сторон переопределяется в cms
+          @include aspect-ratio(410, 257);
+
+          position: relative;
+          img,
+          .no-img{
+            @extend %img-centered;
+          }
+        }
+      }
+      .name {
+        display: block;
+        color: $default-font-color;
+        line-height: 1.2;
+        transition: color 0.1s ease-in-out;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        @include media((
+                margin-top: (all: 10px, xs: 7px)
+        ));
+      }
+      &:hover {
+        .img-border {
+          box-shadow: 0 0 10px rgba(159, 159, 159, 0.4);
+          transition: box-shadow 0.1s ease-in-out;
+        }
+        .name {
+          color: $accent-color;
+          transition: color 0.1s ease-in-out;
+        }
+      }
+    }
+    //&.object-fit-cover {
+    //  .item .img-border .img-container img {
+    //    width: 100%;
+    //    object-fit: cover;
+    //  }
+    //}
+  }
+
+  .catalog-sections-search{
+    ul{
+      @extend %list-unstyled;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .item{
+      a{
+        min-height: 30px;
+        padding-bottom: 10px;
+        line-height: 1.1;
+        border-bottom: 1px solid $accent-color-gray1;
+        display: flex;
+        align-items: center;
+        gap: 5px 10px;
+        flex-wrap: wrap;
+        @include media((
+                font-size: (all: 16px, md: 14px),
+        ));
+        .item-category{
+          padding: 3px;
+          background: $accent-color;
+          color: #fff;
+          border-radius: 4px;
+          display: inline-block;
+          font-size: 14px;
+        }
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.catalog-sections2{
+  .item{
+    box-shadow: 12px 16px 50px rgba(55, 129, 110, 0.15);
+    border-radius: 30px;
+    position: relative;
+    height: 100%;
+    background-color: #fff;
+    background-position: right 20px bottom 20px;
+    background-repeat: no-repeat;
+    @include media((
+            background-size: (lg: 130px),
+            padding: (all: 38px 40px 44px 40px, lg: 30px, md: 20px),
+    ));
+    &:before{
+      content: '';
+      border-radius: 20px;
+      border: 1px dashed $accent-color-gray2;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+    }
+    //&:after{
+    //  content: '';
+    //  position: absolute;
+    //  right: 20px;
+    //  bottom: 20px;
+    //  background-repeat: no-repeat;
+    //  background-size: contain;
+    //  background-position: top right;
+    //  @include media((
+    //          width: (all: 180px, lg: 130px),
+    //          height: (all: 180px, lg: 130px),
+    //  ));
+    //}
+    .name{
+      @include media((
+              font-size: (all: 25px, lg: 20px, md: 16px),
+      ));
+      position: relative;
+      color: $accent-color;
+      font-weight: 700;
+      line-height: 1.1;
+      display: inline-block;
+      text-decoration: none;
+      &:hover{
+        color: $accent-color-yellow4;
+      }
+    }
+    ul{
+      position: relative;
+      @include media((
+              margin-top: (all: 30px, lg: 10px),
+      ));
+      @extend %list-unstyled;
+      > li{
+        > a{
+          @include media((
+                  font-size: (all: 16px, lg: 14px),
+          ));
+          display: inline-flex;
+          color: $default-font-color;
+          text-decoration: none;
+          line-height: 1.1;
+          &:before {
+            content: "\f105";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: $accent-color3;
+            @include media((
+                    margin-right: (all: 7px, lg: 5px),
+            ));
+          }
+
+          &:hover{
+            color: $accent-color;
+          }
+        }
+        &:not(:last-child){
+          > a{
+            @include media((
+                    margin-bottom: (all: 12px, lg: 8px),
+            ));
+          }
+        }
+      }
+    }
+  }
+  //[class*="col-"]:nth-child(1){
+  //  .item{
+  //    &:after{
+  //      //content: url('../img/ico1.png');
+  //      background-image: url('../img/ico1.png');
+  //    }
+  //  }
+  //}
+  //[class*="col-"]:nth-child(2){
+  //  .item{
+  //    &:after{
+  //      background-image: url('../img/ico2.png');
+  //    }
+  //  }
+  //}
+  //[class*="col-"]:nth-child(3){
+  //  .item{
+  //    &:after{
+  //      background-image: url('../img/ico3.png');
+  //    }
+  //  }
+  //}
+  //[class*="col-"]:nth-child(4){
+  //  .item{
+  //    &:after{
+  //      background-image: url('../img/ico4.png');
+  //    }
+  //  }
+  //}
+}
+
+@mixin catalog-advantage() {
+  /* catalog-advantage */
+  .catalog-advantage-variant1 {
+    .item {
+      text-align: center;
+      height: 100%;
+      .img-container {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 100px);
+        max-height: var(--img-height, 100px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(100, 100);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+        .no-img{
+          font-size: 4rem;
+        }
+      }
+      .text-container{
+        line-height: 1.2;
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+
+          text-overflow: ellipsis;
+          overflow: hidden;
+          @include media((
+                  margin-top: (all: 10px, xs: 7px)
+          ));
+          + .text{
+            @include media((
+                    margin-top: (xs: 5px)
+            ));
+          }
+        }
+        a.title{
+          display: inline-block;
+          text-decoration: none;
+        }
+        .text {
+          font-size: 14px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          @include media((
+                  margin-top: (all: 10px, xs: 7px)
+          ));
+        }
+      }
+    }
+    a.item{
+      text-decoration: none;
+      display: block;
+      .img-container{
+        transition: opacity 0.1s ease-in-out;
+      }
+      .title,
+      .text{
+        transition: color 0.1s ease-in-out;
+      }
+      &:hover{
+        .img-container {
+          opacity: 0.8;
+          transition: opacity 0.1s ease-in-out, border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        }
+        &.item-padding {
+          box-shadow: 0 0 10px rgba(159, 159, 159, 0.4);
+          transition: border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        }
+        .title,
+        .text{
+          color: $accent-color;
+          transition: color 0.1s ease-in-out;
+        }
+      }
+    }
+  }
+
+  .catalog-advantage-variant2 {
+    .item {
+      height: 100%;
+
+      .img-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include media((
+                width: (all: var(--img-width, 35px), md: inherit!important),
+                height: (all: var(--img-height, 30px), md: inherit!important),
+        ));
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(100, 100);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+        .no-img{
+          font-size: 4rem;
+        }
+
+        /*
+        // если у картинки нужен фон
+        &:before{
+          content: '';
+          display: block;
+          width: 100%;
+          padding-top: 100%; // чтобы фон был в пропорции 1:1
+
+          background: #c42026;
+          border-radius: 50%;
+        }
+        img{
+          // уменьшаем максимальный размер картинки, чтоб на маленьких разрешениях она не казалась слишком большой на фоне
+          // как тут https://yadi.sk/i/zkuZ7C_yp1nPzg
+          // а была как тут https://yadi.sk/i/l0W0XaAodibxvQ
+          max-width: calc(100% - 20px);
+          max-height: calc(100% - 20px);
+        }
+        */
+      }
+      .text-container{
+        margin-top: 5px;
+        @include media((
+                line-height: (all: 1.43, lg: 1.2),
+        ));
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+
+          text-overflow: ellipsis;
+          overflow: hidden;
+          + .text{
+            @include media((
+                    margin-top: (all: 10px, xs: 5px)
+            ));
+          }
+        }
+        .text {
+          font-size: 14px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+      > .row{
+        @include row-mini(10px);
+        //@media only screen and (max-width: 767px) {
+        //  @include row-mini(15px);
+        //}
+
+        // на случай, если текст будет большим, чтобы картинка не съезжала
+        flex-wrap: nowrap;
+        > .col-xl {
+          @include media((
+                  width: (all: calc(100% - var(--img-width, 100px) - 15px - 15px), lg: inherit)
+          ));
+        }
+      }
+    }
+    a.item{
+      display: block;
+      text-decoration: none;
+      color: $default-font-color;
+      .img-container{
+        transition: opacity 0.1s ease-in-out;
+      }
+      .title,
+      .text{
+        transition: color 0.1s ease-in-out;
+      }
+      &:hover{
+        .img-container {
+          opacity: 0.8;
+          transition: opacity 0.1s ease-in-out;
+        }
+        &.item-padding {
+          box-shadow: 0 0 10px rgba(159, 159, 159, 0.4);
+          transition: border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        }
+        .title,
+        .text{
+          color: $accent-color;
+          transition: color 0.1s ease-in-out;
+        }
+      }
+    }
+  }
+
+  .catalog-advantage-variant5 {
+    .item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      .img-container {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 410px);
+        max-height: var(--img-height, 302px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(410, 302);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+      }
+      .text-container {
+        display: block;
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        line-height: 1.2;
+        .name {
+          //display: inline-block;
+          display: inline-flex; // не inline-block - чтобы не было промежутка между .name и .text
+          padding: 7px 10px;
+          background: $accent-color;
+          color: #fff;
+          @include media((
+                  font-size: (all: 18px, sm: 16px)
+          ));
+
+          // многоточие при inline-flex можно поставить только с помощью доп. дива .text-div
+          max-width: 100%;
+          .text-div{
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          + .text{
+            @include media((
+                    padding-top: (all: 5px, xs: 0)
+            ));
+          }
+        }
+        .text {
+          display: inline-flex;
+          background: $accent-color;
+          color: #fff;
+          padding: 7px 10px;
+
+          max-width: 100%;
+          .text-div{
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+        }
+      }
+      @media only screen and (max-width: 767px) {
+        .text-container{
+          position: relative;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          flex-grow: 1;
+          background: $accent-color;
+          padding: 7px;
+          .name{
+            display: block;
+            padding: 0;
+          }
+          .text{
+            display: block;
+            padding: 0!important;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+    a.item {
+      text-decoration: none;
+      .img-container {
+        overflow: hidden;
+        .no-img,
+        img {
+          transition: all 0.2s linear;
+        }
+      }
+      &:hover .img-container {
+        .no-img,
+        img {
+          transform: scale(1.1, 1.1);
+        }
+      }
+    }
+  }
+
+  .catalog-advantage-variant6 {
+    .item {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      .img-container {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 330px);
+        max-height: var(--img-height, 243px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(330, 243);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+      }
+      .text-container {
+        flex-grow: 1;
+        background: $accent-color;
+        color: #fff;
+        line-height: 1.2;
+        @include media((
+                padding: (all: 10px 15px, sm: 10px)
+        ));
+        .name {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          @include media((
+                  font-size: (all: 18px, xs: 16px)
+          ));
+          + .text{
+            @include media((
+                    margin-top: (all: 10px, xs: 5px)
+            ));
+          }
+        }
+        .text {
+          font-size: 14px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
+    a.item {
+      text-decoration: none;
+      .img-container {
+        overflow: hidden;
+        .no-img,
+        img {
+          transition: all 0.2s linear;
+        }
+      }
+      &:hover .img-container {
+        .no-img,
+        img {
+          transform: scale(1.1, 1.1);
+        }
+      }
+    }
+  }
+
+  .catalog-advantage-variant7 {
+    .item {
+      display: block;
+      height: 100%;
+      .img-container {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 330px);
+        max-height: var(--img-height, 243px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(330, 243);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+      }
+      .text-container {
+        line-height: 1.2;
+        .name {
+          @include media((
+                  font-size: (all: 18px, xs: 16px),
+                  margin-top: (all: 10px, xs: 7px)
+          ));
+          color: $accent-color;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          + .text{
+            @include media((
+                    margin-top: (all: 10px, xs: 5px)
+            ));
+          }
+        }
+        .text {
+          font-size: 14px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
+    a.item {
+      text-decoration: none;
+      .img-container {
+        overflow: hidden;
+        .no-img,
+        img {
+          transition: all 0.2s linear;
+        }
+      }
+      &:hover .img-container {
+        .no-img,
+        img {
+          transform: scale(1.1, 1.1);
+        }
+      }
+    }
+  }
+
+  .catalog-advantage-variant8 {
+    .item {
+      height: 100%;
+      padding-top: 20px;
+      position: relative;
+      &:after,
+      &:before{
+        content: '';
+        position: absolute;
+      }
+      &:after{
+        top: 10px;
+        left: 30px;
+        width: calc(100% - 60px);
+        height: calc(100% - 20px);
+        border-radius: 20px;
+        border: 1px dashed $accent-color-gray2;
+      }
+      &:before{
+        top: 0;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: 100%;
+        background: #fff;
+        border-radius: 30px;
+      }
+      .img-container {
+        z-index: 1;
+        border-radius: 20px;
+        overflow: hidden;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 410px);
+        max-height: var(--img-height, 210px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(410, 210);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+      }
+      a.img-container {
+        display: block;
+        .no-img,
+        img {
+          transition: all 0.2s linear;
+        }
+        &:hover {
+          .no-img,
+          img {
+            transform: scale(1.1, 1.1);
+          }
+        }
+      }
+      .text-container {
+        position: relative;
+        line-height: 1.2;
+        z-index: 1;
+        @include media((
+                padding: (all: 26px 60px 37px 60px, lg: 15px 45px 20px 45px),
+        ));
+        .name {
+          color: $accent-color;
+          font-weight: 700;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          line-height: 1;
+          @include media((
+                  font-size: (all: 25px, lg: 20px, md: 18px, sm: 16px),
+          ));
+        }
+        a.name {
+          text-decoration: none;
+          &:hover {
+            color: $accent-color-yellow4;
+          }
+        }
+        .text {
+          @include media((
+                  font-size: (all: 16px, lg: 14px),
+                  margin-top: (all: 20px, lg: 15px, sm: 5px),
+          ));
+          ul{
+            @extend %list-unstyled;
+            li:not(:last-child){
+              @include media((
+                      margin-bottom: (all: 10px, lg: 8px, md: 5px),
+              ));
+            }
+          }
+          a{
+            //display: inline-block;
+            display: inline-flex;
+            text-decoration: none;
+            color: $default-font-color;
+            &:before {
+              content: "\f105";
+              font-family: 'Font Awesome 5 Free';
+              font-weight: 900;
+              margin-right: 7px;
+              color: $accent-color3;
+            }
+            &:hover{
+              color: $accent-color;
+            }
+          }
+          //@extend %text-elements;
+        }
+      }
+    }
+  }
+
+  .catalog-advantage-variant9 {
+    .item {
+      position: relative;
+      display: block;
+      max-width: 180px;
+      max-height: 180px;
+      height: 100%;
+
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      text-decoration: none;
+      transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)!important;
+
+      background-color: var(--item_bg);
+      box-shadow: 6px 8px 20px rgba(6, 7, 7, 0.1);
+      border-radius: 50%;
+      &:after {
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      }
+      &:hover {
+        transform: scale(1.25, 1.25);
+        &:after {
+          opacity: 1;
+        }
+      }
+      .img-container{
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 180px);
+        max-height: var(--img-height, 180px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(180, 180);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+      }
+      .item-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        line-height: 1.2;
+      }
+      .count {
+        @include media((
+                font-size: (all: 40px, sm: 30px)
+        ));
+        font-weight: bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    a.item {
+      text-decoration: none;
+      &:hover {
+        background: $accent-color;
+        color: #fff;
+      }
+    }
+    &.carousel-slider-custom{
+      .item{
+        box-shadow: none;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+  }
+
+  .catalog-advantage-animate{
+    .item{
+      visibility: hidden;
+    }
+    [class*="col-"] {
+      &:nth-child(2) {
+        .item {
+          animation-delay: .2s
+        }
+      }
+      &:nth-child(3) {
+        .item {
+          animation-delay: .3s
+        }
+      }
+      &:nth-child(4) {
+        .item {
+          animation-delay: .6s
+        }
+      }
+      &:nth-child(5) {
+        .item {
+          animation-delay: .8s
+        }
+      }
+      &:nth-child(6) {
+        .item {
+          animation-delay: 1s
+        }
+      }
+      &:nth-child(7) {
+        .item {
+          animation-delay: 1.2s
+        }
+      }
+      &:nth-child(8) {
+        .item {
+          animation-delay: 1.4s
+        }
+      }
+    }
+  }
+}
+
+/* ВИДЕОГАЛЕРЕЯ И ОТДЕЛЬНЫЙ БЛОК */
+iframe, object, embed{
+  border: 0;
+}
+%video-elements{
+  iframe, object, embed{
+    //width: 100%!important;
+    max-width: 100%;
+
+    // Стили соотношения сторон для iframe вставленного без вспомогательных дивов
+    // на мобильнике видео будет на всю ширину, а высотой как видео в указанной пропорции (напр, 16:9)
+    // иногда у видео будут поялвяться мелкие полоски сверху и снизу
+    // ! может и не нужны уже эти стили, т.к. есть плагин вyoutube в слувшещк, где iframe полностью адаптивные
+    @include media((
+            width: (sm: 100%),
+    ));
+    &,
+    .aspect_ratio_16by9{
+      @include media((
+              height: (sm: 286.88px, xs:306.56px, 425: 222.19px, 375: 194.06px, 320:163.13px)
+      ));
+    }
+    &.aspect_ratio_21by9{
+      @include media((
+              height: (sm: 218.56px, xs:233.56px, 425: 169.28px, 375: 147.84px, 320:124.28px)
+      ));
+    }
+    &.aspect_ratio_4by3{
+      @include media((
+              height: (sm: 382.5px, xs:408.75px, 425: 296.25px, 375: 258.75px, 320:217.5px)
+      ));
+    }
+    &.aspect_ratio_1by1{
+      @include media((
+              height: (sm: 510px, xs:545px, 425: 395px, 375: 345px, 320:290px)
+      ));
+    }
+
+    // Стили позиционирования для iframe вставленного без вспомогательных дивов
+    &.float-start{
+      @include media((
+              margin-right: (all: 30px, sm:0)
+      ));
+    }
+    &.float-end{
+      @include media((
+              margin-left: (all: 30px, sm:0)
+      ));
+    }
+    &.center{
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    &.fullwidth{
+      width: 100%;
+    }
+
+  }
+
+  // Стили для тега video
+  .ckeditor-html5-video{
+    max-width: 100%;
+    //video{
+    //  @include media((
+    //          width: (sm: 100%),
+    //  ));
+    //}
+
+    // Стили позиционирования для тега video
+    &.float-start{
+      @include media((
+              margin-right: (all: 30px, sm:0),
+              float: (sm:none),
+      ));
+    }
+    &.float-end{
+      @include media((
+              margin-left: (all: 30px, sm:0),
+              float: (sm:none),
+      ));
+    }
+    &.center{
+      display: table;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &:not(.aspect_ratio_original){
+      position: relative;
+      overflow: hidden;
+      background: #000;
+      &:before{
+        content: "";
+        display: block;
+      }
+      video{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      &.aspect_ratio_16by9{
+        @include aspect-ratio(16, 9);
+      }
+      &.aspect_ratio_21by9{
+        @include aspect-ratio(21, 9);
+      }
+      &.aspect_ratio_4by3{
+        @include aspect-ratio(4, 3);
+      }
+      &.aspect_ratio_1by1{
+        @include aspect-ratio(1, 1);
+      }
+    }
+  }
+}
+
+.video-container {
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  &:before{
+    content: "";
+    display: block;
+  }
+  iframe, object, embed {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    // border: 0; выше уже задано для всех
+  }
+
+  // Стили соотношения сторон для iframe вставленного с дивом video-container
+  &,
+  &.aspect_ratio_16by9{
+    @include aspect-ratio(16, 9);
+  }
+  &.aspect_ratio_21by9{
+    @include aspect-ratio(21, 9);
+  }
+  &.aspect_ratio_4by3{
+    @include aspect-ratio(4, 3);
+  }
+  &.aspect_ratio_1by1{
+    @include aspect-ratio(1, 1);
+  }
+
+  // Стили позиционирования для iframe вставленного с дивом video-container
+  //@include media((
+  //        max-width: (sm: 100%!important),
+  //));
+  &.float-start{
+    width: 100%;
+    @include media((
+            margin-right: (all: 30px, sm:0),
+            float: (sm:none),
+    ));
+  }
+  &.float-end{
+    width: 100%;
+    @include media((
+            margin-left: (all: 30px, sm:0),
+            float: (sm:none),
+    ));
+  }
+  &.center{
+    margin-left: auto;
+    margin-right: auto;
+    //display: block;
+  }
+  &.fullwidth{
+    width: 100%;
+  }
+}
+
+.video-block{
+  .item{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    //.video-container{
+    //  background: #000;
+    //}
+    .name{
+      line-height: 1.2;
+      padding: 10px;
+      color: #fff;
+      background: $accent-color;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-grow: 1;
+    }
+  }
+}
+
+.video-block-fancybox{
+  .item{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    .img-container{
+      width:100%; // fix max-width bug if parent display:flex
+      img{
+        //max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        //width: 100%;
+      }
+
+      // Стили соотношения сторон для iframe вставленного с дивом video-container-fancybox
+      &,
+      &.aspect_ratio_16by9{
+        @include aspect-ratio(16, 9);
+      }
+      &.aspect_ratio_21by9{
+        @include aspect-ratio(21, 9);
+        img{
+          height: 100%; // превью у видео 21:9 может быть не такого соотношения, поэтому его немного растянем по высоте
+        }
+      }
+      &.aspect_ratio_4by3{
+        @include aspect-ratio(4, 3);
+      }
+      &.aspect_ratio_1by1{
+        @include aspect-ratio(1, 1);
+      }
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+      }
+    }
+    .name{
+      line-height: 1.2;
+      text-align: center;
+      padding: 10px;
+      color: #fff;
+      background: $accent-color;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-grow: 1;
+    }
+  }
+}
+.video-block-fancybox .item[data-fancybox] .img-container,
+.video-container-fancybox.img-container{
+    &:after {
+      content: "\f144";
+      opacity: 1;
+    }
+}
+.video-block-fancybox .item[data-fancybox]:hover .img-container{
+  &:after {
+    opacity: .8;
+  }
+}
+
+.video-container-fancybox{
+  // Стили позиционирования для thumbnail
+  max-width: 100%;
+  &.float-start{
+    width: 100%;
+    @include media((
+            margin-right: (all: 30px, sm:0),
+            float: (sm:none),
+    ));
+  }
+  &.float-end{
+    width: 100%;
+    @include media((
+            margin-left: (all: 30px, sm:0),
+            float: (sm:none),
+    ));
+  }
+  &.center{
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+  }
+  &.fullwidth{
+    display: block;
+    img{
+      width: 100%;
+    }
+  }
+}
+/* /ВИДЕОГАЛЕРЕЯ И ОТДЕЛЬНЫЙ БЛОК */
+
+@mixin catalog-sections-rubric() {
+  /*catalog-sections-rubric*/
+  .catalog-sections-rubric {
+    .no-gutters {
+      > [class*="col-"] {
+        margin: 0 0 -1px -1px;
+      }
+    }
+    .item {
+      @include media((
+              padding: (all: 30px, sm: 15px)
+      ));
+      border: 1px solid #f2f2f2;
+      transition: box-shadow 0.1s ease-in-out;
+      height: 100%;
+      .img-container {
+        display: inline-block;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+      .sections-container {
+        .title {
+          font-size: 16px;
+          line-height: 1.2;
+          font-weight: 700;
+          display: inline-block;
+          text-decoration: none;
+          &:hover {
+            color: $accent-color;
+          }
+        }
+        .rubric-container {
+          margin-top: 10px;
+          .link {
+            font-size: 14px;
+            display: inline-block;
+            text-decoration: none;
+            margin-right: 8px;
+            &:hover {
+              color: $accent-color;
+            }
+          }
+        }
+      }
+      .text {
+        margin-top: 15px;
+        font-size: 14px;
+      }
+      &:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.1s ease-in-out;
+      }
+    }
+  }
+  @media only screen and (max-width: 575px) {
+    .catalog-sections-rubric .item{
+      text-align: center;
+      padding: 20px;
+      .sections-container{
+        margin-top: 15px;
+        .rubric-container{
+          text-align: left;
+        }
+      }
+      .text{
+        text-align: left;
+      }
+    }
+  }
+}
+/*==========  /CATALOGS  ==========*/
+/**/
+/**/

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    @@include('head.html', {
+    "title": "Вопрос-ответ"
+    })
+    @@include('head_css.html')
+</head>
+
+<body>
+
+<div class="page">
+
+    @@include('header.html')
+
+    @@include('menu_top.html')
+
+    <!--content-->
+    <div class="page-content">
+
+        @@include('breadcrumb.html')
+
+        <div class="title-wrapper">
+            <div class="container">
+                <h1>Вопрос-ответ</h1>
+            </div>
+        </div>
+
+        <div class="faq block-margin-bottom">
+            <div class="container">
+
+                <div class="btn-wrap">
+                    <a data-fancybox="modal-faq" data-type="ajax" data-src="forms/modal_faq.html" href="javascript:;" class="button">Задать вопрос</a>
+                </div>
+
+                <div class="categories">
+                    <div class="categories-item selected">Все вопросы <span>(85)</span></div>
+                    <a href="#" class="categories-item">По строительству <span>(8)</span></a>
+                    <a href="#" class="categories-item">По проектированию <span>(5)</span></a>
+                    <a href="#" class="categories-item">По оплате <span>(8)</span></a>
+                    <a href="#" class="categories-item">Жалобы и предложения <span>(8)</span></a>
+                    <a href="#" class="categories-item">Другое название <span>(1)</span></a>
+                    <a href="#" class="categories-item">Еще название вторая строка <span>(1)</span></a>
+                </div>
+
+                <div class="pagination-ajax-wrapper mb-30">
+                    <div class="item">
+
+                        <div class="item-text text1">
+                            <div class="row row-mini20 justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="text-container">
+
+                                        <div class="item-info">
+                                            <div class="name">Сергей</div>
+                                            <time datetime="2017-05-21" class="date">01.09.2021</time>
+                                        </div>
+
+                                        <div class="title">Отзыв:</div>
+                                        <div class="text">
+                                            Обращался в клинику Лекарь в октябре 2013 года – лечил вросший ноготь.
+                                            <div class="text3">
+                                                Врач предложил современный способ – радиоволновая хирургия, быстро и без боли, без крови. Сразу отпустили домой, потребовалась 1 перевязка. Обратился потому что не надо ждать в очереди и уходить на больничный, ходить в процедурный поликлинники на перевязки и т п… все сделано у них для людей, с государственным учреждением несравнить…
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item-text text2">
+                            <div class="text-container">
+                                <div class="title">Ответ:</div>
+                                <div class="text">Спасибо за теплые слова. </div>
+                                <div class="answer-name">Администрация сайта</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-text text1">
+                            <div class="row row-mini20 justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="text-container">
+
+                                        <div class="item-info">
+                                            <div class="name">Александра</div>
+                                            <time datetime="2017-05-21" class="date">01.09.2021</time>
+                                        </div>
+
+                                        <div class="title">Отзыв:</div>
+                                        <div class="text">
+                                            Добрый день. Наблюдалась в медцентре «Лекарь» по беременности, по программе Стандарт. Это очень удобно, особенно когда нет времени сидеть в очереди в государственной женской конс. Здесь запись по времени – пришел и не ждеш никого.
+                                            <div class="text3">
+                                                Гинекологи – приятные люди, оставили ощущение грамотных специалистов. Необходимое обследование тоже проходила при медцентре – анализы там и УЗИ…Благодаря замечательным докторам моя беременность прошла без непредвиденых сюрпризов и весьма для меня легко, и теперь я счастливая мама 4-месячной малышки.
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item-text text2">
+                            <div class="text-container">
+                                <div class="title">Ответ:</div>
+                                <div class="text">Спасибо за теплые слова. </div>
+                                <div class="answer-name">Администрация сайта</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-text text1">
+                            <div class="row row-mini20 justify-content-center">
+
+                                <div class="col-md-3 col-8">
+                                    <a href="img/temp/news.jpg" data-fancybox class="img-container">
+                                        <img data-src="img/temp/news.jpg" width="308" height="202" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='308' viewBox='0 0 308 202'%3E%3C/svg%3E" class="img-fluid lazy" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="col-md-9">
+                                    <div class="text-container">
+                                        <div class="item-info">
+                                            <div class="name">Степан Иванович</div>
+                                            <time datetime="2017-05-21" class="date">21.05.2017</time>
+                                        </div>
+                                        <div class="title">Вопрос:</div>
+                                        <div class="text">Хочу купить, но скажите, это очень хороший товар? Если да, то куплю еще 100 таких.  Хочу купить, но скажите, это очень хороший товар? Если да, то куплю еще 100 таких.  Хочу купить, но скажите, это очень хороший товар? Если да, то куплю еще 100 таких. </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="item-text text2">
+                            <div class="text-container">
+                                <div class="title">Ответ:</div>
+                                <div class="text">
+                                    Конечно, этот товар очень очень очень хороший. Конечно, этот товар очень хороший. Конечно, этот товар очень хороший. Конечно, этот товар очень хороший. Конечно, этот товар очень хороший. Конечно, этот товар очень хороший. Конечно, этот товар очень хороший.
+                                    <div class="answer-name">Администрация сайта</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    @@include('footer.html')
+
+</div>
+
+<!--popup УСТАРЕЛ-->
+<div class="window" style="display: none;">
+    <div class="window-popup-overflower"></div>
+    <div class="window_body">
+        <div class="close show">x</div>
+        <div class="content">
+            <div class="block">
+                <form class="nc-form faq" enctype="multipart/form-data" method="post" action="/json/faq/">
+                    <div class="h2">Задать вопрос</div>
+
+                    <div class="item-form-element question">
+                        <span>Вопрос (*):</span>
+                        <textarea name="question[_text]"></textarea>
+                        <div class="validation-informer"><span></span></div>
+                    </div>
+
+                    <div class="item-form-element answer">
+                        <span>Ответ:</span>
+                        <textarea name="question[answer]"></textarea>
+                        <div class="validation-informer"><span></span></div>
+                    </div>
+
+                    <div class="item-form-element name">
+                        <span>ФИО:</span>
+                        <input class="name" name="question[name]" type="text">
+                        <div class="validation-informer"><span></span></div>
+                    </div>
+
+                    <div class="item-form-element email">
+                        <span>Email (*):<br>(на сайте не публикуется)</span>
+                        <input class="name" name="question[email]" type="email">
+                        <div class="validation-informer"><span></span></div>
+                    </div>
+
+                    <div class="item-form-element phone">
+                        <span>Телефон:<br>(на сайте не публикуется)</span>
+                        <input class="name" name="question[phone]" type="tel" placeholder="+7 ( ___ ) ___ - __ - __">
+                        <div class="validation-informer"><span></span></div>
+                    </div>
+
+                    <a class="button" href="#">Отправить</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@@include('widgets.html')
+
+@@include('scripts.html')
+
+</body>
+</html>

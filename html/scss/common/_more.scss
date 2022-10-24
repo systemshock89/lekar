@@ -1,0 +1,196 @@
+/*==========  MORE STYLES  ==========*/
+.catalog-top{
+  margin-bottom: 30px;
+  .sort-select{
+    border-radius: 0;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: #666666;
+  }
+  .catalog-view{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    @include media((
+            text-align: (all: right, xs: left),
+            margin-top: (xs: 15px)
+    ));
+    .title{
+      color: #666666;
+      font-size: 13px;
+      margin-right: 18px;
+    }
+    .catalog-view-wrapper{
+      display: flex;
+    }
+    .item{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ebeced;
+      margin: 0 5px;
+      text-align: center;
+      text-decoration: none;
+      .fa{
+        color: #B3B3B3;
+      }
+      &:hover,
+      &.selected{
+        background-color: #bfbfbf;
+        border: 1px solid #bfbfbf;
+        .fa{
+          color: #fff;
+        }
+
+      }
+      &:first-child{
+        margin-left: 0;
+      }
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.interactive-plan{
+  position: relative;
+  img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  svg{
+    g{
+      fill: #fff;
+      fill-opacity: .25;
+      transition: fill-opacity 0.1s ease-in-out;
+      &:hover{
+        fill-opacity: .75;
+        transition: fill-opacity 0.1s ease-in-out;
+      }
+    }
+  }
+}
+/*==========  /MORE STYLES  ==========*/
+/**/
+/**/
+/*==========  HEADER WITH VIDEO  ==========*/
+header.header-with-video{
+  @include media((
+          position: (all: sticky, sm: fixed),
+  ));
+  top: 0;
+  z-index: 4;
+}
+.index-page{
+  header.header-with-video.header-desktop{
+    background: transparent;
+    @include media((
+            margin-bottom: (all: -64px, lg:-64px, md:-64px, sm:0)
+    ));
+    transition: background 0.1s ease-in-out;
+    &.background-color{
+      background: #0e2756;
+      transition: background 0.1s ease-in-out;
+    }
+  }
+  .index-video-block{
+    position: relative;
+    background: rgba(#0f2b4d,.7) linear-gradient(to bottom, rgba(1, 17, 65, 0.57) 0%, rgba(2, 18, 65, 0.56) 38%, rgba(0, 18, 64, 0.29) 57%, rgba(0, 12, 70, 0.08) 78%, rgba(0, 0, 85, 0.01) 96%, rgba(0, 0, 128, 0) 98%, rgba(0, 0, 0, 0) 100%) ;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    @include media((
+            min-height: (all: 100vh, sm:auto),
+            padding-top: (all: 150px, md:120px, sm:50px, xs:30px),
+            padding-bottom: (all: 105px, sm:50px, xs:30px),
+    ));
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .container{
+      height: 100%;
+
+    }
+    .text-container{
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      //@include media((
+      //        padding-top: (all: 210px, sm:30px),
+      //        padding-bottom: (all: 210px, sm:30px),
+      //));
+      .text-container2{
+        .button{
+          @include media((
+                  margin-top: (all: 65px, lg: 40px, md: 20px),
+          ));
+        }
+      }
+    }
+    .title{
+      color: #fff;
+      font-weight: bold;
+      @include media((
+              font-size: (all: 70px, lg: 60px, md: 40px, sm:28px, xs:24px),
+              line-height: (all: 80px, lg:normal),
+      ));
+    }
+    .text{
+      font-size: 16px;
+      font-weight: bold;
+      color: $accent-color2;
+      a{
+        color: $accent-color2;
+      }
+      @include media((
+              font-size: (all: 16px, xs:14px),
+              margin-top: (all: 60px, lg: 40px, md:20px),
+      ));
+      .sep{
+        display: inline-block;
+        margin-left: 5px;
+        margin-right: 5px;
+
+      }
+    }
+  }
+  .button-bottom{
+    display: block;
+    //background: url('../img/arrow2.png') center no-repeat;
+    //background: url('http://modnozeleno.ru/img/arrow.png') center no-repeat;
+    background: $accent-color2;
+    width: 26px;
+    height: 60px;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -13px;
+    z-index: 1;
+    &:hover{
+      animation: button-bottom-shake .7s ease-in-out alternate infinite;
+    }
+    &:active{
+      opacity: .6;
+    }
+  }
+}
+
+@keyframes button-bottom-shake {
+  100% {
+    transform: translateY(10px);
+  }
+}
+/*==========  /HEADER WITH VIDEO  ==========*/

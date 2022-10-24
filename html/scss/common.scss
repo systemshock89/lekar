@@ -1,0 +1,52 @@
+@import "common/0_vars";
+@import 'mixins/media_screen_mixin';
+
+@import "common/1_base_styles";
+@import "common/4_header";
+@import "common/6_menu-top";
+//@import "common/7_sidebar";
+//@include vertical-menu();
+@import "common/5_footer";
+@import "common/2_base_styles2"; // базовые стили блоков и индивидуальные стили сайта и главной
+
+@import "common/catalog";
+@include catalog-products();
+@include catalog-gallery();
+@include catalog-gallery-fluid();
+@include catalog-sections();
+@include catalog-advantage();
+//@include catalog-sections-rubric();
+
+@import "common/sliders";
+@include index-slider();
+@include fullwidth-slider();
+@include carousel-slider();
+@include basic-slider();
+@include reviews-slider();
+@include synced-slider();
+//@include synced-slider-single();
+
+//@import "common/sliders_test";
+
+//@import "common/tovar";
+//@include filter();
+@import "common/table_price";
+@import "common/news";
+@import "common/faq";
+//@import "common/tabs";
+
+//@import "common/cart";
+//@import "common/cabinet"; // Личный кабинет Netcat
+//@import "common/print"; // версия для печати - оформление заказа
+@import "common/widger-phone";
+@import "common/search_netcat";
+//@import "common/more"; // редко используемые стили
+//@import "common/old"; // устаревшие стили
+//@import "common/uniform.checkbox";
+//@import "common/uniform.radio";
+
+@import "media/_0_media_xl";
+@import "media/_1_media_lg";
+@import "media/_2_media_md";
+@import "media/_3_media_sm";
+@import "media/_4_media_xs";

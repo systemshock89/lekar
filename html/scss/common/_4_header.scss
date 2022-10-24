@@ -1,0 +1,375 @@
+/*==========  HEADER  ==========*/
+.header-desktop {
+  background-image: linear-gradient(-240deg, #56ebc5 0%, #94ffba 100%);
+  @include media((
+          margin-bottom: (all: -35px, lg: -30px, md: -55px),
+  ));
+  .header-desktop1{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #71ccb5;
+    //height: 40px;
+    min-height: 40px;
+    display: flex;
+
+    //width: 100%;
+    flex-direction: column;
+    justify-content: center;
+
+    > .row{
+      height: 100%;
+    }
+    .time{
+      color: $title-font-color;
+      //width: 455px;
+      @include media((
+              width: (all: 455px, lg: auto),
+              text-align: (md: center),
+              margin-top: (md: 5px),
+      ));
+      i{
+        color: $accent-color2;
+        margin-right: 7px;
+      }
+    }
+  }
+  .header-desktop2{
+    padding-top: 16px;
+    @include media((
+            padding-bottom: (all: 57px, md: 75px),
+    ));
+  }
+  .logo {
+    display: inline-block;
+    margin-left: 11px;
+  }
+  a.logo:hover{
+    opacity: .8;
+  }
+  .address{
+    color: $title-font-color;
+    i{
+      color: $accent-color2;
+      font-size: 16px;
+      margin-right: 7px;
+    }
+  }
+  .header-wrap1{
+    //width: 455px;
+    @include media((
+            width: (all: 455px, lg: 450px),
+    ));
+    margin-top: 10px;
+  }
+  .header-wrap2 {
+    @include media((
+            margin-top: (all: 12px, md: 5px),
+    ));
+    display: flex;
+    align-items: center;
+    //justify-content: space-between;
+    justify-content: flex-end;
+    .phone{
+      white-space: nowrap;
+      color: $title-font-color;
+      font-size: 20px;
+      font-weight: 700;
+      display: inline-block;
+      text-decoration: none;
+      &:hover{
+        color: $accent-color-yellow4;
+      }
+      &:not(:first-child){
+        margin-right: 15px;
+      }
+    }
+    .whatsapp{
+      display: inline-block;
+      text-decoration: none;
+      color: $accent-color2;
+      font-size: 30px;
+      &:hover{
+        color: $accent-color-yellow4;
+      }
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 767px) {
+  /*==========  HEADER MOBILE  ==========*/
+  @import 'mixins/mburger';
+
+  .header-mobile{
+    $header-mobile-height: 44px;
+    background-image: linear-gradient(-240deg, #56ebc5 0%, #94ffba 100%);
+    //color: #fff;
+    color: rgba(0,0,0,.4);
+
+    display: flex;
+    justify-content: space-between;
+    height: $header-mobile-height;
+    &:not(.mh-sticky){
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header-mobile-buttons{
+      height: inherit;
+      display: flex;
+      a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        text-decoration: none;
+        width: 40px;
+        height: inherit;
+        color: inherit;
+        &.active{
+          background: rgba(255,255,255,.4);
+        }
+
+        &.cart {
+          position: relative;
+          .count {
+            display: flex;
+            position: absolute;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+
+            top: 2px;
+            right: 2px;
+
+            width: 20px;
+            height: 20px;
+
+            background: $orange_color;
+            font-weight: 400;
+            font-size: 12px;
+            color: #fff;
+          }
+        }
+        &.fa-calendar-alt{
+          background-image: linear-gradient(to right, $accent-color-btn-gradient1 0%, $accent-color-btn-gradient2 100%);
+        }
+        &.mgo-number{
+          text-indent: -9999px;
+          &:before{
+            text-indent: 0;
+          }
+        }
+      }
+
+      .mburger {
+        --mb-button-size: 40px;
+        --mb-bar-width: 0.6;
+        --mb-bar-height: 2px;
+        --mb-bar-spacing: 6px;
+        .mm-wrapper_opened &{
+          background: rgba(255,255,255,.4);
+        }
+      }
+    }
+
+    .header-mobile-logo{
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      line-height: 1.2;
+      overflow: hidden;
+      .header-mobile-text{
+        display: inline-block;
+        text-decoration: none;
+        color: inherit;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        &:hover,
+        &:active{
+          text-decoration: none;
+        }
+      }
+      .header-mobile-text,
+      img{
+        padding: 5px;
+      }
+      img{
+        max-height: $header-mobile-height;
+      }
+    }
+
+    .header-mobile-button-container{
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      padding: 10px 15px;
+      background: inherit;
+      &[data-button-name='search']{
+        .search-container{
+          position: relative;
+          input[type=search]{
+            border: none;
+            width: 100%;
+            padding: 6px 35px 6px 12px;
+          }
+          input[type=submit]{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 20px;
+            color: #54b39b;
+            transition: color 0.1s ease-in-out;
+            &:focus{
+              outline: none;
+            }
+
+            &:hover{
+              color: $accent-color-yellow4;
+              transition: color 0.1s ease-in-out;
+            }
+          }
+        }
+        .advancedlink{
+          display: none;
+        }
+      }
+    }
+  }
+
+  // соцсети в моб. меню
+  .mm-navbar {
+    .fa, .fab, .fas {
+      //transform: translate3d(0, 0, 0); // чтобы иконки были четкими
+      &.fa-vk{
+        color: #45668e;
+      }
+      &.fa-facebook{
+        color: #3b5998;
+      }
+      &.fa-twitter{
+        color: #1da1f2;
+      }
+      &.fa-youtube{
+        color: #ff0000;
+      }
+      &.fa-skype{
+        color: #00AFF0;
+      }
+      &.fa-instagram:before{
+        color: transparent;
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        line-height: 1;
+      }
+      &.fa-odnoklassniki{
+        color: #ed812b;
+      }
+      &.fa-whatsapp{
+        color: #075e54;
+      }
+      &.fa-viber{
+        color: #675CA8;
+      }
+      &.fa-telegram-plane{
+        color: #0088cc;
+      }
+
+    }
+  }
+
+  /* Переменные mmenu */
+  // темная тема
+  .mm-menu_theme-dark {
+    --mm-color-border: rgba(0, 0, 0, 0.3);
+    --mm-color-button: rgba(255, 255, 255, 0.4);
+    --mm-color-text: rgba(255, 255, 255, 0.85);
+    --mm-color-text-dimmed: rgba(255, 255, 255, 0.4);
+    //--mm-color-background: #333;
+    --mm-color-background: #{$accent-color2}; // фон меню
+    --mm-color-background-highlight: rgba(255, 255, 255, 0.08);
+    //--mm-color-background-emphasis: rgba(0, 0, 0, 0.1);
+    --mm-color-background-emphasis: #{$accent-color}; // фон активного пункта меню
+    --mm-shadow: 0 0 20px rgba(0, 0, 0, 0.5)
+  }
+
+  // светлая тема
+  :root {
+    --mm-line-height: 20px;
+    --mm-listitem-size: 44px;
+    --mm-navbar-size: 44px;
+    --mm-offset-top: 0;
+    --mm-offset-right: 0;
+    --mm-offset-bottom: 0;
+    --mm-offset-left: 0;
+    --mm-color-border: rgba(0, 0, 0, 0.1);
+    --mm-color-button: rgba(0, 0, 0, 0.3);
+    --mm-color-text: rgba(0, 0, 0, 0.75);
+    --mm-color-text-dimmed: rgba(0, 0, 0, 0.3);
+    --mm-color-background: linear-gradient(-240deg, #56ebc5 0%, #94ffba 100%);
+    --mm-color-background-highlight: rgba(0, 0, 0, 0.05);
+    //--mm-color-background-emphasis: rgba(255, 255, 255, 0.4);
+    --mm-color-background-emphasis: rgba(255, 255, 255, 0.6);  // фон активного пункта меню
+    --mm-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+  }
+  /* /Переменные mmenu */
+
+  // исправляет визуальный баг с кнопками подменю https://yadi.sk/i/NCIV0VfX_c5ipA
+  .mm-listitem_vertical>.mm-panel{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .mm-listitem_vertical>.mm-listitem__btn{
+    height: inherit;
+  }
+
+  //Чтобы между последним пунктом меню и кнопками не было этого промежутка https://yadi.sk/i/Z05k9zsirRWH9g
+  .mm-panel {
+    margin-bottom: -1px;
+    &:after {
+      display: none;
+    }
+  }
+
+  // чтобы у скрытых разделов в подразделах была недостающая линия https://yadi.sk/i/XJAIyV6JAss4Xg
+  .mm-listitem_opened:not(.mm-listitem_selected) > .mm-panel > .mm-listview > .mm-listitem:first-child:before{
+    content: '';
+    border-color: inherit;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    display: block;
+    position: absolute;
+    //left: 20px;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  /*==========  /HEADER MOBILE  ==========*/
+}
+
+// решает глюк - когда в длинном меню, состоящем из пунктов и подпунктов нельзя скроллить по подпунктам (колесом мыши или тачем)
+// Чтоб работало и на десктопе - пишем стиль не только для мобильного брейкпоинта!
+// scrollBugFix для этого уже не нужен.
+// Раньше использовал костыль: старую версию 8.5.4. И в js должно быть: scrollBugFix { "fix": false } чтобы на мобильных можно было скроллить пальцем
+// https://github.com/FrDH/mmenu-js/issues/1157
+// !!! Вроде как это баг исправлен в версии 8.5.17
+//.mm-panel {
+//  overscroll-behavior: auto;
+//}
+/*==========  /HEADER  ==========*/
+/**/
+/**/

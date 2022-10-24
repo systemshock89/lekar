@@ -1,0 +1,279 @@
+<!--sidebar-->
+<aside>
+
+    <div class="nc_netshop_filter-wrap">
+        <div class="nc_netshop_filter-title">Подбор по параметрам</div>
+
+        <link rel="stylesheet" href="css/nouislider.min.css">
+        <script defer src="js/lib/nouislider.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                // Пример https://refreshless.com/nouislider/examples/#section-steps-api
+                let range_slider_wrap = document.querySelector('.nc_netshop_filter_row_range'),
+                    range_slider_margin = 0, // отступ между минимальным и максимальным значком
+                    range_slider_start_min = range_slider_wrap.querySelector('.nc_netshop_filter_field_min > input'), // минимальное ТЕКУЩЕЕ значение
+                    range_slider_start_max = range_slider_wrap.querySelector('.nc_netshop_filter_field_max > input'), // максимальное ТЕКУЩЕЕ значение
+                    range_slider_range_min = parseInt(range_slider_wrap.dataset.min), // минимальное ВОЗМОЖНОЕ значение
+                    range_slider_range_max = parseInt(range_slider_wrap.dataset.max), // максимальное ВОЗМОЖНОЕ значение
+                    range_slider_inputs = [range_slider_start_min, range_slider_start_max];
+
+                let range_slider_div = document.createElement('div');
+                range_slider_div.className = 'range-slider';
+                range_slider_wrap.appendChild(range_slider_div);
+                let range_slider = range_slider_wrap.querySelector('.range-slider');
+
+                noUiSlider.create(range_slider, {
+                    start: [range_slider_start_min.value, range_slider_start_max.value],
+                    margin: range_slider_margin,
+                    connect: true,
+                    range: {
+                        'min': range_slider_range_min,
+                        'max': range_slider_range_max
+                    },
+                    format: {
+                        to: (value) => parseFloat(value).toFixed(0),
+                        from: (value) => parseFloat(value).toFixed(0)
+                    }
+                });
+
+                range_slider.noUiSlider.on('update', function (values, handle) {
+                    range_slider_inputs[handle].value = values[handle];
+                });
+
+                // Listen to keydown events on the input field.
+                range_slider_inputs.forEach(function (input, handle) {
+
+                    input.addEventListener('change', function () {
+                        range_slider.noUiSlider.setHandle(handle, this.value);
+                    });
+
+                    input.addEventListener('keydown', function (e) {
+
+                        var values = range_slider.noUiSlider.get();
+                        var value = Number(values[handle]);
+
+                        // [[handle0_down, handle0_up], [handle1_down, handle1_up]]
+                        var steps = range_slider.noUiSlider.steps();
+
+                        // [down, up]
+                        var step = steps[handle];
+
+                        var position;
+
+                        // 13 is enter,
+                        // 38 is key up,
+                        // 40 is key down.
+                        switch (e.which) {
+
+                            case 13:
+                                range_slider.noUiSlider.setHandle(handle, this.value);
+                                break;
+
+                            case 38:
+
+                                // Get step to go increase slider value (up)
+                                position = step[1];
+
+                                // false = no step is set
+                                if (position === false) {
+                                    position = 1;
+                                }
+
+                                // null = edge of slider
+                                if (position !== null) {
+                                    range_slider.noUiSlider.setHandle(handle, value + position);
+                                }
+
+                                break;
+
+                            case 40:
+
+                                position = step[0];
+
+                                if (position === false) {
+                                    position = 1;
+                                }
+
+                                if (position !== null) {
+                                    range_slider.noUiSlider.setHandle(handle, value - position);
+                                }
+
+                                break;
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <form class="nc_netshop_filter" method="GET">
+
+            <div class="nc_netshop_filter_row">
+                <div class="nc_netshop_filter_label">
+                    <label>Производитель</label>
+                </div>
+                <div class="nc_netshop_filter_field">
+                    <div class="checkbox-awesome variant1 input-awesome">
+                        <input type="checkbox" id="custom-checkbox1-variant1" checked>
+                        <label for="custom-checkbox1-variant1">
+                            <span class="icon"></span>
+                            Значение параметра 1
+                        </label>
+                    </div>
+                    <div class="checkbox-awesome variant1 input-awesome">
+                        <input type="checkbox" id="custom-checkbox2-variant1">
+                        <label for="custom-checkbox2-variant1">
+                            <span class="icon"></span>
+                            Значение параметра 2
+                        </label>
+                    </div>
+
+                    <div class="checkbox-awesome variant1 input-awesome">
+                        <input type="checkbox" id="custom-checkbox3-variant1">
+                        <label for="custom-checkbox3-variant1">
+                            <span class="icon"></span>
+                            Значение параметра 3
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nc_netshop_filter_row">
+                <div class="nc_netshop_filter_label">
+                    <label>Тип покрытия</label>
+                </div>
+                <div class="nc_netshop_filter_field">
+                    <div class="checkbox-awesome variant1 input-awesome">
+                        <input type="checkbox" id="custom-checkbox4-variant1" checked>
+                        <label for="custom-checkbox4-variant1">
+                            <span class="icon"></span>
+                            Значение параметра 1
+                        </label>
+                    </div>
+                    <div class="checkbox-awesome variant1 input-awesome">
+                        <input type="checkbox" id="custom-checkbox5-variant1">
+                        <label for="custom-checkbox5-variant1">
+                            <span class="icon"></span>
+                            Значение параметра 2
+                        </label>
+                    </div>
+
+                    <div class="checkbox-awesome variant1 input-awesome">
+                        <input type="checkbox" id="custom-checkbox6-variant1">
+                        <label for="custom-checkbox6-variant1">
+                            <span class="icon"></span>
+                            Значение параметра 3
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nc_netshop_filter_row nc_netshop_filter_row_range" data-min="50" data-max="5000">
+                <div class="nc_netshop_filter_label">
+                    <label>Поиск по цене</label>
+                </div>
+                <div class="nc_netshop_filter_field">
+                    <label class="nc_netshop_filter_field_min">
+                        <span>от</span>
+                        <input type="text" name="filter_Price[]" value="1000">
+                    </label>
+
+                    <label class="nc_netshop_filter_field_max">
+                        <span>до</span>
+                        <input type="text" name="filter_Price[]" value="2500">
+                    </label>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="vertical-menu-container">
+        <div class="h2">Каталог</div>
+
+        <nav class="vertical-menu">
+            <ul class="level1">
+                <li class="active">
+                    <div class="item-wrap">
+                        <a href="#" class="item"><span>Наша продукция</span></a>
+                        <a href="#" class="submenu-btn"></a>
+                    </div>
+                    <ul class="level2">
+                        <li class="selected"><span class="item">Газосиликатные блоки</span></li>
+                        <li><a href="#" class="item"><span>Трехслойные несущие блоки с теплоизоляционным слоем</span></a></li>
+                        <li><a href="#" class="item"><span>Товары для сада</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="item-wrap">
+                        <a href="#" class="item"><span>Строительство коттеджей</span></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-wrap">
+                        <a href="#" class="item submenu-toggle"><span>Проектирование коттеджей и ландшафтный дизайн</span></a>
+                        <a href="#" class="submenu-btn"></a>
+                    </div>
+                    <ul class="level2">
+                        <li><a href="#" class="item"><span>Подраздел 1</span></a></li>
+                        <li><a href="#" class="item"><span>Подраздел 2</span></a></li>
+                        <li><a href="#" class="item"><span>Подраздел 3</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="item-wrap">
+                        <a href="#" class="item submenu-toggle"><span>Аренда техники</span></a>
+                        <a href="#" class="submenu-btn"></a>
+                    </div>
+                    <ul class="level2">
+                        <li><a href="#" class="item"><span>Подраздел 4</span></a></li>
+                        <li><a href="#" class="item"><span>Подраздел 5</span></a></li>
+                        <li><a href="#" class="item"><span>Подраздел 6</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="item-wrap">
+                        <a href="#" class="item"><span>Бетонные работы</span></a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="news-widget">
+
+        <div class="h2">Новости</div>
+
+        <article class="item">
+            <a href="#" class="img-container">
+                <img data-src="img/temp/news.jpg" width="410" height="270" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='410' viewBox='0 0 410 270'%3E%3C/svg%3E" class="img-fluid lazy" alt="">
+            </a>
+            <time datetime="2017-05-17" class="date">17 мая 2017</time>
+            <a href="#" class="title"><h2 class="h2-title">Здесь название новости, наша компания учавствует в выставке Экспо-Про и еще далее</h2></a>
+        </article>
+
+        <article class="item">
+            <time datetime="2017-05-17" class="date">17 мая 2017</time>
+            <a href="#" class="title"><h2 class="h2-title">Во второй новости фото не показывается, только название. Просто название новости и все.</h2></a>
+        </article>
+
+        <article class="item">
+            <time datetime="2017-05-17" class="date">17 мая 2017</time>
+            <a href="#" class="title"><h2 class="h2-title">Эта новость без фото. Новость без фото. Название новости без фото.</h2></a>
+        </article>
+
+        <a href="#" class="link-all">Все новости</a>
+
+    </div>
+
+    <div class="catalog-gallery">
+        <div class="h2">Галерея</div>
+
+        <a href="img/temp/gallery_preview.jpg" class="item" title="Рисунок">
+            <div class="img-container">
+                <img data-src="img/temp/gallery_preview.jpg" width="410" height="274" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='410' viewBox='0 0 410 274'%3E%3C/svg%3E" class="img-fluid lazy" alt="">
+            </div>
+            <div class="name">Рисунок 1</div>
+        </a>
+    </div>
+
+</aside>

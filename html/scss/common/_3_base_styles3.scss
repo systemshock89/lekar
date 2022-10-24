@@ -1,0 +1,114 @@
+.block-bg-green{
+  @include media((
+          padding-top: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-position: (all: 'center left 17px, top right, top left', md: 'center left 10px, top right -150px, top left'),
+          background: (sm: linear-gradient(-240deg, #56ebc5 0%, #94ffba 100%) ),
+  ));
+  background-image: url('../img/block-bg2-pic1.png'), url('../img/block-bg2-pic2.png'), linear-gradient(-240deg, #56ebc5 0%, #94ffba 100%);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: auto, contain, auto;
+}
+
+.block-bg1{
+  @include media((
+          padding-top: (all: 120px, lg: 50px, md: 40px!important, sm : 15px!important),
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic7.png'), url('../img/block-bg2-pic6.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom left, top right;
+}
+
+.block-bg2{
+  @include media((
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic5.png');
+  background-repeat: no-repeat;
+  background-position: bottom right 14px;
+}
+
+.block-bg3{
+  @include media((
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic8.png');
+  background-repeat: no-repeat;
+  background-position: bottom 53px left 99px;
+}
+
+.block-bg4{
+  @include media((
+          padding-top: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic4.png'), url('../img/block-bg2-pic3.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom left, top right;
+}
+
+.block-bg5{
+  @include media((
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 0px!important, xs: 15px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic9.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+.block-bg6{
+  @include media((
+          //padding-top: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic4.png');
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+
+.block-bg7{
+  @include media((
+          padding-top: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic8.png'), url('../img/block-bg2-pic3.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom left 100px, top right;
+}
+
+.inner-bg{
+  @include media((
+          //padding-top: (all: 120px, lg: 50px, md: 40px!important, sm : 15px!important),
+          //padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          background-size: (lg: 250px, md: 200px),
+          background: (sm: none),
+  ));
+  background-image: url('../img/block-bg2-pic7.png'), url('../img/block-bg2-pic6.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: top 365px left, top right;
+}
+
+.table-time-wrap{
+  .red-color{
+    display: flex;
+    align-items: baseline;
+    i{
+      margin-right: 5px;
+    }
+  }
+}

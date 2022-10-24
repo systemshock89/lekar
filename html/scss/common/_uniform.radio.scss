@@ -1,0 +1,89 @@
+/*==========  uniform.radio  ==========*/
+
+$uniform-width: 15px;
+$uniform-height: 15px;
+$uniform-margin-right: 3px;
+$uniform-background-image: url("../img/temp/radio.png");
+
+%uniform-background-position-unchecked {
+  background-position: 0 0;
+}
+
+%uniform-background-position-checked {
+  background-position: -$uniform-width 0;
+}
+
+div.radio,
+div.radio span,
+div.radio input {
+  cursor: pointer;
+  width: $uniform-width;
+  height: $uniform-height;
+}
+
+div.radio {
+  margin-right: $uniform-margin-right;
+  position: relative;
+
+  span {
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+    background-image: $uniform-background-image;
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+    @extend %uniform-background-position-unchecked;
+    &.checked {
+      @extend %uniform-background-position-checked;
+    }
+  }
+  &.active {
+    span {
+      @extend %uniform-background-position-unchecked;
+      &.checked {
+        @extend %uniform-background-position-checked;
+      }
+    }
+  }
+  &.hover,
+  &.focus {
+    span {
+      @extend %uniform-background-position-unchecked;
+      &.checked {
+        @extend %uniform-background-position-checked;
+      }
+    }
+    &.active {
+      span {
+        @extend %uniform-background-position-unchecked;
+        &.checked {
+          @extend %uniform-background-position-checked;
+        }
+      }
+    }
+  }
+  &.disabled,
+  &.disabled.active {
+    span {
+      @extend %uniform-background-position-unchecked;
+      &.checked {
+        @extend %uniform-background-position-checked;
+      }
+    }
+  }
+  input {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+  }
+}
+/*==========  /uniform.radio  ==========*/

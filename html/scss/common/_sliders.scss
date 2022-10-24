@@ -1,0 +1,1780 @@
+// идентичные стили двух слайдеров
+%index-and-fullwidth-slider-styles{
+  .item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .item-wrapper {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      > .container {
+        height: 100%;
+      }
+    }
+    .text-container {
+      opacity: 0;
+      transition: opacity .75s ease-in-out;
+      transition-delay: .85s;
+      @include media((
+              margin-top: (all: 60px, lg: 30px, md: 20px, sm: 15px),
+              margin-bottom: (all: 60px, lg: 50px),
+      ));
+
+      // Полупрозрачная подложка текста
+      &.text-container-bg-enable {
+        position: relative;
+        @include media((
+                padding: (all: 30px, md: 15px, sm: 0)
+        ));
+        .text-container2{
+          position: relative;
+        }
+        .text-container-bg {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0.5;
+        }
+      }
+
+      .title {
+        @include media((
+                font-size: (all: 32px, lg: 28px, md: 26px)
+        ));
+        line-height: 1.2;
+      }
+      .text {
+        @include media((
+                margin-top: (all: 17px, md: 15px),
+                font-size: (md: 14px)
+        ));
+      }
+      .button,
+      .button2 {
+        @include media((
+                margin-top: (all: 20px, md: 15px)
+        ));
+        transition: background 0.1s ease-in-out;
+        &:hover {
+          transition: background 0.1s ease-in-out;
+        }
+      }
+    }
+
+    .row-text-container{
+      height: 100%;
+
+      // text left
+      &.justify-content-start {
+        .text-container {
+        }
+      }
+
+      // text right
+      &.justify-content-end {
+        .text-container {
+        }
+      }
+
+      // text center
+      &.justify-content-center{
+        .text-container{
+          text-align: center;
+        }
+      }
+
+      // text center - horizontal, vertical
+      &.justify-content-center.align-items-center {
+        .text-container {
+          text-align: center;
+          .title {
+            @include media((
+                    font-size: (all: 52px, md: 38px, sm: 26px)
+            ));
+          }
+          .text {
+            @include media((
+                    font-size: (lg: 16px, md: 14px)
+            ));
+          }
+        }
+      }
+
+      // text start - vertical
+      &.align-items-start{
+        .text-container{
+        }
+      }
+
+      // text center - vertical
+      &.align-items-center {
+        .text-container{
+        }
+      }
+
+      // text end - vertical
+      &.align-items-end{
+        .text-container{
+        }
+      }
+
+    }
+
+    // Тонировка фона слайда
+    &.item-bg {
+      .item-wrapper {
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+        }
+      }
+      &.item-bg-variant1 .item-wrapper {
+        &:before {
+          background: rgba(43, 60, 72, 0.32);
+        }
+      }
+      &.item-bg-variant2 .item-wrapper {
+        &:before {
+          background: url('../img/slide-bg-pattern.png') rgba(0, 0, 0, 0.1);
+        }
+      }
+      &.item-bg-variant3 .item-wrapper {
+        &:before {
+          background: rgba(255, 255, 255, 0.6);
+        }
+      }
+    }
+
+    // на мобильных затемнение всего слайда и белый текст (если есть текстовые элементы, т.е. класс item-bg-mobile)
+    @media only screen and (max-width: 767px) {
+      &.item-bg-mobile {
+        .item-wrapper {
+          position: relative;
+          &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(43, 60, 72, 0.32) !important;
+          }
+        }
+
+        .text-container {
+          color: #fff !important;
+          &.text-container-bg-enable .text-container-bg {
+            display: none;
+          }
+        }
+      }
+    }
+
+  }
+  a.item{
+    text-decoration: none;
+    color: $default-font-color;
+  }
+
+  // Одиночный слайд (без скрипта)
+  &.one-slide{
+    @extend %text-container-opacity1;
+    .item .text-container{
+      @include media((
+              margin-top: (all: 60px, lg: 30px, md: 20px, sm: 15px),
+              margin-bottom: (all: 60px, lg: 30px, md: 20px, sm: 15px),
+      ));
+    }
+    .slider-wrapper {
+      @include media((
+              min-height: (sm: 280px)
+      ));
+    }
+    .owl-carousel {
+      display: flex;
+      flex: 1 0 auto;
+    }
+
+    &.block-padding,
+    &.block-padding-small{
+      // у всего слайда высоту слайдера делаем auto, а не по размеру картинки-слайда
+      // и убираем отступы у text-container,
+      &[style*='background']{
+        .slider-wrapper,
+        .item .item-wrapper{
+          min-height: auto!important;
+        }
+
+        .item .text-container{
+          margin-top: 0!important;
+          margin-bottom: 0!important;
+        }
+      }
+    }
+
+    // при отступах в одиночном слайде на мобильном делаем заливку всему блоку слайдера, а у item-wrapper заливку убираем
+    @media only screen and (max-width: 767px) {
+      &.block-padding,
+      &.block-padding-small{
+        position: relative;
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background: rgba(43, 60, 72, 0.32) !important;
+        }
+        .item.item-bg-mobile {
+          .item-wrapper:before{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    // на мобильных затемнение всего слайда (ЕСЛИ В СЛАЙДЕРЕ ВИДЕО)
+    &.video-bg {
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(43, 60, 72, 0.32) !important;
+      }
+      .item.item-bg-mobile {
+        .item-wrapper:before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  > .button-container{
+    margin-top: 30px;
+  }
+}
+
+@mixin index-slider() {
+  /* index owl slider */
+  .index-slider {
+
+    .slider-wrapper,
+    .item .item-wrapper{
+      @include media((
+              min-height: (all: var(--slider-min-height-all, 500px), lg: var(--slider-min-height-lg, 360px), md: var(--slider-min-height-md, 300px), sm: var(--slider-min-height-sm, 309px))
+      ));
+    }
+
+    .item{
+      .text-container{
+        @include media((
+                margin-left: (sm: 15px!important),
+                margin-right: (sm: 15px!important),
+        ));
+      }
+      .row-text-container{
+        // text left
+        &.justify-content-start {
+          .text-container {
+            margin-left: 69px;
+          }
+        }
+
+        // text right
+        &.justify-content-end {
+          .text-container {
+            margin-right: 69px;
+          }
+        }
+      }
+    }
+
+    // идентичные стили двух слайдеров
+    @extend %index-and-fullwidth-slider-styles;
+
+    .owl-carousel {
+      .owl-stage{
+        display: flex;
+        .owl-item {
+          display: flex;
+          flex: 1 0 auto;
+        }
+      }
+      .owl-item.active {
+        @extend %text-container-opacity1;
+      }
+
+      /* owl-nav */
+      @include owl-slider2-nav-vector(
+          // общее
+              $owl-slider2-nav-width: 45px, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+              $owl-slider2-nav-height: 45px,
+          $owl-slider2-nav-left-right: -25px, // отступы слева/справа
+          $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+          $owl-slider2-nav-opacity: 0.8, // прозрачность
+          $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+          $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+          // стрелка - fontawesome
+              $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+              $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+              $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+              $owl-slider2-nav-font-size: 28px, // размер векторной иконки
+              $owl-slider2-nav-color: $accent-color, // цвет иконки
+              $owl-slider2-nav-color-hover: $accent-color-yellow4, // цвет иконки при наведении
+              $owl-slider2-nav-text-shadow: none, // тень у иконки (тень или none)
+              $owl-slider2-nav-bg-color: $accent-color-gray1, // цвет фона (цвет или null)
+              $owl-slider2-nav-bg-color-hover: $accent-color-gray1, // цвет фона при наведении (цвет или null)
+              $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+                // стрелка - картинка
+          $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+          $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+      );
+      .owl-nav {
+        [class*=owl-]{
+          border-radius: 50%;
+          &.owl-prev:before{
+            left:-2px;
+          }
+          &.owl-next:before{
+            right: -2px;
+          }
+        }
+      }
+
+      /* owl-dots */
+      @include owl-slider2-dots( $dots-bg: rgba(#fff, .4), $dots-bg-active : rgba(#fff,.6) );
+      .owl-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 575px) {
+    .index-slider{
+      .slider-wrapper{
+        padding-left: 0;
+        padding-right:0;
+      }
+      &[style*='background'],
+      &.block-bg{
+        padding-top: 0!important;
+        padding-bottom: 0!important;
+        background: transparent!important;
+        &.block-text-color-white{
+          h1, .h1,
+          h2, .h2,
+          h3, .h3{
+            color: $default-font-color;
+          }
+        }
+        &.one-slide .item{
+          .text-container{
+            padding-top: 30px!important;
+            padding-bottom: 30px!important;
+          }
+
+          &.item-bg-mobile .item-wrapper:before{
+            display: block;
+          }
+        }
+      }
+    }
+
+    .content-column{
+      .index-slider{
+
+        // растягиваем весь инфоблок (вместе с заголовком инфоблока)
+        &.block-padding,
+        &.block-padding-small{
+          margin-left: -15px;
+          margin-right: -15px;
+        }
+
+        // растягиваем слайд
+        &:not(.block-padding),
+        &:not(.block-padding-small){
+          .slider-wrapper{
+            margin-left: -15px;
+            margin-right: -15px;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin fullwidth-slider() {
+  /*fullwidth-slider*/
+  .fullwidth-slider {
+
+    .slider-wrapper,
+    .item .item-wrapper{
+      @include media((
+              min-height: (
+                      all: var(--slider-min-height-all, 500px),
+                      min-2560: var(--slider-min-height-xxl, var(--slider-min-height-all, 500px)),
+                      min-1930: var(--slider-min-height-xl, var(--slider-min-height-all, 500px)),
+                      lg: var(--slider-min-height-lg, 450px),
+                      md: var(--slider-min-height-md, 350px),
+                      sm: var(--slider-min-height-sm, 309px)
+              )
+      ));
+    }
+
+    // идентичные стили двух слайдеров
+    @extend %index-and-fullwidth-slider-styles;
+
+    .owl-carousel {
+      .owl-stage{
+        display: flex;
+        .owl-item {
+          display: flex;
+          flex: 1 0 auto;
+        }
+      }
+      .owl-item.active{
+        @extend %text-container-opacity1;
+      }
+
+      /* owl-nav */
+      @include owl-slider2-nav-vector(
+        // общее
+              $owl-slider2-nav-width: 45px, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+              $owl-slider2-nav-height: 45px,
+              $owl-slider2-nav-left-right: -75px, // отступы слева/справа
+              $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+              $owl-slider2-nav-opacity: 0.6, // прозрачность
+              $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+              $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+                // стрелка - fontawesome
+              $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+              $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+              $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+              $owl-slider2-nav-font-size: 28px, // размер векторной иконки
+              $owl-slider2-nav-color: $accent-color, // цвет иконки
+              $owl-slider2-nav-color-hover: $accent-color-yellow4, // цвет иконки при наведении
+              $owl-slider2-nav-text-shadow: none, // тень у иконки (тень или none)
+              $owl-slider2-nav-bg-color: $accent-color-gray1, // цвет фона (цвет или null)
+              $owl-slider2-nav-bg-color-hover: $accent-color-gray1, // цвет фона при наведении (цвет или null)
+              $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+                // стрелка - картинка
+              $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+              $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+              $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+              $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+              $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+      );
+      // позиционирование стрелок слева и справа относительно контента
+      .owl-nav {
+        [class*=owl-] {
+          border-radius: 50%;
+          &.owl-prev {
+            left: 50%;
+            transform: translate3d(-100%, -50%, 0);
+            @include media((
+                    margin-left: (all: calc(-1290px/2 - 15px), lg: calc(-930px/2 - 15px), md: calc(-690px/2 - 15px)),
+            ));
+            &:before{
+              left:-2px;
+            }
+          }
+          &.owl-next {
+            right: 50%;
+            transform: translate3d(100%, -50%, 0);
+            @include media((
+                    margin-right: (all: calc(-1290px/2 - 15px), lg: calc(-930px/2 - 15px), md: calc(-690px/2 - 15px)),
+            ));
+            &:before{
+              right: -2px;
+            }
+          }
+        }
+      }
+
+      /* owl-dots */
+      @include owl-slider2-dots( $dots-bg: rgba(#fff, .4), $dots-bg-active : rgba(#fff,.6) );
+      .owl-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+      }
+    }
+
+    // слайдер на весь экран
+    &.fullheight .slider-wrapper,
+    &.fullheight .item .item-wrapper {
+      @include media((
+              min-height: (all: 100vh!important, sm: 309px!important)
+      ));
+    }
+  }
+
+  // позиционирование стрелок слева и справа относительно контента (в двухколоночном макете)
+  .content-column .fullwidth-slider{
+    .owl-carousel{
+      .owl-nav {
+        [class*=owl-] {
+          &.owl-prev {
+            left: 40px!important;
+            margin-left: 0;
+          }
+          &.owl-next {
+            right: 40px!important;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+    &:not(.block-padding){ // если у всего блока слайдера нет фона или видео, и он находится в двухколоночном макете - то оступы внутри слайда
+      .item .item-wrapper{
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+    .item .row-text-container{
+      // text left
+      &.justify-content-start {
+        .text-container {
+          @include media((
+                  margin-left: (all: 69px, sm: 0)
+          ));
+        }
+      }
+
+      // text right
+      &.justify-content-end {
+        .text-container {
+          @include media((
+                  margin-right: (all: 69px, sm: 0)
+          ));
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    .content-column .fullwidth-slider.block-padding .item{
+      .container{
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 575px) {
+    .content-column{
+      .fullwidth-slider:not(.block-padding) .slider-wrapper{
+        margin-left: -15px;
+        margin-right: -15px;
+        .container {
+          padding-right: 15px;
+          padding-left: 15px;
+          width: auto;
+        }
+      }
+      .fullwidth-slider:not(.block-padding) .item .item-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+@mixin carousel-slider() {
+  /* carousel owl slider */
+  .carousel-slider {
+    position: relative;
+    .item {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      border: 1px solid #ddd;
+      text-decoration: none;
+      text-align: center;
+      background: #fff;
+      transition: border 0.1s ease-in-out;
+
+      @include media((
+              padding: (all: 20px 15px, sm: 15px, xs: 10px)
+      ));
+      .img-container {
+        display: inline-block;
+        text-decoration: none;
+        img{
+          width: auto;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+      .text-container {
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: column;
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+
+          text-overflow: ellipsis;
+          overflow: hidden;
+          @include media((
+                  margin-top: (all: 10px, xs: 7px)
+          ));
+
+          //@extend %text-elements;
+        }
+        a.title{
+          display: inline-block;
+          text-decoration: none;
+        }
+        .text {
+          font-size: 14px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          @include media((
+                  margin-top: (all: 10px, xs: 7px)
+          ));
+
+          flex-grow: 1;
+          //@extend %text-elements;
+        }
+        .button {
+          @include media((
+                  margin-top: (all: 10px, xs: 7px)
+          ));
+          align-self: center;
+        }
+      }
+      &:hover {
+        border: 1px solid #a2a2a2;
+        transition: border 0.1s ease-in-out;
+      }
+    }
+    .owl-carousel {
+      margin-bottom: 30px;
+      .owl-stage {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        .owl-item {
+          display: flex;
+          flex: 1 0 auto;
+        }
+      }
+
+      @include owl-slider2-nav-vector(
+          // общее
+          $owl-slider2-nav-width: null, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+          $owl-slider2-nav-height: null,
+          $owl-slider2-nav-left-right: 24px, // отступы слева/справа
+          $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+          $owl-slider2-nav-opacity: 0.6, // прозрачность
+          $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+          $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+          // стрелка - fontawesome
+          $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+          $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+          $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+          $owl-slider2-nav-font-size: 24px, // размер векторной иконки
+          $owl-slider2-nav-color: #fff, // цвет иконки
+          $owl-slider2-nav-color-hover: #fff, // цвет иконки при наведении
+          $owl-slider2-nav-text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.6), // тень у иконки (тень или none)
+          $owl-slider2-nav-bg-color: null, // цвет фона (цвет или null)
+          $owl-slider2-nav-bg-color-hover: null, // цвет фона при наведении (цвет или null)
+          $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+          // стрелка - картинка
+          $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+          $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+      );
+
+      @include owl-slider2-dots();
+    }
+  }
+  // firefox hack for border right item
+  _:-moz-tree-row(hover), .content-column .carousel-slider .owl-carousel {
+    width: 100.3%;
+  }
+
+  /* carousel owl slider */
+  .carousel-slider-custom {
+    position: relative;
+    .item{
+      width: 100%;
+    }
+    .owl-carousel {
+      margin-bottom: 30px;
+      width: calc(100% + 3px); //border right item fix
+      .owl-stage {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        .owl-item {
+          display: flex;
+          flex: 1 0 auto;
+          img{
+            width: initial;
+          }
+        }
+      }
+      /**/
+      @include owl-slider2-nav-vector(
+        // общее
+              $owl-slider2-nav-width: 45px, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+              $owl-slider2-nav-height: 45px,
+              $owl-slider2-nav-left-right: 24px, // отступы слева/справа
+              $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+              $owl-slider2-nav-opacity: 0.6, // прозрачность
+              $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+              $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+                // стрелка - fontawesome
+              $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+              $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+              $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+              $owl-slider2-nav-font-size: 28px, // размер векторной иконки
+              $owl-slider2-nav-color: $accent-color, // цвет иконки
+              $owl-slider2-nav-color-hover: $accent-color-yellow4, // цвет иконки при наведении
+              $owl-slider2-nav-text-shadow: none, // тень у иконки (тень или none)
+              $owl-slider2-nav-bg-color: $accent-color-gray1, // цвет фона (цвет или null)
+              $owl-slider2-nav-bg-color-hover: $accent-color-gray1, // цвет фона при наведении (цвет или null)
+              $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+                // стрелка - картинка
+              $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+              $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+              $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+              $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+              $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+      );
+      .owl-nav {
+        [class*=owl-]{
+          border-radius: 50%;
+          &.owl-prev:before{
+            left:-2px;
+          }
+          &.owl-next:before{
+            right: -2px;
+          }
+        }
+      }
+
+      @include owl-slider2-dots();
+    }
+
+    // костыль для тени у itemа в слайдере
+    &.item-with-shadow{
+      .owl-stage-outer{
+        width: calc(100% + 60px);
+        padding: 0 30px;
+        margin-left: -30px;
+      }
+      .owl-carousel{
+        margin-top: -15px;
+      }
+      .owl-item{
+        padding-top: 15px;
+        padding-bottom: 40px;
+      }
+      .button-container{
+        @include media((
+                margin-top: (all: -30px, md:-20px)
+        ));
+      }
+      .owl-dots{
+        margin-top: -25px!important;
+      }
+    }
+    // /костыль для тени у itemа в слайдере
+
+  }
+}
+
+@mixin basic-slider() {
+  /* basic owl slider */
+  .basic-slider {
+    position: relative;
+    .item {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      .row{
+        height: 100%;
+        @include media((
+                flex-direction: (sm: column),
+        ));
+        //@include media((
+        //        height: (all: 100%, sm: auto)
+        //));
+        .col-md-7{
+          @include media((
+                  flex-grow: (sm: 1),
+          ));
+        }
+      }
+      .img-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 75px;
+        overflow: hidden;
+        img {
+          width: auto;
+          transform: translate3d(0px, 0px, 0px);
+        }
+        &:hover {
+          img {
+            opacity: 0.8 !important;
+          }
+        }
+      }
+      .text-container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        @include media((
+                padding-top: (all: 26px, md: 15px),
+        ));
+        .text-wrap{
+          flex-grow: 1;
+          @include media((
+                  margin-left: (all: -101px, lg: -60px, sm: 0),
+                  padding: (all: 40px, lg: 30px, sm: 20px),
+          ));
+          position: relative;
+          box-shadow: 12px 16px 50px rgba(55, 129, 110, 0.15);
+          background-color: #ffffff;
+          padding: 71px 90px;
+          @include media((
+                  border-radius: (all: 55px, lg: 30px),
+          ));
+          &:before{
+            content: '';
+            position: absolute;
+            border-radius: 30px;
+            border: 1px dashed $accent-color-gray2;
+            @include media((
+                    top: (all: 30px, lg: 10px),
+                    left: (all: 30px, lg: 10px),
+                    width: (all: calc(100% - 60px), lg: calc(100% - 20px)),
+                    height: (all: calc(100% - 60px), lg: calc(100% - 20px)),
+                    border-radius: (all: 30px, lg: 20px),
+            ));
+          }
+        }
+        .text{
+          position: relative;
+          @include media((
+                  font-size: (all: 16px, md: 14px),
+          ));
+          h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{
+            color: $accent-color;
+            font-family: $default-font;
+            @include media((
+                    margin-bottom: (all:25px, lg: 20px, md:10px, sm: 1rem)
+            ));
+          }
+        }
+        .name{
+          display: inline-block;
+          color: $title-font-color;
+          font-weight: 700;
+          font-family: 'MontserratAlternates';
+          @include media((
+                  font-size: (all: 40px, lg: 30px, md: 24px, sm: 20px, xs: 18px),
+                  margin-left: (all: 27px, lg: 20px, md: 5px, sm: 0),
+                  margin-bottom: (all: 37px, lg: 20px, md: 15px, sm: 10px),
+          ));
+        }
+        a.name:hover{
+          color: $accent-color-yellow4;
+          text-decoration: none;
+        }
+        .text-wrap2{
+          display: flex;
+          align-items: center;
+          @include media((
+                  margin-top: (all: 30px, lg: 15px, sm: 10px),
+          ));
+        }
+        .price{
+          color: $title-font-color;
+          font-weight: 700;
+          @include media((
+                  font-size: (all: 20px, lg: 18px, md: 16px),
+          ));
+          span{
+            color: $accent-color;
+            white-space: nowrap;
+          }
+        }
+        .button{
+          @include media((
+                  margin-left: (all: 35px, lg: 20px, md: 10px),
+          ));
+        }
+      }
+
+      &.item-bg {
+        padding: 15px;
+      }
+    }
+    .owl-carousel {
+      //margin-bottom: 30px;
+      .owl-stage{
+        display: flex;
+        .owl-item {
+          display: flex;
+          flex: 1 0 auto;
+        }
+      }
+      /**/
+      @include owl-slider2-nav-vector(
+          // общее
+          $owl-slider2-nav-width: 45px, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+          $owl-slider2-nav-height: 45px,
+          $owl-slider2-nav-left-right: 24px, // отступы слева/справа
+          $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+          $owl-slider2-nav-opacity: 0.8, // прозрачность
+          $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+          $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+          // стрелка - fontawesome
+          $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+          $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+          $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+          $owl-slider2-nav-font-size: 28px, // размер векторной иконки
+          $owl-slider2-nav-color: $accent-color, // цвет иконки
+          $owl-slider2-nav-color-hover: $accent-color-yellow4, // цвет иконки при наведении
+          $owl-slider2-nav-text-shadow: none, // тень у иконки (тень или none)
+          $owl-slider2-nav-bg-color: $accent-color-gray1, // цвет фона (цвет или null)
+          $owl-slider2-nav-bg-color-hover: $accent-color-gray1, // цвет фона при наведении (цвет или null)
+          $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+          // стрелка - картинка
+          $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+          $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+          $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+      );
+      .owl-nav {
+        [class*=owl-]{
+          border-radius: 50%;
+          transform: translate(0);
+          top: inherit;
+          @include media((
+                  bottom: (all: 240px, lg: 184px, md: 203px),
+          ));
+          &.owl-prev{
+            @include media((
+                    left: (all: 457px, lg: 343px, md: 246px),
+            ));
+            &:before{
+              left:-2px;
+            }
+          }
+          &.owl-next{
+            right: 7px;
+            &:before{
+              right: -2px;
+            }
+          }
+        }
+      }
+
+      @include owl-slider2-dots();
+    }
+    &.one-slide{ // one-slide если слайд всего один, то не запускать скрипт
+      .owl-carousel {
+        display: block;
+        img{
+          display: block;
+          width: 100%;
+        }
+
+      }
+    }
+
+    // костыль для тени у itemа в слайдере
+    &.item-with-shadow{
+      //@include media((
+      //        margin-bottom: (all: -60px, sm: 0),
+      //));
+      .owl-stage-outer{
+        width: calc(100% + 100px);
+        padding: 0 50px;
+        margin-left: -50px;
+      }
+      .owl-carousel{
+        margin-top: -15px;
+      }
+      .owl-item{
+        padding-top: 15px;
+        padding-bottom: 60px;
+      }
+      .button-container{
+        @include media((
+                margin-top: (all: -30px, md:-20px)
+        ));
+      }
+      .owl-dots{
+        margin-top: -55px!important;
+      }
+    }
+    // /костыль для тени у itemа в слайдере
+  }
+}
+
+@mixin reviews-slider() {
+  /* reviews owl slider */
+  .reviews-slider {
+    position: relative;
+    .item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      box-shadow: 3px 5px 15px rgba(6, 7, 7, 0.15);
+      padding: 22px 30px;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: 110px;
+      margin-right: 110px;
+      background: #fff;
+      .text-container{
+
+      }
+      .date {
+        @include media((
+                font-size: (sm: 14px)
+        ));
+      }
+      .name {
+        font-weight: 700;
+        @include media((
+                font-size: (sm: 16px)
+        ));
+      }
+      .text {
+        margin-top: 14px;
+        font-style: italic;
+        color: #505050;
+        @include media((
+                font-size: (sm: 14px)
+        ));
+      }
+    }
+    .owl-carousel {
+      margin-bottom: 30px;
+      .owl-stage{
+        display: flex;
+        .owl-item {
+          display: flex;
+          flex: 1 0 auto;
+        }
+      }
+      /**/
+      @include owl-slider2-nav-vector(
+        // общее
+        $owl-slider2-nav-width: null, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+        $owl-slider2-nav-height: null,
+        $owl-slider2-nav-left-right: -50px, // отступы слева/справа
+        $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+        $owl-slider2-nav-opacity: 0.6, // прозрачность
+        $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+        $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+        // стрелка - fontawesome
+        $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+        $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+        $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+        $owl-slider2-nav-font-size: 35px, // размер векторной иконки
+        $owl-slider2-nav-color: #fff, // цвет иконки
+        $owl-slider2-nav-color-hover: #fff, // цвет иконки при наведении
+        $owl-slider2-nav-text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.6), // тень у иконки (тень или none)
+        $owl-slider2-nav-bg-color: null, // цвет фона (цвет или null)
+        $owl-slider2-nav-bg-color-hover: null, // цвет фона при наведении (цвет или null)
+        $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+        // стрелка - картинка
+        $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+        $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+      );
+      .owl-nav {
+        [class*=owl-] {
+          opacity: .5;
+          &:hover {
+            opacity: .8;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+        }
+      }
+
+      @include owl-slider2-dots();
+    }
+  }
+
+  @media only screen and (max-width: 1359px) {
+    .reviews-slider{
+      .item{
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+      .owl-carousel{
+        .owl-nav [class*=owl-]{
+          &.owl-prev{
+            left: -24px;
+          }
+
+          &.owl-next{
+            right: -24px;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .reviews-slider {
+      .container{
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .item{
+        padding: 15px;
+      }
+    }
+  }
+}
+
+/* tovar owl slider */
+.tovar-slider{
+  position: relative;
+  margin-bottom: 30px;
+  animation: smoothly-show-items 1.1s ease-in-out;
+  .labels-container{
+    @extend %labels-container;
+    z-index: 2;
+    top: 6px;
+    left: 6px;
+  }
+}
+
+@mixin synced-slider() {
+/*==========  SYNCED OWL SLIDER  ==========*/
+.synced-slider1 {
+  .item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .img-container {
+      border-radius: 30px;
+      overflow: hidden;
+
+      display: block;
+      text-decoration: none;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      max-width: var(--img-width, 1290px);
+      max-height: var(--img-height, 650px);
+      width:100%; // fix max-width bug if parent display:flex
+      img{
+        width: auto;
+        max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      }
+
+      // соотношение сторон переопределяется в cms
+      @include aspect-ratio(1290, 650);
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+      }
+
+      .labels-container {
+        @extend %labels-container;
+      }
+    }
+  }
+  .owl-carousel {
+    .owl-stage {
+      display: flex;
+      .owl-item {
+        display: flex;
+        flex: 1 0 auto;
+      }
+    }
+
+    @include owl-slider2-nav-vector(
+        // общее
+        $owl-slider2-nav-width: 45px, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+        $owl-slider2-nav-height: 45px,
+        $owl-slider2-nav-left-right: -30px, // отступы слева/справа
+        $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+        $owl-slider2-nav-opacity: 0.8, // прозрачность
+        $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+        $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+        // стрелка - fontawesome
+        $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+        $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+        $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+        $owl-slider2-nav-font-size: 28px, // размер векторной иконки
+        $owl-slider2-nav-color: $accent-color, // цвет иконки
+        $owl-slider2-nav-color-hover: $accent-color-yellow4, // цвет иконки при наведении
+        $owl-slider2-nav-text-shadow: none, // тень у иконки (тень или none)
+        $owl-slider2-nav-bg-color: $accent-color-gray1, // цвет фона (цвет или null)
+        $owl-slider2-nav-bg-color-hover: $accent-color-gray1, // цвет фона при наведении (цвет или null)
+        $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+        // стрелка - картинка
+        $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+        $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+    );
+    .owl-nav {
+      [class*=owl-]{
+        border-radius: 50%;
+        &.owl-prev:before{
+          left:-2px;
+        }
+        &.owl-next:before{
+          right: -2px;
+        }
+      }
+    }
+
+    @include owl-slider2-dots();
+    .owl-dots{
+      margin-top: 5px;
+    }
+  }
+  &.one-slide{ // one-slide если слайд всего один, то не запускать скрипт
+    .owl-carousel {
+      display: block;
+    }
+  }
+}
+
+.synced-slider2 {
+  text-align: center;
+  @include media((
+          display: (sm: none),
+          margin-top: (all: 30px, lg: 15px),
+  ));
+  .item {
+    border-radius: 10px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    cursor: pointer;
+    transform: translate3d(0px, 0px, 0px);
+    transition: opacity 0.1s ease-in-out, border 0.1s ease-in-out;
+    .img-container {
+      display: block;
+      text-decoration: none;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      max-width: var(--img-width, 190px);
+      max-height: var(--img-height, 96px);
+      width:100%; // fix max-width bug if parent display:flex
+      img{
+        width: auto;
+        max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      }
+
+      // соотношение сторон переопределяется в cms
+      @include aspect-ratio(190, 96);
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+      }
+    }
+
+    position: relative;
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      border: 7px solid transparent;
+      z-index: 1;
+      transition: border 0.1s ease-in-out;
+    }
+
+    &:hover,
+    &.current {
+      &:before{
+        border: 7px solid $accent-color-yellow2;
+        transition: border 0.1s ease-in-out;
+      }
+    }
+  }
+  .owl-carousel {
+    .owl-stage {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      .owl-item {
+        display: flex;
+        flex: 1 0 auto;
+      }
+    }
+
+    @include owl-slider2-nav-vector(
+        // общее
+        $owl-slider2-nav-width: null, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+        $owl-slider2-nav-height: null,
+        $owl-slider2-nav-left-right: 20px, // отступы слева/справа
+        $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+        $owl-slider2-nav-opacity: 0.6, // прозрачность
+        $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+        $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+        // стрелка - fontawesome
+        $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+        $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+        $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+        $owl-slider2-nav-font-size: 24px, // размер векторной иконки
+        $owl-slider2-nav-color: #fff, // цвет иконки
+        $owl-slider2-nav-color-hover: #fff, // цвет иконки при наведении
+        $owl-slider2-nav-text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.6), // тень у иконки (тень или none)
+        $owl-slider2-nav-bg-color: null, // цвет фона (цвет или null)
+        $owl-slider2-nav-bg-color-hover: null, // цвет фона при наведении (цвет или null)
+        $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+        // стрелка - картинка
+        $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+        $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+        $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+    );
+  }
+  .owl-item.loading {
+    min-height: 120px;
+  }
+}
+/*==========  /SYNCED OWL SLIDER  ==========*/
+/**/
+/**/
+}
+
+@mixin synced-slider-single() {
+/*==========  SYNCED SINGLE OWL SLIDER  ==========*/
+.synced-slider-single {
+  .item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #ededee;
+    .img-container {
+      display: block;
+      text-decoration: none;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      max-width: var(--img-width, 628px);
+      max-height: var(--img-height, 417px);
+      width:100%; // fix max-width bug if parent display:flex
+      img{
+        width: auto;
+        max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      }
+
+      // соотношение сторон переопределяется в cms
+      @include aspect-ratio(628, 417);
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+      }
+
+      .labels-container {
+        @extend %labels-container;
+      }
+    }
+  }
+  .owl-carousel {
+    .owl-stage {
+      display: flex;
+      .owl-item {
+        display: flex;
+        flex: 1 0 auto;
+      }
+    }
+
+    @include owl-slider2-nav-vector(
+      // общее
+      $owl-slider2-nav-width: null, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+      $owl-slider2-nav-height: null,
+      $owl-slider2-nav-left-right: -30px, // отступы слева/справа
+      $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+      $owl-slider2-nav-opacity: 0.6, // прозрачность
+      $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+      $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+      // стрелка - fontawesome
+      $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+      $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+      $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+      $owl-slider2-nav-font-size: 35px, // размер векторной иконки
+      $owl-slider2-nav-color: #fff, // цвет иконки
+      $owl-slider2-nav-color-hover: #fff, // цвет иконки при наведении
+      $owl-slider2-nav-text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.6), // тень у иконки (тень или none)
+      $owl-slider2-nav-bg-color: null, // цвет фона (цвет или null)
+      $owl-slider2-nav-bg-color-hover: null, // цвет фона при наведении (цвет или null)
+      $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась (например, -2px)
+
+      // стрелка - картинка
+      $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+      $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+      $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+      $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+      $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+    );
+
+    @include owl-slider2-dots();
+  }
+  &.one-slide{ // one-slide если слайд всего один, то не запускать скрипт
+    .owl-carousel {
+      display: block;
+    }
+  }
+}
+
+.synced-slider-thumbs {
+  margin-top: 20px;
+  .item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    cursor: pointer;
+    border: 1px solid #ededee;
+    transform: translate3d(0px, 0px, 0px);
+    transition: opacity 0.1s ease-in-out, border 0.1s ease-in-out;
+    .img-container {
+      display: block;
+      text-decoration: none;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      max-width: var(--img-width, 628px);
+      max-height: var(--img-height, 417px);
+      width:100%; // fix max-width bug if parent display:flex
+      img{
+        width: auto;
+        max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      }
+
+      // соотношение сторон переопределяется в cms
+      @include aspect-ratio(628, 417);
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+      }
+    }
+    &:hover,
+    &.selected {
+      opacity: .6;
+      transition: opacity 0.1s ease-in-out, border 0.1s ease-in-out;
+      border: 1px solid #a2a2a2;
+    }
+  }
+}
+/*==========  /SYNCED SINGLE OWL SLIDER  ==========*/
+/**/
+/**/
+}
+
+@mixin owl-slider2-dots( $dots-bg: rgba(#000, .2), $dots-bg-active : rgba(#000,.4) ) {
+  // owl-dots
+  .owl-dots {
+    margin-top: 15px;
+    .owl-dot {
+      position: relative;
+      width: 25px;
+      height: 18px;
+      span {
+        @extend %img-centered;
+        width: 14px;
+        height: 14px;
+        background: $dots-bg;
+        transition: width 0.1s ease-in-out, height 0.1s ease-in-out, background 0.1s ease-in-out;
+      }
+      &.active,
+      &:hover {
+        span {
+          transition: width 0.1s ease-in-out, height 0.1s ease-in-out, background 0.1s ease-in-out;
+        }
+      }
+      &:hover {
+        span {
+          @include media((
+                  width: (all: 18px, md: 14px),
+                  height: (all: 18px, md: 14px),
+                  background: (all: $dots-bg-active, md: $dots-bg),
+          ));
+        }
+      }
+      &.active{
+        span {
+          width: 18px!important;
+          height: 18px!important;
+          background: $dots-bg-active!important;
+        }
+      }
+      //&:focus {
+        //outline: none;
+        //span {
+        //  box-shadow: 0 0 0 2pt #869791;
+        //}
+      //}
+    }
+  }
+}
+
+// плавное появление слайда
+%text-container-opacity1{
+  .item .text-container {
+    opacity: 1;
+    transition: opacity .75s ease-in-out;
+    transition-delay: .85s;
+  }
+}
+
+// owl-slider2-nav-vector
+@mixin owl-slider2-nav-vector(
+  // общее
+  $owl-slider2-nav-width: null, // Ширина и Высота указывается если стрелка - картинка, либо если у векторной стрелки есть фон и он должен быть особого размера (размер или null)
+  $owl-slider2-nav-height: null,
+  $owl-slider2-nav-left-right: -25px, // отступы слева/справа
+  $owl-slider2-nav-margin-top: null, // индивидуальный отступ сверху (если не нужно вертикальное выравнивание стрелок) (размер или null)
+  $owl-slider2-nav-opacity: 0.6, // прозрачность
+  $owl-slider2-nav-opacity-hover: 1, // прозрачность при наведении
+  $owl-slider2-nav-padding: 'true', // расширить границы наведения на кнопку ('true' или null)
+
+  // стрелка - fontawesome
+  $owl-slider2-nav-is-awesome: 'true', // стрелки созданы с помощью fontawesome ('true' или null)
+  $owl-slider2-nav-prev-code: "\f053", // код стрелки влево
+  $owl-slider2-nav-next-code: "\f054", // код стрелки вправо
+  $owl-slider2-nav-font-size: 35px, // размер векторной иконки
+  $owl-slider2-nav-color: #9A9A9A, // цвет иконки
+  $owl-slider2-nav-color-hover: #9A9A9A, // цвет иконки при наведении
+  $owl-slider2-nav-text-shadow: none, // тень у иконки (тень или none)
+  $owl-slider2-nav-bg-color: null, // цвет фона (цвет или null)
+  $owl-slider2-nav-bg-color-hover: null, // цвет фона при наведении (цвет или null)
+  $owl-slider2-nav-icon-bg-left-right: 0, // подкорректировать отступы у стрелки с фоном, если стрекла не отцентрировалась например, -2px)
+
+  // стрелка - картинка
+  $owl-slider2-nav-is-img: null, // стрелки созданы с помощью фоновых картинок ('true' или null)
+  $owl-slider2-nav-prev-bg: none, // стрелка влево - Пример: url('../img/arr-left.png') или none
+  $owl-slider2-nav-next-bg: none, //стрелка вправо - Пример: url('../img/arr-left.png') или none
+  $owl-slider2-nav-prev-bg-hover: none, // стрелка влево - наведение - Пример: url('../img/arr-left.png') или none
+  $owl-slider2-nav-next-bg-hover: none // стрелка вправо - наведение - Пример: url('../img/arr-left.png') или none
+
+) {
+  // owl-nav
+  .owl-nav {
+    margin-top: 0;
+    [class*=owl-] {
+      @if $owl-slider2-nav-width {
+        width: $owl-slider2-nav-width;
+      }
+      @if $owl-slider2-nav-height {
+        height: $owl-slider2-nav-height;
+      }
+      position: absolute;
+      margin: 0;
+      border-radius: 0;
+
+      // стрелки созданы с помощью fontawesome
+      @if $owl-slider2-nav-is-awesome == 'true' {
+
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: $owl-slider2-nav-color;
+        text-shadow: $owl-slider2-nav-text-shadow;
+        background: $owl-slider2-nav-bg-color;
+        &:hover{
+          background-color: transparent;
+        }
+
+        // фон кнопок
+        @if $owl-slider2-nav-bg-color {
+          padding: 5px !important;
+          &.owl-prev {
+            &:before {
+              position: relative;
+              left: $owl-slider2-nav-icon-bg-left-right;
+            }
+          }
+          &.owl-next {
+            &:before {
+              position: relative;
+              right: $owl-slider2-nav-icon-bg-left-right;
+            }
+          }
+        } @else {
+          padding: 0 !important;
+        }
+
+        &:before{
+          font-family: 'Font Awesome 5 Free';
+          font-size: $owl-slider2-nav-font-size;
+          line-height: $owl-slider2-nav-font-size;
+          font-weight: 900;
+        }
+
+        &.owl-prev {
+          &:before{
+            content: $owl-slider2-nav-prev-code;
+          }
+        }
+        &.owl-next {
+          &:before{
+            content: $owl-slider2-nav-next-code;
+          }
+        }
+        &:hover {
+          color: $owl-slider2-nav-color-hover;
+          @if $owl-slider2-nav-bg-color-hover {
+            background: $owl-slider2-nav-bg-color-hover;
+          }
+        }
+        &:active {
+          color: $owl-slider2-nav-color;
+          @if $owl-slider2-nav-bg-color {
+            background: $owl-slider2-nav-bg-color;
+          }
+        }
+
+      }
+
+      @if $owl-slider2-nav-is-img == 'true' {
+        display: block;
+        background-position: center;
+        background-repeat: no-repeat;
+        &.owl-prev {
+          background-image: $owl-slider2-nav-prev-bg;
+          &:hover{
+            background-color: transparent;
+            background-image: $owl-slider2-nav-prev-bg-hover;
+          }
+          &:active{
+            background-image: $owl-slider2-nav-prev-bg;
+          }
+        }
+        &.owl-next {
+          background-image: $owl-slider2-nav-next-bg;
+          &:hover{
+            background-color: transparent;
+            background-image: $owl-slider2-nav-next-bg-hover;
+          }
+          &:active{
+            background-image: $owl-slider2-nav-next-bg;
+          }
+        }
+      }
+
+      // вертикальные отступы
+      @if $owl-slider2-nav-margin-top {
+        margin-top: $owl-slider2-nav-margin-top;
+        top: 0;
+      } @else {
+        top: 50%;
+        transform: translate(0,-50%);
+      }
+
+      opacity: $owl-slider2-nav-opacity;
+      transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out, background 0.1s ease-in-out;
+
+      &.owl-prev {
+        left: -$owl-slider2-nav-left-right;
+      }
+      &.owl-next {
+        right: -$owl-slider2-nav-left-right;
+      }
+      &:hover {
+        opacity: $owl-slider2-nav-opacity-hover;
+        transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out, background 0.1s ease-in-out;
+      }
+      &:active {
+        opacity: $owl-slider2-nav-opacity;
+      }
+      @if $owl-slider2-nav-padding == 'true' {
+        &:after {
+          content: '';
+          width: calc(100% + 20px);
+          height: calc(100% + 20px);
+          position: absolute;
+          top: -10px;
+          left: -10px;
+        }
+      }
+    }
+  }
+}

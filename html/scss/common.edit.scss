@@ -1,0 +1,54 @@
+.page-content{
+  overflow: inherit;
+}
+
+.documents-block .item .table-responsive > .overflow > table .row1,
+.price-block .item .table-responsive .row1{
+  position: relative;
+}
+
+.text-block-float .text-container .text{
+  .nc-ckeditor-inline{
+    display: block!important;
+  }
+}
+
+.menu-top-container{
+  z-index: 9999;
+}
+
+// чтобы показывались кнопки редактирования у изображений, у которых img position: absolute
+.catalog-advantage-variant1,
+.catalog-advantage-variant2,
+.catalog-advantage-variant3,
+.catalog-advantage-variant4,
+.catalog-advantage-variant5,
+.catalog-advantage-variant6,
+.catalog-advantage-variant7,
+.catalog-advantage-variant8,
+.catalog-advantage-variant9,
+.catalog-products,
+.catalog-products2,
+.catalog-products3,
+.catalog-gallery-album,
+.catalog-gallery,
+.catalog-gallery-album-fluid,
+.catalog-gallery-fluid,
+.catalog-sections,
+.video-block-fancybox,
+.news-list{
+  .nc-editable-image-container{
+    display: block;
+    position: static;
+  }
+}
+
+
+//.img-container-padding{
+//  &:before{
+//    display: none;
+//  }
+//  img{
+//    position: relative!important;
+//  }
+//}

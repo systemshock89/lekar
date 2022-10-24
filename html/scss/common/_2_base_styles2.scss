@@ -1,0 +1,627 @@
+/*==========  BASE BLOCKS  ==========*/
+/* Кнопка Наверх */
+.toTop {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 60px;
+  left: 14%;
+  cursor: pointer;
+  z-index: 98;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+  text-decoration: none;
+  @include media((
+          display: (sm: none!important)
+  ));
+  &:before{
+    font-size: 60px;
+    content: "\f139";
+    font-family: 'Font Awesome 5 Free';
+    line-height: normal;
+    font-weight: 900;
+  }
+  &.show{
+    opacity: 0.35;
+    transition: opacity 0.25s ease-in-out;
+  }
+  &:hover{
+    opacity: .65;
+    text-decoration: none;
+  }
+}
+
+.schema-snippet{
+  display: none;
+}
+
+/* faq-mini */
+.faq-mini {
+  .item {
+    border: 1px solid #d7dee3;
+    &:not(:last-child){
+      margin-bottom: 8px;
+    }
+    .question {
+      background: #f9f9fb;
+      a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        text-decoration: none;
+        color: $default-font-color;
+        padding: 6px 15px;
+        &:after{
+          margin-left: 7px;
+          color: #d7dee3;
+          font-size: 29px;
+          content: "\f078";
+          font-family: 'Font Awesome 5 Free';
+          font-weight: 900;
+          transition: transform 0.1s ease-in-out;
+        }
+        > div {
+          text-decoration: underline;
+        }
+        &:hover {
+          background-color: #eceff2;
+          div {
+            text-decoration: none;
+          }
+        }
+        p:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+    &.selected .question {
+      border-bottom: 1px solid #ddd;
+      a {
+        background-color: #eceff2;
+        &:after {
+          transform: scale(1, -1);
+          transition: transform 0.1s ease-in-out;
+        }
+      }
+    }
+    .answer {
+      display: none;
+      @include media((
+              padding: (all: 15px 15px 15px 35px, xs: 15px)
+      ));
+      background: #fff;
+      //@extend %text-elements;
+    }
+  }
+}
+
+/* Контакты */
+.contacts-block{
+  .contacts-block-item{
+
+    &:not(:last-child){
+      margin-bottom: 30px;
+    }
+
+    > .row{
+      .contacts-block-item-field-map{
+        @include media((
+                margin-top: (md: 1rem)
+        ));
+      }
+
+      + .text-bottom{
+        margin-top: 1rem;
+      }
+    }
+
+    .contacts-block-item-field{
+
+      &:not(:last-child){
+        margin-bottom: 1rem;
+      }
+
+      .contacts-block-item-field-text-wrap{
+        display: flex;
+        align-items: center;
+
+        > i{
+          margin-right: 15px;
+          &.fa-phone{
+            transform: scaleX(-1);
+          }
+        }
+        .contacts-block-item-field-name{
+          font-weight: bold;
+        }
+
+        .contacts-block-item-field-text{
+
+        }
+      }
+
+      &.contacts-block-item-field-socials{
+        .contacts-block-item-field-text-wrap{
+          .contacts-block-item-field-name{
+            margin-bottom: 5px;
+          }
+          .contacts-block-item-field-text{
+            &:not(:last-child){
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+
+    .contacts-block-img-container-wrap{
+      margin-bottom: 1rem;
+      [class*="col-"]:nth-child(2){
+        @include media((
+                text-align: (all: right, sm: left),
+        ));
+      }
+    }
+    .contacts-block-img-container{
+      display: inline-block;
+      text-decoration: none;
+      @include media((
+              margin-top: (sm: 1rem)
+      ));
+    }
+
+    .contacts-map{
+      margin-top: 10px;
+      width: 100%;
+      position: relative;
+
+      @include media((
+              height: (all: 450px, lg: 350px, sm: 300px, xs: 250px)
+      ));
+
+      .contacts-map-wrap{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #FAFAFA;
+        @include media((
+                height: (all: 450px, lg: 350px, sm: 300px, xs: 250px)
+        ));
+        &:before {
+          content: '';
+          @extend %spinner;
+          top: 50%;
+          left: 50%;
+          margin-top: -25px;
+          margin-left: -25px;
+        }
+      }
+    }
+  }
+}
+
+/* Где купить */
+.contacts-block-list{
+  .contacts-block-list-map-wrapper{
+    margin-bottom: 30px;
+    .contacts-block-list-map-button-wrapper{
+      text-align: right;
+    }
+    .contacts-block-list-map{
+      display: none;
+
+      margin-top: 15px;
+      width: 100%;
+      position: relative;
+
+      @include media((
+              height: (all: 650px, lg: 350px, sm: 300px, xs: 250px)
+      ));
+
+      .contacts-block-list-map-wrap{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #FAFAFA;
+        @include media((
+                height: (all: 650px, lg: 350px, sm: 300px, xs: 250px)
+        ));
+      }
+    }
+  }
+
+  .links-wrapper{
+    margin-bottom: 25px;
+    .item{
+      display: inline-block;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+
+  .items-wrapper{
+    .item{
+      &:not(:last-child){
+        margin-bottom: 30px;
+      }
+      .name{
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .item-more{
+        margin-left: 25px;
+        position: relative;
+        //line-height: 1.5;
+        &:not(:last-child){
+          margin-bottom: 5px;
+        }
+        &:before {
+          font-size: 26px;
+          line-height:1;
+          color: $accent-color;
+          content: '•';
+          position: absolute;
+          top: 0;
+          left: -20px;
+        }
+      }
+    }
+  }
+
+  .contacts-block-baloon{
+    div:not(:last-child){
+      @include media((
+              margin-bottom: (all: 5px, sm: 2px),
+      ));
+    }
+    .contacts-block-baloon-title-wrap{
+      @include media((
+              text-align: (all: center, sm: left),
+      ));
+    }
+    .contacts-block-baloon-title{
+      @include media((
+              font-size: (all: 15px, lg: 14px),
+      ));
+      display: inline-block;
+      font-weight: bold;
+    }
+    .contacts-block-baloon-img-wrap{
+      text-align: center;
+    }
+    .contacts-block-baloon-img{
+      text-decoration: none;
+      display: inline-block;
+      @include media((
+              display: (sm: none),
+      ));
+      img{
+        max-width: 200px;
+      }
+    }
+  }
+}
+/* /Где купить */
+
+.categories{
+  margin-bottom: 15px;
+  .categories-item{
+    display: inline-block;
+    margin-bottom: 3px;
+    span{
+      font-size: 14px;
+      color: #666;
+    }
+    &:after{
+      content: '|';
+      font-size: 10px;
+      color: #cccccc;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 4px;
+    }
+    &.selected{
+      font-weight: bold;
+    }
+    &:last-child{
+      &:after{
+        display: none;
+      }
+    }
+  }
+}
+
+.text-resize-block{
+  &.text-resize-block-hidden{
+    //@media only screen and (max-width: 575px) {
+    position: absolute;
+    visibility: hidden;
+    //}
+  }
+  .text-resize-block-compact{
+    overflow: hidden;
+    height: 100px;
+    position: relative;
+    &:after{
+      position: absolute;
+      height: 15px;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      box-shadow: inset 0 -10px 5px 5px hsla(0,0%,100%,.5);
+      content: "";
+    }
+  }
+  .text-resize-block-button-wrap{
+    text-align: center;
+  }
+  .text-resize-block-button{
+    display: inline-block;
+    margin-top: 5px;
+    text-decoration: none;
+    color: $accent-color;
+    &:after{
+      margin-left: 5px;
+      position: relative;
+      top: 1px;
+      content: '\f078';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
+    &.opened:after{
+      content: '\f077';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
+    &:hover{
+      color: $accent-color2;
+    }
+  }
+  &.opened{
+    .text-resize-block-compact{
+      &:after{
+        display: none;
+      }
+    }
+  }
+}
+
+.socials {
+  display: flex;
+  .item {
+    //display: inline-flex;
+    //align-items: center;
+    //justify-content: center;
+    width: 27px;
+    height: 27px;
+    text-decoration: none;
+    //color: $accent-color;
+
+    // center-horizontally-and-vertically
+    position: relative;
+    i{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+    }
+
+    //&.vk{
+    //  background: #45668e;
+    //  //&:hover{
+    //  //  color: #45668e;
+    //  //}
+    //}
+    //&.fb{
+    //  background: #3b5998;
+    //  //&:hover{
+    //  //  color: #3b5998;
+    //  //}
+    //}
+    //&.tw{
+    //  background: #1da1f2;
+    //  //&:hover{
+    //  //  color: #1da1f2;
+    //  //}
+    //}
+    //&.youtube{
+    //  background: #ff0000;
+    //  //&:hover{
+    //  //  color: #ff0000;
+    //  //}
+    //}
+    //&.skype{
+    //  background: #00AFF0;
+    //  //&:hover{
+    //  //  color: #00AFF0;
+    //  //}
+    //}
+    //&.inst{
+    //  background: radial-gradient(circle at 33% 100%, #FED373 4%, #F15245 30%, #D92E7F 62%, #9B36B7 85%, #515ECF);
+    //  //&:hover{
+    //  //  color: #F15245;
+    //  //}
+    //}
+    //&.ok{
+    //  background: #ed812b;
+    //  //&:hover{
+    //  //  color: #ed812b;
+    //  //}
+    //}
+    //&.what{
+    //  background: #075e54;
+    //  //&:hover{
+    //  //  color: #075e54;
+    //  //}
+    //}
+    //&.viber{
+    //  background: #675CA8;
+    //  //&:hover{
+    //  //  color: #675CA8;
+    //  //}
+    //}
+    //&.telegram{
+    //  background: #0088cc;
+    //  //&:hover{
+    //  //  color: #0088cc;
+    //  //}
+    //}
+    &:hover{
+      //background: #fff;
+      //color: $accent-color-yellow4;
+    }
+
+    &:not(:last-child){
+      margin-right: 22px;
+      //margin-right: 5px;
+    }
+  }
+}
+
+// в блоке "Вывод другого инфоблока" если стоит "без нижнего отступа", то у последнего выводяшегося инфоблока убирать нижний отступ
+.combine-block{
+  &.block-margin-bottom-disabled{
+    .tpl-block-list-objects{
+      > div:last-child{
+        .block-margin-bottom,
+        .block-padding-small{
+          margin-bottom: 0!important;
+        }
+      }
+    }
+  }
+}
+
+// поиск с подсказакми
+.search-wrapper{
+  position: relative;
+  .search-variants{
+    display: none;
+
+    position: absolute;
+    top: calc(100% + 9px);
+    left: 0;
+    z-index: 5;
+    overflow: auto;
+    width: 100%;
+    @include media((
+            max-height: (all: 400px, lg: 300px),
+    ));
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(55, 129, 110, 0.15);
+    .search-variants-option{
+      a{
+        display: flex;
+        align-items: center;
+
+        min-height: 35px;
+        padding: 6px 13px;
+        line-height: 1.2;
+        color: $default-font-color;
+        text-decoration: none;
+
+        _:-ms-input-placeholder, :root & {
+          height: 0; // ie11 align-items: center fix
+        }
+
+      }
+      &:hover,
+      &:focus{
+        a{
+          color: #fff;
+          background-color: $accent-color3;
+          text-decoration: none;
+        }
+      }
+    }
+    &:after{
+      content: '';
+      width: 100%;
+      height: 9px;
+      position: absolute;
+      top: -9px;
+      left: 0;
+    }
+  }
+}
+
+/* netcat 6 styles */
+.tpl-area-main, .tpl-area-main-list { min-height: 100vh; }
+.tpl-container, .tpl-container > .tpl-block-list { display: flex;}
+.tpl-container > .tpl-block-list, .tpl-container > .tpl-block-list > .tpl-block-list-objects { width: 100% }
+
+body.is-autorized{
+  // скрываем плашку netcat на мобильных
+  @include media((
+          margin-top: (sm: 0!important),
+  ));
+  .nc-navbar.nc--fixed{
+    @include media((
+            display: (sm: none),
+    ));
+  }
+
+  .menu-top-container{
+    @include media((
+            top: (all: 55px, sm: 0),
+    ));
+  }
+
+  .text-block-two-columns.doctor-inner{
+    .text-block-item{
+      .col-md-7,
+      .col-md-12{
+        .text-container{
+          .button{
+            @include media((
+                    top: (all: 155px, sm: 0),
+            ));
+          }
+        }
+      }
+    }
+  }
+
+  .table-responsive > .overflow > table > tbody > tr > th{
+    @include media((
+            top: (all: 70px + 55px, lg: 60px + 55px, md: 110px + 55px, sm: 40px),
+    ));
+  }
+
+  .documents-block2 {
+    .table-responsive {
+      > .overflow > table {
+        .row1 {
+          .row1-flex {
+            @include media((
+                    //top: (all: 155px, md: 180px, sm: 55px),
+                    top: (all: 114px + 55px, lg: 104px + 55px, md: 154px + 55px, sm: 80px, xs: 0),
+            ));
+          }
+        }
+      }
+    }
+  }
+
+  // учитываем плашку netcat
+  .page {
+    min-height: calc(100vh - 55px);
+    min-height: calc(100vh - var(--vh-offset, 0px) - 55px );
+    @media only screen and (max-width: 767px) {
+      min-height: 100vh;
+      min-height: calc(100vh - var(--vh-offset, 0px) );
+    }
+  }
+}
+
+@import "3_base_styles3"; // Индивидуальные базовые стили (для главной или всего сайта)
+/*==========  /BASE BLOCKS  ==========*/
+/**/
+/**/

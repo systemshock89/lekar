@@ -1,0 +1,677 @@
+/*==========  MENU-TOP  ==========*/
+.menu-top-container {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  @include media((
+          display: (sm: none),
+          margin-bottom: (all: -35px, lg: -30px, md: -55px),
+  ));
+
+  .menu-top-container2{
+    box-shadow: 0 10px 20px rgba(55, 129, 110, 0.15);
+    border-radius: 25px;
+    background-color: #ffffff;
+    padding: 10px;
+  }
+
+  .button{
+    @include media((
+            min-height: (lg: 40px),
+    ));
+  }
+}
+
+.menu-top:not(.mm-menu){
+  @include media((
+          width: (all: 575px, lg: 440px, md: 460px),
+  ));
+  ul {
+    @extend %list-unstyled;
+
+    // 1 level menu-top
+    &.level1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      > li {
+        position: relative;
+        z-index: 3;
+        flex-basis: 0; // чтобы ячейки были одинаковой ширине вне зависимости от их названия
+        flex-grow: 1;
+        &.position-static{
+          position: static;
+        }
+
+        > .item,
+        &.flexMenu-viewMore > a{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          text-decoration: none;
+
+          //width: 140px;
+          //flex-basis: 140px;
+          //min-width: 140px;
+          padding: 6px 10px;
+          @include media((
+                  font-size: (all:16px, lg: 14px),
+                  min-height: (all:50px, lg: 40px),
+          ));
+          font-weight: 500;
+          border-radius: 16px;
+          background-color: $accent-color-gray1;
+          line-height: 1.2;
+
+          _:-ms-input-placeholder, :root & {
+            height: 0; // ie11 align-items: center fix
+          }
+        }
+        &:hover > .item,
+        &.active > .item,
+        &.selected > .item,
+
+        &.flexMenu-viewMore:hover > a,
+        &.flexMenu-viewMore.active > a{
+          color: $accent-color;
+          background-color: $accent-color5;
+        }
+        &.flexMenu-viewMore > a{
+          font-weight: bold;
+        }
+
+        &:not(:last-child){
+          > .item,
+          &.flexMenu-viewMore > a{
+            margin-right: 7px;
+          }
+        }
+
+        // значок у пунктов меню, имеющих подразделы
+        //&.submenu{
+        //  > .item{
+        //    &:after {
+        //      content: "\f078";
+        //      font-family: 'Font Awesome 5 Free';
+        //      font-weight: 900;
+        //      margin-left: 7px;
+        //      font-size: 13px;
+        //    }
+        //  }
+        //}
+      }
+    }
+
+    // 2 level menu-top
+    &.level2 {
+      display: none;
+      position: absolute;
+      min-width: 100%;
+      //left: 0;
+      //white-space: nowrap;
+
+      max-width: 300px;
+      width: max-content;
+    }
+    &.level1 > li:hover > ul.level2 {
+      display: block !important;
+    }
+    &.level2,
+    &.flexMenu-popup{
+      border-radius: 16px;
+      background-color: $accent-color5;
+      box-shadow: 0 10px 20px rgba(55, 129, 110, 0.15);
+      margin-top: 5px;
+      &:before{
+        content: '';
+        width: 100%;
+        height: 5px;
+        position: absolute;
+        top: -5px;
+        left: 0;
+      }
+      > li {
+        position: relative;
+        > .item {
+          display: flex;
+          align-items: center;
+
+          @include media((
+                  min-height: (all: 49px, lg: 40px),
+                  font-size: (all: 16px, lg: 14px),
+          ));
+          padding: 6px 13px;
+          line-height: 1.2;
+          color: $default-font-color;
+          text-decoration: none;
+
+          _:-ms-input-placeholder, :root & {
+            height: 0; // ie11 align-items: center fix
+          }
+
+          &:before {
+            content: "\f105";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 7px;
+            color: $accent-color3;
+          }
+        }
+        &:hover > .item,
+        &.active > .item,
+        &.selected > .item{
+          color: $accent-color;
+        }
+        &:not(:last-child) > .item{
+          border-bottom: 1px solid #fff;
+        }
+      }
+    }
+
+    // 3 level menu-top
+    ul.level2:not(.level2-fullwidth-column) {
+      ul.level3 {
+        display: none;
+        top: 0;
+        left: 100%;
+        position: absolute;
+        max-width: 300px;
+        width: max-content;
+
+        // прокрутка длинного меню не будет работать вместе с четвертым уровнем меню
+        //max-height: 450px;
+        //overflow: auto;
+
+        border-radius: 16px;
+        background-color: $accent-color5;
+        box-shadow: 0 10px 20px rgba(55, 129, 110, 0.15);
+        > li {
+          position: relative;
+          max-width: 300px;
+          > .item {
+            display: flex;
+            align-items: center;
+
+            @include media((
+                    min-height: (all: 49px, lg: 40px),
+                    font-size: (all: 16px, lg: 14px),
+            ));
+            padding: 6px 13px;
+            line-height: 1.2;
+            color: $default-font-color;
+            text-decoration: none;
+
+            _:-ms-input-placeholder, :root & {
+              height: 0; // ie11 align-items: center fix
+            }
+
+            &:before {
+              content: "\f105";
+              font-family: 'Font Awesome 5 Free';
+              font-weight: 900;
+              margin-right: 7px;
+              color: $accent-color3;
+            }
+          }
+          &:hover > .item,
+          &.active > .item,
+          &.selected > .item{
+            color: $accent-color;
+          }
+          &:not(:last-child) > .item{
+            border-bottom: 1px solid #fff;
+          }
+        }
+      }
+      &.level2 > li:hover > ul.level3 {
+        display: block !important;
+      }
+
+      // раздел: услуги для взрослых
+      &.level2 > li.adult{
+        position: static;
+        ul {
+          > li {
+            > .item {
+              font-size: 12px;
+              min-height: 30px;
+            }
+          }
+        }
+      }
+    }
+
+    // 4 level menu-top
+    ul.level4 {
+      display: none;
+      top: 0;
+      left: 100%;
+      position: absolute;
+      max-width: 300px;
+      width: max-content;
+
+      max-height: 450px;
+      overflow: auto;
+
+      border-radius: 16px;
+      background-color: $accent-color5;
+      box-shadow: 0 10px 20px rgba(55, 129, 110, 0.15);
+      > li {
+        position: relative;
+        > .item {
+          display: flex;
+          align-items: center;
+
+          @include media((
+                  min-height: (all: 49px, lg: 40px),
+                  font-size: (all: 16px, lg: 14px),
+          ));
+          padding: 6px 13px;
+          line-height: 1.2;
+          color: $default-font-color;
+          text-decoration: none;
+
+          _:-ms-input-placeholder, :root & {
+            height: 0; // ie11 align-items: center fix
+          }
+
+          &:before {
+            content: "\f105";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 7px;
+            color: $accent-color3;
+          }
+        }
+        &:hover > .item,
+        &.active > .item,
+        &.selected > .item{
+          color: $accent-color;
+        }
+        &:not(:last-child) > .item{
+          border-bottom: 1px solid #fff;
+        }
+      }
+    }
+    &.level3 > li:hover > ul.level4 {
+      display: block !important;
+    }
+
+    // flexMenu-popup
+    &.flexMenu-popup{
+      right: 0;
+      > li{
+        > ul.level2 {
+          display: block;
+          padding-left: 15px;
+          top: 0;
+          left: 0;
+          position: relative;
+          box-shadow: none;
+        }
+        &:hover > ul.level2 {
+          display: block !important;
+        }
+        > ul.level2 > li{
+          > ul.level3{
+            display: block;
+            padding-left: 15px;
+            top: 0;
+            left: 0;
+            position: relative;
+            box-shadow: none;
+          }
+        }
+        &:hover > ul.level3{
+          display: block!important;
+        }
+      }
+    }
+
+    // level2-fullwidth-column
+    &.level2-fullwidth-column{
+      left: 0;
+      padding-top: 20px;
+      padding-bottom: 5px;
+      background: #fff;
+      box-shadow: 0 2px 3px rgba(9, 10, 10, 0.2);
+      white-space: inherit;
+      .item-wrap{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        > .item{
+          .img-container{
+            margin-bottom: 10px;
+          }
+          .title {
+            @include media((
+                    font-size: (all: 20px, md: 18px, sm: 16px)
+            ));
+            color: $accent-color;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            line-height: 1.2;
+          }
+        }
+
+        > .item:hover .title,
+        &.active > .item .title,
+        &.selected > .item .title{
+          text-decoration: underline;
+        }
+      }
+      ul.level3 {
+        margin-bottom: 20px;
+        > li{
+          > .item {
+            display: inline-block;
+            text-decoration: none;
+            line-height: 1.2;
+          }
+          &:not(:last-child){
+            > .item {
+              margin-bottom: 10px;
+            }
+          }
+
+          > a:hover,
+          &.active > .item,
+          &.selected > .item{
+            text-decoration: underline;
+          }
+
+        }
+      }
+    }
+
+    // level2-fullwidth
+    .level2-fullwidth{
+      left: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      background: #fff;
+      box-shadow: 0 2px 3px rgba(9, 10, 10, 0.2);
+      white-space: inherit;
+
+      .level2-wrap{
+        .item {
+          display: inline-block;
+          text-decoration: none;
+          line-height: 1.2;
+        }
+        div:not(:last-child){
+          .item{
+            margin-bottom: 10px;
+          }
+        }
+        .item:hover,
+        .item.active,
+        .item.selected{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.search-container{
+  position: relative;
+  width: 435px;
+  @include media((
+          width: (all: 435px, lg: 240px, md: 100%),
+          margin-top: (md: 10px),
+  ));
+  input[type=search]{
+    width: 100%;
+    padding: 6px 30px 6px 12px;
+    border: 2px solid $accent-color-gray1;
+    border-radius: 16px;
+    @include media((
+            min-height: (all: 50px, lg: 40px),
+    ));
+  }
+  input[type=submit]{
+    @include media((
+            width: (all: 50px, lg: 40px),
+            height: (all: 50px, lg: 40px),
+    ));
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 20px;
+    color: #54b39b;
+    padding: 0;
+    transition: color 0.1s ease-in-out;
+    cursor: pointer;
+    &:hover{
+      color: $accent-color-yellow4;
+      transition: color 0.1s ease-in-out;
+    }
+    &:active{
+      color: #54b39b;
+    }
+
+
+  }
+  .advancedlink{
+    display: none;
+  }
+}
+
+.menu-header-top:not(.mm-menu){
+  ul {
+    @extend %list-unstyled;
+
+    // 1 level menu-top
+    &.level1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      > li {
+        position: relative;
+        z-index: 5;
+        //flex-basis: 0; // чтобы ячейки были одинаковой ширине вне зависимости от их названия
+        flex-grow: 1;
+        &.position-static{
+          position: static;
+        }
+
+        > .item,
+        &.flexMenu-viewMore > a{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          text-decoration: none;
+
+          //min-height: 44px;
+          padding: 0 10px;
+          color: $title-font-color;
+          font-weight: 500;
+          line-height: 1.2;
+
+          _:-ms-input-placeholder, :root & {
+            height: 0; // ie11 align-items: center fix
+          }
+        }
+        &:hover > .item,
+        &.active > .item,
+        &.selected > .item,
+
+        &.flexMenu-viewMore:hover > a,
+        &.flexMenu-viewMore.active > a{
+          color: $accent-color;
+        }
+        &.flexMenu-viewMore > a{
+          font-weight: bold;
+        }
+      }
+    }
+
+    // 2 level menu-top
+    &.level2 {
+      display: none;
+      position: absolute;
+      min-width: 100%;
+      //left: 0;
+      //white-space: nowrap;
+
+      max-width: 300px;
+      width: max-content;
+    }
+    &.level1 > li:hover > ul.level2 {
+      display: block !important;
+    }
+    &.level2,
+    &.flexMenu-popup{
+      border-radius: 16px;
+      background-color: $accent-color5;
+      box-shadow: 0 10px 20px rgba(55, 129, 110, 0.15);
+      margin-top: 5px;
+      &:before{
+        content: '';
+        width: 100%;
+        height: 5px;
+        position: absolute;
+        top: -5px;
+        left: 0;
+      }
+      > li {
+        position: relative;
+        > .item {
+          display: flex;
+          align-items: center;
+
+          min-height: 40px;
+          padding: 6px 13px;
+          line-height: 1.2;
+          color: $title-font-color;
+          font-weight: 500;
+          text-decoration: none;
+
+          _:-ms-input-placeholder, :root & {
+            height: 0; // ie11 align-items: center fix
+          }
+
+          &:before {
+            content: "\f105";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 7px;
+            color: $accent-color3;
+          }
+        }
+        &:hover > .item,
+        &.active > .item,
+        &.selected > .item{
+          color: $accent-color;
+        }
+        &:not(:last-child) > .item{
+          border-bottom: 1px solid #fff;
+        }
+      }
+    }
+
+    // 3 level menu-top
+    ul.level2:not(.level2-fullwidth-column) {
+      ul.level3 {
+        display: none;
+        top: 0;
+        left: 100%;
+        position: absolute;
+        max-width: 300px;
+        width: max-content;
+
+        border-radius: 16px;
+        background-color: $accent-color5;
+        box-shadow: 0 10px 20px rgba(55, 129, 110, 0.15);
+        > li {
+          position: relative;
+          > .item {
+            display: flex;
+            align-items: center;
+
+            min-height: 40px;
+            padding: 6px 13px;
+            line-height: 1.2;
+            color: $title-font-color;
+            font-weight: 500;
+            text-decoration: none;
+
+            _:-ms-input-placeholder, :root & {
+              height: 0; // ie11 align-items: center fix
+            }
+
+            &:before {
+              content: "\f105";
+              font-family: 'Font Awesome 5 Free';
+              font-weight: 900;
+              margin-right: 7px;
+              color: $accent-color3;
+            }
+          }
+          &:hover > .item,
+          &.active > .item,
+          &.selected > .item{
+            color: $accent-color;
+          }
+          &:not(:last-child) > .item{
+            border-bottom: 1px solid #fff;
+          }
+        }
+      }
+      &.level2 > li:hover > ul.level3 {
+        display: block !important;
+      }
+    }
+
+
+    // flexMenu-popup
+    &.flexMenu-popup{
+      right: 0;
+      > li{
+        > ul.level2 {
+          display: block;
+          padding-left: 15px;
+          top: 0;
+          left: 0;
+          position: relative;
+          box-shadow: none;
+        }
+        &:hover > ul.level2 {
+          display: block !important;
+        }
+        > ul.level2 > li{
+          > ul.level3{
+            display: block;
+            padding-left: 15px;
+            top: 0;
+            left: 0;
+            position: relative;
+            box-shadow: none;
+          }
+        }
+        &:hover > ul.level3{
+          display: block!important;
+        }
+      }
+    }
+
+
+  }
+}
+/**/
+/*==========  /Menu-top  ==========*/
+/**/
+/**/

@@ -1,0 +1,88 @@
+<!--footer-->
+<footer id="footer-with-map">
+    <div class="footer-desktop">
+
+        <div class="map-block">
+            <div class="map-block-wrapper">
+
+                <div class="container">
+
+                    <div class="contacts-wrapper">
+                        <address class="contacts">
+                            <div class="requisites">
+                                № ЛО-50-01-006742 от 17.06.20105г. <br>
+                                ОГРН: 1095024007506
+                            </div>
+                            <div class="phone-container">
+                                <a href="tel:+74956460464" class="phone nowrap" title="Позвонить">+7 (495) 646-04-64</a>
+                                <br>
+                                <a href="tel:+74956461443" class="phone nowrap" title="Позвонить">+7 (495) 646-14-43</a>
+                            </div>
+                            <div class="address">
+                                г. Красногорск, Павшинская Пойма, <br>
+                                ул. Павшинский бульвар, д.5
+                            </div>
+                            <div class="time">
+                                Ежедневно с 09:00 до 21:00 <br>
+                                без обеда и выходных
+                            </div>
+
+                            <img src="img/office.jpg" class="img-fluid office" alt="office">
+
+                            <div class="socials">
+                                <a href="#" class="item fb" target="_blank" title="Facebook">
+                                    <i class="fab fa-lg fa-facebook-square"></i>
+                                </a>
+
+                                <a href="#" class="item inst" target="_blank" title="Instagram">
+                                    <i class="fab fa-lg fa-instagram-square"></i>
+                                </a>
+
+                                <a href="#" class="item youtube" target="_blank" title="Youtube">
+                                    <i class="fab fa-lg fa-youtube-square"></i>
+                                </a>
+                            </div>
+
+                        </address>
+                    </div>
+                </div>
+
+                <div class="map-block-map" id="footer-with-map-block-map">
+                    <!-- нужно width=100%&amp;height=100%&amp;scroll=false -->
+                    <!--script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A0e0a55c3aae578bc8e14e7953c4caf9af4af4bdc91476e47fff0914261db05f0&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=false"></script-->
+
+                    <script defer src="js/lib/jquery.waypoints.min.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function(event) {
+                            let waypoint_object = document.getElementById('footer-with-map');
+                            if(waypoint_object){
+                                var waypoint = new Waypoint({
+                                    element: waypoint_object,
+                                    handler: function(direction) {
+                                        showYandexMap('https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9b7eefaae927eff2f545a9a2bb919fb4072d793bdd86cec9df36cb54a64a8400&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=true', 'footer-with-map-block-map');
+                                        this.disable();
+                                    },
+                                    offset: '100%'
+                                });
+                            }
+                        });
+                    </script>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="footer2">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                    <div class="copyright">© ООО «Лекарь» , 2021 г.</div>
+                </div>
+                <div class="col-auto">
+                    <a href="#" class="mastweb">Разработка и реклама сайта <span>MasterWeb</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,123 @@
+/*==========  FAQ  ==========*/
+.faq {
+  .btn-wrap{
+    @include media((
+            margin-bottom: (all: 30px, md: 15px),
+            text-align: (sm: center)
+    ));
+    .button{
+      box-shadow: 0 10px 20px rgba(209, 126, 6, 0.25);
+      &:hover{
+        box-shadow: none;
+      }
+    }
+  }
+  .item {
+    &:not(:last-child){
+      margin-bottom: 30px;
+    }
+    .item-text{
+      //&:not(:last-child){
+      //  @include media((
+      //          margin-bottom: (all: 20px, sm: 15px)
+      //  ));
+      //}
+      .img-container{
+        display: block;
+        @include media((
+                margin-bottom: (sm: 15px)
+        ));
+      }
+      .text-container{
+        border-radius: 30px;
+      }
+
+      .item-info{
+        text-align: right;
+        color: $accent-color;
+        @include media((
+                margin-bottom: (all: 19px, lg: 10px),
+        ));
+        .name {
+          display: inline-block;
+        }
+        .category{
+          display: inline-block;
+          padding: 3px 5px;
+          background: $accent-color;
+          font-size: 14px;
+          color: #fff;
+          border-radius: 4px;
+          margin-left: 17px;
+        }
+        .date {
+          margin-left: 3px;
+          display: inline-block;
+        }
+      }
+
+      .title,
+      .text{
+        @include media((
+                font-size: (all: 16px, md: 14px),
+        ));
+      }
+      .text3{
+        font-size: 14px;
+        font-style: italic;
+        margin-top: 8px;
+      }
+      .title{
+        font-weight: bold;
+        float: left;
+        margin-right: 5px;
+      }
+      .text p:last-child{
+        margin-bottom: 0;
+      }
+      &.text1{
+        .text-container{
+          @include media((
+                  padding: (all: 15px 21px 55px 38px, lg: 15px 20px 30px 20px, xs: 10px 15px 25px 15px)
+          ));
+          background-image: linear-gradient(-240deg, #56ebc5 0%, #94ffba 100%);
+        }
+      }
+      &.text2{
+        .text-container{
+          @include media((
+                  padding: (all: 42px 21px 42px 38px, lg: 25px, xs: 20px),
+                  margin-right: (all: 40px, lg: 30px, xs: 20px),
+                  margin-left: (all: 40px, lg: 30px, xs: 20px),
+                  margin-top: (all: -20px, xs: -15px)
+          ));
+          background: #fff;
+          box-shadow: 12px 16px 50px rgba(55, 129, 110, 0.15);
+          position: relative;
+          &:before{
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+            border-radius: 20px;
+            border: 1px dashed $accent-color-gray2;
+            z-index: 0;
+          }
+          .title,
+          .text,
+          .answer-name{
+            position: relative;
+          }
+        }
+      }
+      .answer-name{
+        color: #5f6868;
+      }
+    }
+  }
+}
+/*==========  /FAQ  ==========*/
+/**/
+/**/

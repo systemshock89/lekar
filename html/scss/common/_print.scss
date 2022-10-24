@@ -1,0 +1,91 @@
+
+@media print {
+  /*==========  ВЕРСИЯ ДЛЯ ПЕЧАТИ  ==========*/
+  html, body{
+    font-size: 14px;
+  }
+
+  html, body,
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4{
+    color: #000!important;
+  }
+
+  h1, .h1{
+    font-size: 22px;
+  }
+
+  .page{
+    background: none!important;
+    min-height: inherit!important;
+    margin-bottom: 0!important;
+    &:after{
+      display: none!important;
+    }
+  }
+
+  header,
+  .header-mobile,
+  footer,
+  .widget-phone,
+  #preloader,
+  .mini-cart,
+  .mini-cart2,
+  .mini-cart3,
+  .toTop,
+  .menu-top-container,
+  .menu-top,
+  .breadcrumb,
+  .print-button,
+  .nc-navbar.nc--fixed{
+    display: none!important;
+  }
+
+  .container{
+    width: auto!important;
+    max-width: inherit!important;
+    margin: 0!important;
+    padding: 0!important;
+  }
+  .page-content{
+    margin: 0!important;
+    padding: 0!important;
+  }
+
+  table.table{
+    td, th{
+      border: 1px solid #000!important;
+      a{
+        color: #000!important;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .order-page{
+    .notice-container{
+      .notice{
+        margin-bottom: 15px;
+      }
+    }
+    .buyer{
+      .buyer-container{
+        background: transparent;
+        padding: 0;
+        font-size: 14px;
+      }
+    }
+    .cart-table{
+      td, th{
+        padding: 5px;
+      }
+    }
+  }
+
+  .visible-print-block{
+    display: block;
+  }
+  /*==========  /ВЕРСИЯ ДЛЯ ПЕЧАТИ  ==========*/
+}

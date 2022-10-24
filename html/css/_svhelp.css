@@ -1,0 +1,1882 @@
+@charset "UTF-8";
+/*
+Кастомный скроллбар на стилях
+- стрелки есть только в firefox и только такого цвета. Закруглений там не сделать.
+- А во всех остальных браузерах стрелок нет, но есть закругления.
+- Еще в firefox кастомный скролл только блоков, а у body обычный
+ */
+.row-mini {
+  margin-left: -6px;
+  margin-right: -6px; }
+  .row-mini > .col,
+  .row-mini > [class*="col-"],
+  .row-mini > [class*="col15-"] {
+    padding-left: 6px;
+    padding-right: 6px; }
+
+.row-mini20 {
+  margin-left: -10px;
+  margin-right: -10px; }
+  .row-mini20 > .col,
+  .row-mini20 > [class*="col-"],
+  .row-mini20 > [class*="col15-"] {
+    padding-left: 10px;
+    padding-right: 10px; }
+
+/*==========  ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ ==========*/
+.svhelp {
+  position: relative;
+  margin-top: 10px; }
+  .svhelp .svhelp-container {
+    display: none;
+    padding: 15px;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    border: 1px solid #869791;
+    border-top: none; }
+  .svhelp .svhelp-button {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    min-height: 44px;
+    line-height: 1.2;
+    padding: 5px 10px;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: top;
+    color: #000;
+    border: 1px solid #cad3d4;
+    background: transparent;
+    border-radius: 4px;
+    text-transform: uppercase; }
+    @media only screen and (max-width: 991px) {
+      .svhelp .svhelp-button {
+        font-size: 14px; } }
+    @media only screen and (max-width: 991px) {
+      .svhelp .svhelp-button {
+        min-height: 40px; } }
+    .svhelp .svhelp-button i {
+      margin-right: 5px; }
+    .svhelp .svhelp-button:active {
+      background: #eeeeee; }
+    .svhelp .svhelp-button _:-ms-input-placeholder, :root .svhelp .svhelp-button {
+      height: 0; }
+  .svhelp .svhelp-default {
+    padding: 10px;
+    border-top: 1px solid #cad3d4;
+    border-bottom: 1px solid #cad3d4;
+    display: block;
+    text-decoration: none;
+    margin-bottom: 10px; }
+    .svhelp .svhelp-default .fa {
+      margin-right: 8px; }
+    .svhelp .svhelp-default:hover span {
+      text-decoration: underline; }
+  .svhelp .svhelp-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cad3d4; }
+    .svhelp .svhelp-item .svhelp-item-title {
+      margin-bottom: 5px; }
+    .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; }
+      .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper .item {
+        width: 40px;
+        height: 40px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        text-decoration: none;
+        font-size: 35px;
+        margin-right: 10px;
+        line-height: normal; }
+        .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper .item:hover {
+          text-decoration: underline; }
+        .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper .item[data-svhelp-class='svhelp-theme-white'] {
+          background: #fff;
+          color: #000;
+          border: 2px solid #000; }
+        .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper .item[data-svhelp-class='svhelp-theme-dark'] {
+          background: #000;
+          color: #fff; }
+        .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper .item[data-svhelp-class='svhelp-theme-brown'] {
+          background: #F7F3D6;
+          color: #000; }
+        .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper .item[data-svhelp-class='svhelp-theme-blue'] {
+          background: #9DD1FF;
+          color: #000; }
+    .svhelp .svhelp-item.svhelp-font-size .svhelp-item-wrapper .item {
+      width: 20px;
+      display: inline-block;
+      text-decoration: none;
+      margin-right: 10px;
+      color: #000;
+      line-height: 30px;
+      text-align: center; }
+      .svhelp .svhelp-item.svhelp-font-size .svhelp-item-wrapper .item:hover {
+        text-decoration: underline; }
+      .svhelp .svhelp-item.svhelp-font-size .svhelp-item-wrapper .item[data-svhelp-class='svhelp-font-size-small'] {
+        font-size: 18px; }
+      .svhelp .svhelp-item.svhelp-font-size .svhelp-item-wrapper .item[data-svhelp-class='svhelp-font-size-medium'] {
+        font-size: 26px; }
+      .svhelp .svhelp-item.svhelp-font-size .svhelp-item-wrapper .item[data-svhelp-class='svhelp-font-size-big'] {
+        font-size: 36px; }
+    .svhelp .svhelp-item.svhelp-font .svhelp-item-wrapper .item {
+      color: #000;
+      font-size: 18px;
+      display: inline-block;
+      margin-bottom: 3px;
+      text-decoration: none; }
+      .svhelp .svhelp-item.svhelp-font .svhelp-item-wrapper .item:hover {
+        text-decoration: underline; }
+      .svhelp .svhelp-item.svhelp-font .svhelp-item-wrapper .item[data-svhelp-class='svhelp-font-times'] {
+        font-family: "Times New Roman"; }
+      .svhelp .svhelp-item.svhelp-font .svhelp-item-wrapper .item[data-svhelp-class='svhelp-font-arial'] {
+        font-family: Arial; }
+    .svhelp .svhelp-item:last-child {
+      margin-bottom: 0; }
+  .svhelp.open .svhelp-button, .svhelp:hover .svhelp-button {
+    border-color: #869791;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid #fff; }
+  .svhelp.open .svhelp-container, .svhelp:hover .svhelp-container {
+    display: block; }
+
+html.svhelp-theme-white body, html.svhelp-theme-brown body, html.svhelp-theme-blue body {
+  color: #000;
+  background: #fff; }
+
+html.svhelp-theme-white .placeholder, html.svhelp-theme-brown .placeholder, html.svhelp-theme-blue .placeholder {
+  color: #000; }
+
+html.svhelp-theme-white ::-webkit-input-placeholder, html.svhelp-theme-brown ::-webkit-input-placeholder, html.svhelp-theme-blue ::-webkit-input-placeholder {
+  color: #000; }
+
+html.svhelp-theme-white ::-moz-placeholder, html.svhelp-theme-brown ::-moz-placeholder, html.svhelp-theme-blue ::-moz-placeholder {
+  color: #000; }
+
+html.svhelp-theme-white :-ms-input-placeholder, html.svhelp-theme-brown :-ms-input-placeholder, html.svhelp-theme-blue :-ms-input-placeholder {
+  color: #000; }
+
+html.svhelp-theme-white ::-ms-input-placeholder, html.svhelp-theme-brown ::-ms-input-placeholder, html.svhelp-theme-blue ::-ms-input-placeholder {
+  color: #000; }
+
+html.svhelp-theme-white ::placeholder, html.svhelp-theme-brown ::placeholder, html.svhelp-theme-blue ::placeholder {
+  color: #000; }
+
+html.svhelp-theme-white :focus, html.svhelp-theme-brown :focus, html.svhelp-theme-blue :focus {
+  outline: 2px solid #d9534f; }
+
+html.svhelp-theme-white input[type='text'],
+html.svhelp-theme-white input[type='file'],
+html.svhelp-theme-white input[type='password'],
+html.svhelp-theme-white input[type='tel'],
+html.svhelp-theme-white input[type='email'],
+html.svhelp-theme-white input[type='search'],
+html.svhelp-theme-white input[type='number'],
+html.svhelp-theme-white input[type='date'],
+html.svhelp-theme-white select, html.svhelp-theme-white textarea, html.svhelp-theme-brown input[type='text'],
+html.svhelp-theme-brown input[type='file'],
+html.svhelp-theme-brown input[type='password'],
+html.svhelp-theme-brown input[type='tel'],
+html.svhelp-theme-brown input[type='email'],
+html.svhelp-theme-brown input[type='search'],
+html.svhelp-theme-brown input[type='number'],
+html.svhelp-theme-brown input[type='date'],
+html.svhelp-theme-brown select, html.svhelp-theme-brown textarea, html.svhelp-theme-blue input[type='text'],
+html.svhelp-theme-blue input[type='file'],
+html.svhelp-theme-blue input[type='password'],
+html.svhelp-theme-blue input[type='tel'],
+html.svhelp-theme-blue input[type='email'],
+html.svhelp-theme-blue input[type='search'],
+html.svhelp-theme-blue input[type='number'],
+html.svhelp-theme-blue input[type='date'],
+html.svhelp-theme-blue select, html.svhelp-theme-blue textarea {
+  border: 2px solid #000; }
+  html.svhelp-theme-white input[type='text']:focus,
+  html.svhelp-theme-white input[type='file']:focus,
+  html.svhelp-theme-white input[type='password']:focus,
+  html.svhelp-theme-white input[type='tel']:focus,
+  html.svhelp-theme-white input[type='email']:focus,
+  html.svhelp-theme-white input[type='search']:focus,
+  html.svhelp-theme-white input[type='number']:focus,
+  html.svhelp-theme-white input[type='date']:focus,
+  html.svhelp-theme-white select:focus, html.svhelp-theme-white textarea:focus, html.svhelp-theme-brown input[type='text']:focus,
+  html.svhelp-theme-brown input[type='file']:focus,
+  html.svhelp-theme-brown input[type='password']:focus,
+  html.svhelp-theme-brown input[type='tel']:focus,
+  html.svhelp-theme-brown input[type='email']:focus,
+  html.svhelp-theme-brown input[type='search']:focus,
+  html.svhelp-theme-brown input[type='number']:focus,
+  html.svhelp-theme-brown input[type='date']:focus,
+  html.svhelp-theme-brown select:focus, html.svhelp-theme-brown textarea:focus, html.svhelp-theme-blue input[type='text']:focus,
+  html.svhelp-theme-blue input[type='file']:focus,
+  html.svhelp-theme-blue input[type='password']:focus,
+  html.svhelp-theme-blue input[type='tel']:focus,
+  html.svhelp-theme-blue input[type='email']:focus,
+  html.svhelp-theme-blue input[type='search']:focus,
+  html.svhelp-theme-blue input[type='number']:focus,
+  html.svhelp-theme-blue input[type='date']:focus,
+  html.svhelp-theme-blue select:focus, html.svhelp-theme-blue textarea:focus {
+    outline: none;
+    -webkit-box-shadow: 0 0 0 2px #f4a70b;
+            box-shadow: 0 0 0 2px #f4a70b; }
+
+html.svhelp-theme-white .button, html.svhelp-theme-brown .button, html.svhelp-theme-blue .button {
+  color: #fff;
+  background: #000;
+  border: 1px solid #000; }
+  html.svhelp-theme-white .button:hover, html.svhelp-theme-brown .button:hover, html.svhelp-theme-blue .button:hover {
+    background: #fff;
+    color: #000 !important;
+    border: 1px solid #000; }
+
+html.svhelp-theme-white .button2,
+html.svhelp-theme-white .svhelp-button, html.svhelp-theme-brown .button2,
+html.svhelp-theme-brown .svhelp-button, html.svhelp-theme-blue .button2,
+html.svhelp-theme-blue .svhelp-button {
+  color: #000;
+  border: 2px solid #000; }
+  html.svhelp-theme-white .button2:hover,
+  html.svhelp-theme-white .svhelp-button:hover, html.svhelp-theme-brown .button2:hover,
+  html.svhelp-theme-brown .svhelp-button:hover, html.svhelp-theme-blue .button2:hover,
+  html.svhelp-theme-blue .svhelp-button:hover {
+    background: #000;
+    border: 2px solid #000;
+    color: #fff; }
+
+html.svhelp-theme-white .pagination .pagination-item, html.svhelp-theme-brown .pagination .pagination-item, html.svhelp-theme-blue .pagination .pagination-item {
+  background: transparent;
+  border: 1px solid #000;
+  color: #000;
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+  html.svhelp-theme-white .pagination .pagination-item:hover, html.svhelp-theme-white .pagination .pagination-item.selected, html.svhelp-theme-brown .pagination .pagination-item:hover, html.svhelp-theme-brown .pagination .pagination-item.selected, html.svhelp-theme-blue .pagination .pagination-item:hover, html.svhelp-theme-blue .pagination .pagination-item.selected {
+    background: #000;
+    color: #fff; }
+
+html.svhelp-theme-white a,
+html.svhelp-theme-white h1, html.svhelp-theme-white .h1,
+html.svhelp-theme-white h2, html.svhelp-theme-white .h2,
+html.svhelp-theme-white h3, html.svhelp-theme-white .h3,
+html.svhelp-theme-white h4, html.svhelp-theme-white .h4,
+html.svhelp-theme-white .catalog-advantage.variant6 .item .text-container .text,
+html.svhelp-theme-white .catalog-advantage.variant7 .item .text-container .name,
+html.svhelp-theme-white .catalog-advantage.variant6 .item .text-container .name,
+html.svhelp-theme-white .toTop,
+html.svhelp-theme-white .vertical-menu ul.level1 > li.submenu > a:before,
+html.svhelp-theme-white .news.widget .item .date,
+html.svhelp-theme-white .catalog-gallery .item .name,
+html.svhelp-theme-white .catalog-products .item .name,
+html.svhelp-theme-white .catalog-products .item .price-container .old-price, html.svhelp-theme-white .tovar-container .info .price-container .old-price,
+html.svhelp-theme-white .catalog-products .item .catalog-item-bottom .catalog-item-compare .far, html.svhelp-theme-white .tovar-container .info .tovar-links-container .item .far,
+html.svhelp-theme-white .catalog-top .sort-select,
+html.svhelp-theme-white .catalog-top .catalog-view .title,
+html.svhelp-theme-white .breadcrumb li.active,
+html.svhelp-theme-white .breadcrumb li.separator,
+html.svhelp-theme-white .catalog-sections .item .name,
+html.svhelp-theme-white .input-awesome.checkbox-awesome input:checked + label:before,
+html.svhelp-theme-white .input-awesome.checkbox-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-white .categories .item span,
+html.svhelp-theme-white .faq .faq-container .item .item-info .date,
+html.svhelp-theme-white .catalog-gallery-album .item .name,
+html.svhelp-theme-white .news.one .date,
+html.svhelp-theme-white .news.list.line.one-column .item .text-container .date, html.svhelp-theme-white .news.list.line.two-columns .item .text-container .date,
+html.svhelp-theme-white .news.list.line.one-column .item .text-container .title, html.svhelp-theme-white .news.list.line.two-columns .item .text-container .title,
+html.svhelp-theme-white .news.list.line.one-column .item .text-container a.link, html.svhelp-theme-white .news.list.line.two-columns .item .text-container a.link,
+html.svhelp-theme-white .news.list.rows .item .text-container .title,
+html.svhelp-theme-white .news.list.rows .item .text-container .date,
+html.svhelp-theme-white .news.list.line.one-column-anons .item .text-container .date,
+html.svhelp-theme-white .news.list.line.one-column-anons .item .text-container .title,
+html.svhelp-theme-white .news.list.line.three-columns .item .text-container .date,
+html.svhelp-theme-white .news.list.line.three-columns .item .text-container .title,
+html.svhelp-theme-white .input-awesome.radio-awesome input:checked + label:before,
+html.svhelp-theme-white .input-awesome.radio-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-white .cart-page .cart-page-part1 .cart-table .delete-button, html.svhelp-theme-white .order-page .zakaz-table-container .cart-table .delete-button,
+html.svhelp-theme-white .order-page .order-page-text .print-button,
+html.svhelp-theme-white .order-page .order-page-text .print-button .fa,
+html.svhelp-theme-white .tovar-container .info .buttons-tabs .buttons-item,
+html.svhelp-theme-white .tovar-container .info .price-container .skidka-text,
+html.svhelp-theme-white .tovar-container .info .buttons-tabs .buttons-item .fas,
+html.svhelp-theme-white .tovar-container .tovar-documents .item .tovar-documents-info,
+html.svhelp-theme-white .tovar-container .tovar-reviews a.link,
+html.svhelp-theme-white .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .date,
+html.svhelp-theme-white .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-title,
+html.svhelp-theme-white .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star-o,
+html.svhelp-theme-white .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star,
+html.svhelp-theme-white .vertical-menu ul.level2 > li > a,
+html.svhelp-theme-white .news.widget .item .title,
+html.svhelp-theme-white .reviews-slider .owl-carousel .item .text,
+html.svhelp-theme-white .faq-mini .item .question a,
+html.svhelp-theme-white .catalog-advantage.variant1 .item .title:hover,
+html.svhelp-theme-white .catalog-advantage.variant2 .item .title:hover,
+html.svhelp-theme-white .catalog-advantage.variant3 .item .title:hover,
+html.svhelp-theme-white .catalog-advantage.variant4 a.item:hover .title,
+html.svhelp-theme-white .sub-title,
+html.svhelp-theme-white .price-block .documents-item .h3,
+html.svhelp-theme-white .wherebuy-block .items-wrapper .item .item-more:before,
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before,
+html.svhelp-theme-white ul.ul-style li:before,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level2-fullwidth-column [class*="col"] > li > .level2-title > a, html.svhelp-theme-brown a,
+html.svhelp-theme-brown h1, html.svhelp-theme-brown .h1,
+html.svhelp-theme-brown h2, html.svhelp-theme-brown .h2,
+html.svhelp-theme-brown h3, html.svhelp-theme-brown .h3,
+html.svhelp-theme-brown h4, html.svhelp-theme-brown .h4,
+html.svhelp-theme-brown .catalog-advantage.variant6 .item .text-container .text,
+html.svhelp-theme-brown .catalog-advantage.variant7 .item .text-container .name,
+html.svhelp-theme-brown .catalog-advantage.variant6 .item .text-container .name,
+html.svhelp-theme-brown .toTop,
+html.svhelp-theme-brown .vertical-menu ul.level1 > li.submenu > a:before,
+html.svhelp-theme-brown .news.widget .item .date,
+html.svhelp-theme-brown .catalog-gallery .item .name,
+html.svhelp-theme-brown .catalog-products .item .name,
+html.svhelp-theme-brown .catalog-products .item .price-container .old-price, html.svhelp-theme-brown .tovar-container .info .price-container .old-price,
+html.svhelp-theme-brown .catalog-products .item .catalog-item-bottom .catalog-item-compare .far, html.svhelp-theme-brown .tovar-container .info .tovar-links-container .item .far,
+html.svhelp-theme-brown .catalog-top .sort-select,
+html.svhelp-theme-brown .catalog-top .catalog-view .title,
+html.svhelp-theme-brown .breadcrumb li.active,
+html.svhelp-theme-brown .breadcrumb li.separator,
+html.svhelp-theme-brown .catalog-sections .item .name,
+html.svhelp-theme-brown .input-awesome.checkbox-awesome input:checked + label:before,
+html.svhelp-theme-brown .input-awesome.checkbox-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-brown .categories .item span,
+html.svhelp-theme-brown .faq .faq-container .item .item-info .date,
+html.svhelp-theme-brown .catalog-gallery-album .item .name,
+html.svhelp-theme-brown .news.one .date,
+html.svhelp-theme-brown .news.list.line.one-column .item .text-container .date, html.svhelp-theme-brown .news.list.line.two-columns .item .text-container .date,
+html.svhelp-theme-brown .news.list.line.one-column .item .text-container .title, html.svhelp-theme-brown .news.list.line.two-columns .item .text-container .title,
+html.svhelp-theme-brown .news.list.line.one-column .item .text-container a.link, html.svhelp-theme-brown .news.list.line.two-columns .item .text-container a.link,
+html.svhelp-theme-brown .news.list.rows .item .text-container .title,
+html.svhelp-theme-brown .news.list.rows .item .text-container .date,
+html.svhelp-theme-brown .news.list.line.one-column-anons .item .text-container .date,
+html.svhelp-theme-brown .news.list.line.one-column-anons .item .text-container .title,
+html.svhelp-theme-brown .news.list.line.three-columns .item .text-container .date,
+html.svhelp-theme-brown .news.list.line.three-columns .item .text-container .title,
+html.svhelp-theme-brown .input-awesome.radio-awesome input:checked + label:before,
+html.svhelp-theme-brown .input-awesome.radio-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-brown .cart-page .cart-page-part1 .cart-table .delete-button, html.svhelp-theme-brown .order-page .zakaz-table-container .cart-table .delete-button,
+html.svhelp-theme-brown .order-page .order-page-text .print-button,
+html.svhelp-theme-brown .order-page .order-page-text .print-button .fa,
+html.svhelp-theme-brown .tovar-container .info .buttons-tabs .buttons-item,
+html.svhelp-theme-brown .tovar-container .info .price-container .skidka-text,
+html.svhelp-theme-brown .tovar-container .info .buttons-tabs .buttons-item .fas,
+html.svhelp-theme-brown .tovar-container .tovar-documents .item .tovar-documents-info,
+html.svhelp-theme-brown .tovar-container .tovar-reviews a.link,
+html.svhelp-theme-brown .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .date,
+html.svhelp-theme-brown .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-title,
+html.svhelp-theme-brown .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star-o,
+html.svhelp-theme-brown .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star,
+html.svhelp-theme-brown .vertical-menu ul.level2 > li > a,
+html.svhelp-theme-brown .news.widget .item .title,
+html.svhelp-theme-brown .reviews-slider .owl-carousel .item .text,
+html.svhelp-theme-brown .faq-mini .item .question a,
+html.svhelp-theme-brown .catalog-advantage.variant1 .item .title:hover,
+html.svhelp-theme-brown .catalog-advantage.variant2 .item .title:hover,
+html.svhelp-theme-brown .catalog-advantage.variant3 .item .title:hover,
+html.svhelp-theme-brown .catalog-advantage.variant4 a.item:hover .title,
+html.svhelp-theme-brown .sub-title,
+html.svhelp-theme-brown .price-block .documents-item .h3,
+html.svhelp-theme-brown .wherebuy-block .items-wrapper .item .item-more:before,
+html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before,
+html.svhelp-theme-brown ul.ul-style li:before,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level2-fullwidth-column [class*="col"] > li > .level2-title > a, html.svhelp-theme-blue a,
+html.svhelp-theme-blue h1, html.svhelp-theme-blue .h1,
+html.svhelp-theme-blue h2, html.svhelp-theme-blue .h2,
+html.svhelp-theme-blue h3, html.svhelp-theme-blue .h3,
+html.svhelp-theme-blue h4, html.svhelp-theme-blue .h4,
+html.svhelp-theme-blue .catalog-advantage.variant6 .item .text-container .text,
+html.svhelp-theme-blue .catalog-advantage.variant7 .item .text-container .name,
+html.svhelp-theme-blue .catalog-advantage.variant6 .item .text-container .name,
+html.svhelp-theme-blue .toTop,
+html.svhelp-theme-blue .vertical-menu ul.level1 > li.submenu > a:before,
+html.svhelp-theme-blue .news.widget .item .date,
+html.svhelp-theme-blue .catalog-gallery .item .name,
+html.svhelp-theme-blue .catalog-products .item .name,
+html.svhelp-theme-blue .catalog-products .item .price-container .old-price, html.svhelp-theme-blue .tovar-container .info .price-container .old-price,
+html.svhelp-theme-blue .catalog-products .item .catalog-item-bottom .catalog-item-compare .far, html.svhelp-theme-blue .tovar-container .info .tovar-links-container .item .far,
+html.svhelp-theme-blue .catalog-top .sort-select,
+html.svhelp-theme-blue .catalog-top .catalog-view .title,
+html.svhelp-theme-blue .breadcrumb li.active,
+html.svhelp-theme-blue .breadcrumb li.separator,
+html.svhelp-theme-blue .catalog-sections .item .name,
+html.svhelp-theme-blue .input-awesome.checkbox-awesome input:checked + label:before,
+html.svhelp-theme-blue .input-awesome.checkbox-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-blue .categories .item span,
+html.svhelp-theme-blue .faq .faq-container .item .item-info .date,
+html.svhelp-theme-blue .catalog-gallery-album .item .name,
+html.svhelp-theme-blue .news.one .date,
+html.svhelp-theme-blue .news.list.line.one-column .item .text-container .date, html.svhelp-theme-blue .news.list.line.two-columns .item .text-container .date,
+html.svhelp-theme-blue .news.list.line.one-column .item .text-container .title, html.svhelp-theme-blue .news.list.line.two-columns .item .text-container .title,
+html.svhelp-theme-blue .news.list.line.one-column .item .text-container a.link, html.svhelp-theme-blue .news.list.line.two-columns .item .text-container a.link,
+html.svhelp-theme-blue .news.list.rows .item .text-container .title,
+html.svhelp-theme-blue .news.list.rows .item .text-container .date,
+html.svhelp-theme-blue .news.list.line.one-column-anons .item .text-container .date,
+html.svhelp-theme-blue .news.list.line.one-column-anons .item .text-container .title,
+html.svhelp-theme-blue .news.list.line.three-columns .item .text-container .date,
+html.svhelp-theme-blue .news.list.line.three-columns .item .text-container .title,
+html.svhelp-theme-blue .input-awesome.radio-awesome input:checked + label:before,
+html.svhelp-theme-blue .input-awesome.radio-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-blue .cart-page .cart-page-part1 .cart-table .delete-button, html.svhelp-theme-blue .order-page .zakaz-table-container .cart-table .delete-button,
+html.svhelp-theme-blue .order-page .order-page-text .print-button,
+html.svhelp-theme-blue .order-page .order-page-text .print-button .fa,
+html.svhelp-theme-blue .tovar-container .info .buttons-tabs .buttons-item,
+html.svhelp-theme-blue .tovar-container .info .price-container .skidka-text,
+html.svhelp-theme-blue .tovar-container .info .buttons-tabs .buttons-item .fas,
+html.svhelp-theme-blue .tovar-container .tovar-documents .item .tovar-documents-info,
+html.svhelp-theme-blue .tovar-container .tovar-reviews a.link,
+html.svhelp-theme-blue .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .date,
+html.svhelp-theme-blue .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-title,
+html.svhelp-theme-blue .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star-o,
+html.svhelp-theme-blue .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star,
+html.svhelp-theme-blue .vertical-menu ul.level2 > li > a,
+html.svhelp-theme-blue .news.widget .item .title,
+html.svhelp-theme-blue .reviews-slider .owl-carousel .item .text,
+html.svhelp-theme-blue .faq-mini .item .question a,
+html.svhelp-theme-blue .catalog-advantage.variant1 .item .title:hover,
+html.svhelp-theme-blue .catalog-advantage.variant2 .item .title:hover,
+html.svhelp-theme-blue .catalog-advantage.variant3 .item .title:hover,
+html.svhelp-theme-blue .catalog-advantage.variant4 a.item:hover .title,
+html.svhelp-theme-blue .sub-title,
+html.svhelp-theme-blue .price-block .documents-item .h3,
+html.svhelp-theme-blue .wherebuy-block .items-wrapper .item .item-more:before,
+html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before,
+html.svhelp-theme-blue ul.ul-style li:before,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level2-fullwidth-column [class*="col"] > li > .level2-title > a {
+  color: #000;
+  opacity: 1; }
+
+html.svhelp-theme-white .menu-top-container,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level2, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.flexMenu-popup,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level3,
+html.svhelp-theme-white .catalog-advantage.variant8 .item .text-container .name,
+html.svhelp-theme-white .video-block .item,
+html.svhelp-theme-white .video-block-fancybox .item,
+html.svhelp-theme-white .sub-title:before,
+html.svhelp-theme-white .price-block .documents-item .h3:before,
+html.svhelp-theme-white .faq .faq-container .item .item-info .category,
+html.svhelp-theme-white .news.list.line.one-column .item .text-container .category,
+html.svhelp-theme-white .news.list.line.two-columns .item .text-container .category,
+html.svhelp-theme-white .news.list.rows .item .text-container .category,
+html.svhelp-theme-white .news.list.line.one-column-anons .item .text-container .category,
+html.svhelp-theme-white .news.list.line.three-columns .item .text-container .category,
+html.svhelp-theme-white .mini-cart .count,
+html.svhelp-theme-white .mini-cart2 .btn-rollup .count,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3, html.svhelp-theme-brown .menu-top-container,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level2, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.flexMenu-popup,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level3,
+html.svhelp-theme-brown .catalog-advantage.variant8 .item .text-container .name,
+html.svhelp-theme-brown .video-block .item,
+html.svhelp-theme-brown .video-block-fancybox .item,
+html.svhelp-theme-brown .sub-title:before,
+html.svhelp-theme-brown .price-block .documents-item .h3:before,
+html.svhelp-theme-brown .faq .faq-container .item .item-info .category,
+html.svhelp-theme-brown .news.list.line.one-column .item .text-container .category,
+html.svhelp-theme-brown .news.list.line.two-columns .item .text-container .category,
+html.svhelp-theme-brown .news.list.rows .item .text-container .category,
+html.svhelp-theme-brown .news.list.line.one-column-anons .item .text-container .category,
+html.svhelp-theme-brown .news.list.line.three-columns .item .text-container .category,
+html.svhelp-theme-brown .mini-cart .count,
+html.svhelp-theme-brown .mini-cart2 .btn-rollup .count,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3, html.svhelp-theme-blue .menu-top-container,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level2, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.flexMenu-popup,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level3,
+html.svhelp-theme-blue .catalog-advantage.variant8 .item .text-container .name,
+html.svhelp-theme-blue .video-block .item,
+html.svhelp-theme-blue .video-block-fancybox .item,
+html.svhelp-theme-blue .sub-title:before,
+html.svhelp-theme-blue .price-block .documents-item .h3:before,
+html.svhelp-theme-blue .faq .faq-container .item .item-info .category,
+html.svhelp-theme-blue .news.list.line.one-column .item .text-container .category,
+html.svhelp-theme-blue .news.list.line.two-columns .item .text-container .category,
+html.svhelp-theme-blue .news.list.rows .item .text-container .category,
+html.svhelp-theme-blue .news.list.line.one-column-anons .item .text-container .category,
+html.svhelp-theme-blue .news.list.line.three-columns .item .text-container .category,
+html.svhelp-theme-blue .mini-cart .count,
+html.svhelp-theme-blue .mini-cart2 .btn-rollup .count,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 {
+  background: #000;
+  opacity: 1; }
+
+html.svhelp-theme-white .catalog-advantage.variant6 .item, html.svhelp-theme-brown .catalog-advantage.variant6 .item, html.svhelp-theme-blue .catalog-advantage.variant6 .item {
+  background: #fff; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:checked + label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 input:checked + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:checked + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 input:checked + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:checked + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 input:checked + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+  html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 input:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 input:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 input:checked + label .icon:before {
+    color: #000; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:not(:disabled) + label:hover .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 input:not(:disabled) + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:not(:disabled) + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 input:not(:disabled) + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:not(:disabled) + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 input:not(:disabled) + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:focus + label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 input:focus + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:focus + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 input:focus + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:focus + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:focus + label:hover .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 input:focus + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:focus + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 input:focus + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:focus + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:disabled + label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 input:disabled + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:disabled + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 input:disabled + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:disabled + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 input:disabled + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #6e6e6e;
+          box-shadow: 0 0 0 0.13em #6e6e6e; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant1 input:disabled:checked + label .icon:before, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant3 input:disabled:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant1 input:disabled:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant3 input:disabled:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant1 input:disabled:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant3 input:disabled:checked + label .icon:before {
+  color: #6e6e6e; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 label .icon {
+  background: #000;
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:checked + label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:checked + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:checked + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:checked + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:checked + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:checked + label .icon {
+  background: #000;
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+  html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:checked + label .icon:before, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:checked + label .icon:before {
+    color: #fff; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:not(:disabled) + label:hover .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:not(:disabled) + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:not(:disabled) + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:not(:disabled) + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:not(:disabled) + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:not(:disabled) + label:hover .icon {
+  background: #000;
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:focus + label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:focus + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:focus + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:focus + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:focus + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:focus + label:hover .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:focus + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:focus + label:hover .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:focus + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:focus + label:hover .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:disabled + label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:disabled + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:disabled + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:disabled + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:disabled + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:disabled + label .icon {
+  background: #C5C5C5;
+  -webkit-box-shadow: 0 0 0 0.13em #C5C5C5;
+          box-shadow: 0 0 0 0.13em #C5C5C5; }
+
+html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon {
+  background: #C5C5C5; }
+  html.svhelp-theme-white .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon :before, html.svhelp-theme-white .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon :before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon :before, html.svhelp-theme-brown .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon :before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon :before, html.svhelp-theme-blue .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon :before {
+    color: #fff; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant1 label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant1 input:checked + label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 input:checked + label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 input:checked + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+  html.svhelp-theme-white .input-awesome.radio-awesome.variant1 input:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 input:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 input:checked + label .icon:before {
+    background: #000; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant1 input:not(:disabled) + label:hover .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 input:not(:disabled) + label:hover .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 input:not(:disabled) + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant1 input:focus + label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 input:focus + label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant1 input:focus + label:hover .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 input:focus + label:hover .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant1 input:disabled + label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 input:disabled + label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 input:disabled + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #6e6e6e;
+          box-shadow: 0 0 0 0.13em #6e6e6e; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant1 input:disabled:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.radio-awesome.variant1 input:disabled:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.radio-awesome.variant1 input:disabled:checked + label .icon:before {
+  background: #6e6e6e; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant2 label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 label .icon {
+  background: #6e6e6e;
+  -webkit-box-shadow: 0 0 0 0.13em #6e6e6e;
+          box-shadow: 0 0 0 0.13em #6e6e6e; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant2 input:checked + label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 input:checked + label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 input:checked + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000;
+  background: #000; }
+  html.svhelp-theme-white .input-awesome.radio-awesome.variant2 input:checked + label .icon:before, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 input:checked + label .icon:before, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 input:checked + label .icon:before {
+    background: #fff; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant2 input:not(:disabled) + label:hover .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 input:not(:disabled) + label:hover .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 input:not(:disabled) + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000;
+          box-shadow: 0 0 0 0.13em #000;
+  background: #000; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant2 input:focus + label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 input:focus + label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant2 input:focus + label:hover .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 input:focus + label:hover .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #000, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant2 input:disabled + label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 input:disabled + label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 input:disabled + label .icon {
+  background: #C5C5C5;
+  -webkit-box-shadow: 0 0 0 0.13em #C5C5C5;
+          box-shadow: 0 0 0 0.13em #C5C5C5; }
+
+html.svhelp-theme-white .input-awesome.radio-awesome.variant2 input:disabled:checked + label .icon, html.svhelp-theme-brown .input-awesome.radio-awesome.variant2 input:disabled:checked + label .icon, html.svhelp-theme-blue .input-awesome.radio-awesome.variant2 input:disabled:checked + label .icon {
+  background: #C5C5C5; }
+
+html.svhelp-theme-white .catalog-products .item,
+html.svhelp-theme-white .catalog-sections .item .img-border,
+html.svhelp-theme-white .table > tbody > tr > td, html.svhelp-theme-white .table > tbody > tr > th, html.svhelp-theme-white .table > thead > tr > td, html.svhelp-theme-white .table > thead > tr > th, html.svhelp-theme-white .table > tfoot > tr > td, html.svhelp-theme-white .table > tfoot > tr > th,
+html.svhelp-theme-white .catalog-gallery-album .item .img-border,
+html.svhelp-theme-white .catalog-sections-rubric .item,
+html.svhelp-theme-white .synced-slider1 .owl-carousel .item,
+html.svhelp-theme-white .synced-slider2 .owl-carousel .item,
+html.svhelp-theme-white .tovar-container .tovar-table td,
+html.svhelp-theme-white .synced-slider-thumbs .item, html.svhelp-theme-brown .catalog-products .item,
+html.svhelp-theme-brown .catalog-sections .item .img-border,
+html.svhelp-theme-brown .table > tbody > tr > td, html.svhelp-theme-brown .table > tbody > tr > th, html.svhelp-theme-brown .table > thead > tr > td, html.svhelp-theme-brown .table > thead > tr > th, html.svhelp-theme-brown .table > tfoot > tr > td, html.svhelp-theme-brown .table > tfoot > tr > th,
+html.svhelp-theme-brown .catalog-gallery-album .item .img-border,
+html.svhelp-theme-brown .catalog-sections-rubric .item,
+html.svhelp-theme-brown .synced-slider1 .owl-carousel .item,
+html.svhelp-theme-brown .synced-slider2 .owl-carousel .item,
+html.svhelp-theme-brown .tovar-container .tovar-table td,
+html.svhelp-theme-brown .synced-slider-thumbs .item, html.svhelp-theme-blue .catalog-products .item,
+html.svhelp-theme-blue .catalog-sections .item .img-border,
+html.svhelp-theme-blue .table > tbody > tr > td, html.svhelp-theme-blue .table > tbody > tr > th, html.svhelp-theme-blue .table > thead > tr > td, html.svhelp-theme-blue .table > thead > tr > th, html.svhelp-theme-blue .table > tfoot > tr > td, html.svhelp-theme-blue .table > tfoot > tr > th,
+html.svhelp-theme-blue .catalog-gallery-album .item .img-border,
+html.svhelp-theme-blue .catalog-sections-rubric .item,
+html.svhelp-theme-blue .synced-slider1 .owl-carousel .item,
+html.svhelp-theme-blue .synced-slider2 .owl-carousel .item,
+html.svhelp-theme-blue .tovar-container .tovar-table td,
+html.svhelp-theme-blue .synced-slider-thumbs .item {
+  border: 1px solid #000; }
+
+html.svhelp-theme-white .catalog-sections .item:hover .name,
+html.svhelp-theme-white .catalog-gallery-album .item:hover .name,
+html.svhelp-theme-white .catalog-gallery .item:hover .name,
+html.svhelp-theme-white .catalog-advantage.variant1 .item a.title:hover,
+html.svhelp-theme-white .catalog-advantage.variant2 .item a.title:hover,
+html.svhelp-theme-white .catalog-advantage.variant4 a.item:hover .title, html.svhelp-theme-brown .catalog-sections .item:hover .name,
+html.svhelp-theme-brown .catalog-gallery-album .item:hover .name,
+html.svhelp-theme-brown .catalog-gallery .item:hover .name,
+html.svhelp-theme-brown .catalog-advantage.variant1 .item a.title:hover,
+html.svhelp-theme-brown .catalog-advantage.variant2 .item a.title:hover,
+html.svhelp-theme-brown .catalog-advantage.variant4 a.item:hover .title, html.svhelp-theme-blue .catalog-sections .item:hover .name,
+html.svhelp-theme-blue .catalog-gallery-album .item:hover .name,
+html.svhelp-theme-blue .catalog-gallery .item:hover .name,
+html.svhelp-theme-blue .catalog-advantage.variant1 .item a.title:hover,
+html.svhelp-theme-blue .catalog-advantage.variant2 .item a.title:hover,
+html.svhelp-theme-blue .catalog-advantage.variant4 a.item:hover .title {
+  text-decoration: underline; }
+
+html.svhelp-theme-white header .header-desktop .search-container input[type=submit], html.svhelp-theme-brown header .header-desktop .search-container input[type=submit], html.svhelp-theme-blue header .header-desktop .search-container input[type=submit] {
+  color: #000; }
+  html.svhelp-theme-white header .header-desktop .search-container input[type=submit]:hover, html.svhelp-theme-brown header .header-desktop .search-container input[type=submit]:hover, html.svhelp-theme-blue header .header-desktop .search-container input[type=submit]:hover {
+    background: #000;
+    color: #fff; }
+
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level1 > li:hover > a, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level1 > li.selected > a, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level1 > li.active > a,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level2 > li.selected > a, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level2 > li > a:hover, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level2 > li.active > a, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.flexMenu-popup > li.selected > a, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.flexMenu-popup > li > a:hover, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.flexMenu-popup > li.active > a,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level3 > li.selected > a, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level3 > li > a:hover, html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level3 > li.active > a,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.selected > a, html.svhelp-theme-white .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li > a:hover, html.svhelp-theme-white .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.active > a,
+html.svhelp-theme-white .catalog-advantage.variant5 .item,
+html.svhelp-theme-white .catalog-advantage.variant5 .item .name,
+html.svhelp-theme-white .catalog-advantage.variant5 .item .text,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level2-fullwidth-column,
+html.svhelp-theme-white .menu-top:not(.mm-menu) ul.level2-fullwidth-column ul.level3, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level1 > li:hover > a, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level1 > li.selected > a, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level1 > li.active > a,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level2 > li.selected > a, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level2 > li > a:hover, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level2 > li.active > a, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.flexMenu-popup > li.selected > a, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.flexMenu-popup > li > a:hover, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.flexMenu-popup > li.active > a,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level3 > li.selected > a, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level3 > li > a:hover, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level3 > li.active > a,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.selected > a, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li > a:hover, html.svhelp-theme-brown .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.active > a,
+html.svhelp-theme-brown .catalog-advantage.variant5 .item,
+html.svhelp-theme-brown .catalog-advantage.variant5 .item .name,
+html.svhelp-theme-brown .catalog-advantage.variant5 .item .text,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level2-fullwidth-column,
+html.svhelp-theme-brown .menu-top:not(.mm-menu) ul.level2-fullwidth-column ul.level3, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level1 > li:hover > a, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level1 > li.selected > a, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level1 > li.active > a,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level2 > li.selected > a, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level2 > li > a:hover, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level2 > li.active > a, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.flexMenu-popup > li.selected > a, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.flexMenu-popup > li > a:hover, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.flexMenu-popup > li.active > a,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level3 > li.selected > a, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level3 > li > a:hover, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level3 > li.active > a,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.selected > a, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li > a:hover, html.svhelp-theme-blue .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.active > a,
+html.svhelp-theme-blue .catalog-advantage.variant5 .item,
+html.svhelp-theme-blue .catalog-advantage.variant5 .item .name,
+html.svhelp-theme-blue .catalog-advantage.variant5 .item .text,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level2-fullwidth-column,
+html.svhelp-theme-blue .menu-top:not(.mm-menu) ul.level2-fullwidth-column ul.level3 {
+  background: #fff;
+  color: #000; }
+
+html.svhelp-theme-white .catalog-products .item .price-container .skidka, html.svhelp-theme-white .tovar-container .info .price-container .skidka, html.svhelp-theme-white .catalog-products .item .price-container .economy, html.svhelp-theme-white .tovar-container .info .price-container .economy,
+html.svhelp-theme-white .catalog-products .item .price-container .skidka, html.svhelp-theme-white .tovar-container .info .price-container .skidka, html.svhelp-theme-white .catalog-products .item .price-container .economy, html.svhelp-theme-white .tovar-container .info .price-container .economy,
+html.svhelp-theme-white .table > tbody > tr > th, html.svhelp-theme-white .table > thead > tr > th, html.svhelp-theme-white .table > tfoot > tr > th,
+html.svhelp-theme-white .vertical-menu ul.level1 > li.selected > a,
+html.svhelp-theme-white .video-block .item .name,
+html.svhelp-theme-white .video-block-fancybox .item .name, html.svhelp-theme-brown .catalog-products .item .price-container .skidka, html.svhelp-theme-brown .tovar-container .info .price-container .skidka, html.svhelp-theme-brown .catalog-products .item .price-container .economy, html.svhelp-theme-brown .tovar-container .info .price-container .economy,
+html.svhelp-theme-brown .catalog-products .item .price-container .skidka, html.svhelp-theme-brown .tovar-container .info .price-container .skidka, html.svhelp-theme-brown .catalog-products .item .price-container .economy, html.svhelp-theme-brown .tovar-container .info .price-container .economy,
+html.svhelp-theme-brown .table > tbody > tr > th, html.svhelp-theme-brown .table > thead > tr > th, html.svhelp-theme-brown .table > tfoot > tr > th,
+html.svhelp-theme-brown .vertical-menu ul.level1 > li.selected > a,
+html.svhelp-theme-brown .video-block .item .name,
+html.svhelp-theme-brown .video-block-fancybox .item .name, html.svhelp-theme-blue .catalog-products .item .price-container .skidka, html.svhelp-theme-blue .tovar-container .info .price-container .skidka, html.svhelp-theme-blue .catalog-products .item .price-container .economy, html.svhelp-theme-blue .tovar-container .info .price-container .economy,
+html.svhelp-theme-blue .catalog-products .item .price-container .skidka, html.svhelp-theme-blue .tovar-container .info .price-container .skidka, html.svhelp-theme-blue .catalog-products .item .price-container .economy, html.svhelp-theme-blue .tovar-container .info .price-container .economy,
+html.svhelp-theme-blue .table > tbody > tr > th, html.svhelp-theme-blue .table > thead > tr > th, html.svhelp-theme-blue .table > tfoot > tr > th,
+html.svhelp-theme-blue .vertical-menu ul.level1 > li.selected > a,
+html.svhelp-theme-blue .video-block .item .name,
+html.svhelp-theme-blue .video-block-fancybox .item .name {
+  background: #000;
+  color: #fff; }
+
+html.svhelp-theme-white footer .footer-desktop.variant1, html.svhelp-theme-white footer .footer-desktop.variant3, html.svhelp-theme-white footer .footer-desktop.variant4, html.svhelp-theme-brown footer .footer-desktop.variant1, html.svhelp-theme-brown footer .footer-desktop.variant3, html.svhelp-theme-brown footer .footer-desktop.variant4, html.svhelp-theme-blue footer .footer-desktop.variant1, html.svhelp-theme-blue footer .footer-desktop.variant3, html.svhelp-theme-blue footer .footer-desktop.variant4 {
+  background: transparent;
+  border-top: 2px solid #000; }
+
+html.svhelp-theme-white .owl-carousel .owl-nav [class*=owl-], html.svhelp-theme-brown .owl-carousel .owl-nav [class*=owl-], html.svhelp-theme-blue .owl-carousel .owl-nav [class*=owl-] {
+  background: #fff;
+  color: #000;
+  opacity: 1;
+  text-shadow: none; }
+  html.svhelp-theme-white .owl-carousel .owl-nav [class*=owl-]:hover, html.svhelp-theme-brown .owl-carousel .owl-nav [class*=owl-]:hover, html.svhelp-theme-blue .owl-carousel .owl-nav [class*=owl-]:hover {
+    background: #000;
+    color: #fff; }
+
+html.svhelp-theme-white .owl-carousel .owl-dots .owl-dot span, html.svhelp-theme-brown .owl-carousel .owl-dots .owl-dot span, html.svhelp-theme-blue .owl-carousel .owl-dots .owl-dot span {
+  background: #000; }
+
+html.svhelp-theme-white .owl-carousel .owl-dots .owl-dot.active span, html.svhelp-theme-brown .owl-carousel .owl-dots .owl-dot.active span, html.svhelp-theme-blue .owl-carousel .owl-dots .owl-dot.active span {
+  background: #fff;
+  border-color: #000; }
+
+html.svhelp-theme-white .catalog-advantage.variant9 .item, html.svhelp-theme-brown .catalog-advantage.variant9 .item, html.svhelp-theme-blue .catalog-advantage.variant9 .item {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: #fff;
+  border: 2px solid #000; }
+
+html.svhelp-theme-white .vertical-menu ul.level1, html.svhelp-theme-brown .vertical-menu ul.level1, html.svhelp-theme-blue .vertical-menu ul.level1 {
+  border: 1px solid #000; }
+
+html.svhelp-theme-white .vertical-menu ul.level1 > li > a, html.svhelp-theme-brown .vertical-menu ul.level1 > li > a, html.svhelp-theme-blue .vertical-menu ul.level1 > li > a {
+  color: #000;
+  border-bottom: 1px solid #000; }
+
+html.svhelp-theme-white .vertical-menu ul.level1 > li:last-child > a, html.svhelp-theme-brown .vertical-menu ul.level1 > li:last-child > a, html.svhelp-theme-blue .vertical-menu ul.level1 > li:last-child > a {
+  border: none; }
+
+html.svhelp-theme-white .vertical-menu ul.level1 > li.active > a, html.svhelp-theme-white .vertical-menu ul.level1 > li > a:hover, html.svhelp-theme-brown .vertical-menu ul.level1 > li.active > a, html.svhelp-theme-brown .vertical-menu ul.level1 > li > a:hover, html.svhelp-theme-blue .vertical-menu ul.level1 > li.active > a, html.svhelp-theme-blue .vertical-menu ul.level1 > li > a:hover {
+  background: #000;
+  color: #fff; }
+
+html.svhelp-theme-white .vertical-menu ul.level1 > li.submenu.active > a:before, html.svhelp-theme-white .vertical-menu ul.level1 > li.submenu > a:hover:before, html.svhelp-theme-brown .vertical-menu ul.level1 > li.submenu.active > a:before, html.svhelp-theme-brown .vertical-menu ul.level1 > li.submenu > a:hover:before, html.svhelp-theme-blue .vertical-menu ul.level1 > li.submenu.active > a:before, html.svhelp-theme-blue .vertical-menu ul.level1 > li.submenu > a:hover:before {
+  color: #fff; }
+
+html.svhelp-theme-white .news.widget .item,
+html.svhelp-theme-white .news.list.line.one-column .item, html.svhelp-theme-white .news.list.line.two-columns .item, html.svhelp-theme-brown .news.widget .item,
+html.svhelp-theme-brown .news.list.line.one-column .item, html.svhelp-theme-brown .news.list.line.two-columns .item, html.svhelp-theme-blue .news.widget .item,
+html.svhelp-theme-blue .news.list.line.one-column .item, html.svhelp-theme-blue .news.list.line.two-columns .item {
+  border-bottom: 1px solid #000; }
+
+html.svhelp-theme-white .catalog-top .catalog-view .item, html.svhelp-theme-brown .catalog-top .catalog-view .item, html.svhelp-theme-blue .catalog-top .catalog-view .item {
+  border: 1px solid #000; }
+  html.svhelp-theme-white .catalog-top .catalog-view .item .fa, html.svhelp-theme-brown .catalog-top .catalog-view .item .fa, html.svhelp-theme-blue .catalog-top .catalog-view .item .fa {
+    color: #000; }
+  html.svhelp-theme-white .catalog-top .catalog-view .item:hover, html.svhelp-theme-white .catalog-top .catalog-view .item.selected, html.svhelp-theme-brown .catalog-top .catalog-view .item:hover, html.svhelp-theme-brown .catalog-top .catalog-view .item.selected, html.svhelp-theme-blue .catalog-top .catalog-view .item:hover, html.svhelp-theme-blue .catalog-top .catalog-view .item.selected {
+    background: #000; }
+    html.svhelp-theme-white .catalog-top .catalog-view .item:hover .fa, html.svhelp-theme-white .catalog-top .catalog-view .item.selected .fa, html.svhelp-theme-brown .catalog-top .catalog-view .item:hover .fa, html.svhelp-theme-brown .catalog-top .catalog-view .item.selected .fa, html.svhelp-theme-blue .catalog-top .catalog-view .item:hover .fa, html.svhelp-theme-blue .catalog-top .catalog-view .item.selected .fa {
+      color: #fff; }
+
+html.svhelp-theme-white .catalog-products .item .tovars-counter input[type=number],
+html.svhelp-theme-white .cart-page .cart-page-part1 .cart-table .tovars-counter input[type=number], html.svhelp-theme-white .order-page .zakaz-table-container .cart-table .tovars-counter input[type=number],
+html.svhelp-theme-white .tovar-container .info .tovars-counter input[type=number], html.svhelp-theme-brown .catalog-products .item .tovars-counter input[type=number],
+html.svhelp-theme-brown .cart-page .cart-page-part1 .cart-table .tovars-counter input[type=number], html.svhelp-theme-brown .order-page .zakaz-table-container .cart-table .tovars-counter input[type=number],
+html.svhelp-theme-brown .tovar-container .info .tovars-counter input[type=number], html.svhelp-theme-blue .catalog-products .item .tovars-counter input[type=number],
+html.svhelp-theme-blue .cart-page .cart-page-part1 .cart-table .tovars-counter input[type=number], html.svhelp-theme-blue .order-page .zakaz-table-container .cart-table .tovars-counter input[type=number],
+html.svhelp-theme-blue .tovar-container .info .tovars-counter input[type=number] {
+  border: 1px solid #000;
+  background: transparent; }
+
+html.svhelp-theme-white .catalog-products .item .tovars-counter .minus, html.svhelp-theme-white .catalog-products .item .tovars-counter .plus,
+html.svhelp-theme-white .cart-page .cart-page-part1 .cart-table .tovars-counter .minus, html.svhelp-theme-white .order-page .zakaz-table-container .cart-table .tovars-counter .minus,
+html.svhelp-theme-white .cart-page .cart-page-part1 .cart-table .tovars-counter .plus, html.svhelp-theme-white .order-page .zakaz-table-container .cart-table .tovars-counter .plus,
+html.svhelp-theme-white .tovar-container .info .tovars-counter .minus,
+html.svhelp-theme-white .tovar-container .info .tovars-counter .plus, html.svhelp-theme-brown .catalog-products .item .tovars-counter .minus, html.svhelp-theme-brown .catalog-products .item .tovars-counter .plus,
+html.svhelp-theme-brown .cart-page .cart-page-part1 .cart-table .tovars-counter .minus, html.svhelp-theme-brown .order-page .zakaz-table-container .cart-table .tovars-counter .minus,
+html.svhelp-theme-brown .cart-page .cart-page-part1 .cart-table .tovars-counter .plus, html.svhelp-theme-brown .order-page .zakaz-table-container .cart-table .tovars-counter .plus,
+html.svhelp-theme-brown .tovar-container .info .tovars-counter .minus,
+html.svhelp-theme-brown .tovar-container .info .tovars-counter .plus, html.svhelp-theme-blue .catalog-products .item .tovars-counter .minus, html.svhelp-theme-blue .catalog-products .item .tovars-counter .plus,
+html.svhelp-theme-blue .cart-page .cart-page-part1 .cart-table .tovars-counter .minus, html.svhelp-theme-blue .order-page .zakaz-table-container .cart-table .tovars-counter .minus,
+html.svhelp-theme-blue .cart-page .cart-page-part1 .cart-table .tovars-counter .plus, html.svhelp-theme-blue .order-page .zakaz-table-container .cart-table .tovars-counter .plus,
+html.svhelp-theme-blue .tovar-container .info .tovars-counter .minus,
+html.svhelp-theme-blue .tovar-container .info .tovars-counter .plus {
+  border: 1px solid #000;
+  color: #000;
+  background: transparent; }
+  html.svhelp-theme-white .catalog-products .item .tovars-counter .minus:hover, html.svhelp-theme-white .catalog-products .item .tovars-counter .plus:hover,
+  html.svhelp-theme-white .cart-page .cart-page-part1 .cart-table .tovars-counter .minus:hover, html.svhelp-theme-white .order-page .zakaz-table-container .cart-table .tovars-counter .minus:hover,
+  html.svhelp-theme-white .cart-page .cart-page-part1 .cart-table .tovars-counter .plus:hover, html.svhelp-theme-white .order-page .zakaz-table-container .cart-table .tovars-counter .plus:hover,
+  html.svhelp-theme-white .tovar-container .info .tovars-counter .minus:hover,
+  html.svhelp-theme-white .tovar-container .info .tovars-counter .plus:hover, html.svhelp-theme-brown .catalog-products .item .tovars-counter .minus:hover, html.svhelp-theme-brown .catalog-products .item .tovars-counter .plus:hover,
+  html.svhelp-theme-brown .cart-page .cart-page-part1 .cart-table .tovars-counter .minus:hover, html.svhelp-theme-brown .order-page .zakaz-table-container .cart-table .tovars-counter .minus:hover,
+  html.svhelp-theme-brown .cart-page .cart-page-part1 .cart-table .tovars-counter .plus:hover, html.svhelp-theme-brown .order-page .zakaz-table-container .cart-table .tovars-counter .plus:hover,
+  html.svhelp-theme-brown .tovar-container .info .tovars-counter .minus:hover,
+  html.svhelp-theme-brown .tovar-container .info .tovars-counter .plus:hover, html.svhelp-theme-blue .catalog-products .item .tovars-counter .minus:hover, html.svhelp-theme-blue .catalog-products .item .tovars-counter .plus:hover,
+  html.svhelp-theme-blue .cart-page .cart-page-part1 .cart-table .tovars-counter .minus:hover, html.svhelp-theme-blue .order-page .zakaz-table-container .cart-table .tovars-counter .minus:hover,
+  html.svhelp-theme-blue .cart-page .cart-page-part1 .cart-table .tovars-counter .plus:hover, html.svhelp-theme-blue .order-page .zakaz-table-container .cart-table .tovars-counter .plus:hover,
+  html.svhelp-theme-blue .tovar-container .info .tovars-counter .minus:hover,
+  html.svhelp-theme-blue .tovar-container .info .tovars-counter .plus:hover {
+    color: #fff;
+    background: #000; }
+
+html.svhelp-theme-white .faq .faq-container .item .item-text.text1 .text-container,
+html.svhelp-theme-white .faq .faq-container .item .item-text.text2 .text-container, html.svhelp-theme-brown .faq .faq-container .item .item-text.text1 .text-container,
+html.svhelp-theme-brown .faq .faq-container .item .item-text.text2 .text-container, html.svhelp-theme-blue .faq .faq-container .item .item-text.text1 .text-container,
+html.svhelp-theme-blue .faq .faq-container .item .item-text.text2 .text-container {
+  background: transparent;
+  border: 1px solid #000; }
+
+html.svhelp-theme-white .catalog-sections-rubric .item .sections-container .rubric-container .link:hover, html.svhelp-theme-brown .catalog-sections-rubric .item .sections-container .rubric-container .link:hover, html.svhelp-theme-blue .catalog-sections-rubric .item .sections-container .rubric-container .link:hover {
+  color: #000;
+  text-decoration: underline; }
+
+html.svhelp-theme-white .faq-mini .item .question,
+html.svhelp-theme-white .faq-mini .item.selected .question a, html.svhelp-theme-brown .faq-mini .item .question,
+html.svhelp-theme-brown .faq-mini .item.selected .question a, html.svhelp-theme-blue .faq-mini .item .question,
+html.svhelp-theme-blue .faq-mini .item.selected .question a {
+  background: transparent;
+  color: #000; }
+
+html.svhelp-theme-white .faq-mini .item, html.svhelp-theme-brown .faq-mini .item, html.svhelp-theme-blue .faq-mini .item {
+  border: 1px solid #000; }
+
+html.svhelp-theme-white .faq-mini .item.selected .question, html.svhelp-theme-brown .faq-mini .item.selected .question, html.svhelp-theme-blue .faq-mini .item.selected .question {
+  border-bottom: 1px solid #000; }
+
+html.svhelp-theme-white .faq-mini .item .question a:after, html.svhelp-theme-brown .faq-mini .item .question a:after, html.svhelp-theme-blue .faq-mini .item .question a:after {
+  color: #000; }
+
+html.svhelp-theme-white .cart-page .cart-page-order .cart-page-order-container,
+html.svhelp-theme-white .order-page .buyer .buyer-container, html.svhelp-theme-brown .cart-page .cart-page-order .cart-page-order-container,
+html.svhelp-theme-brown .order-page .buyer .buyer-container, html.svhelp-theme-blue .cart-page .cart-page-order .cart-page-order-container,
+html.svhelp-theme-blue .order-page .buyer .buyer-container {
+  background: transparent;
+  border: 2px solid #000; }
+
+html.svhelp-theme-white .cart-page .cart-page-order .cart-page-order-container input, html.svhelp-theme-white .cart-page .cart-page-order .cart-page-order-container textarea, html.svhelp-theme-white .cart-page .cart-page-order .cart-page-order-container select, html.svhelp-theme-brown .cart-page .cart-page-order .cart-page-order-container input, html.svhelp-theme-brown .cart-page .cart-page-order .cart-page-order-container textarea, html.svhelp-theme-brown .cart-page .cart-page-order .cart-page-order-container select, html.svhelp-theme-blue .cart-page .cart-page-order .cart-page-order-container input, html.svhelp-theme-blue .cart-page .cart-page-order .cart-page-order-container textarea, html.svhelp-theme-blue .cart-page .cart-page-order .cart-page-order-container select {
+  border-color: #000; }
+
+html.svhelp-theme-white .table-striped tbody tr:nth-of-type(odd), html.svhelp-theme-brown .table-striped tbody tr:nth-of-type(odd), html.svhelp-theme-blue .table-striped tbody tr:nth-of-type(odd) {
+  background: transparent; }
+
+html.svhelp-theme-white .mini-cart3, html.svhelp-theme-brown .mini-cart3, html.svhelp-theme-blue .mini-cart3 {
+  background: #000; }
+
+html.svhelp-theme-white .mini-cart3 .mini-cart3-button, html.svhelp-theme-brown .mini-cart3 .mini-cart3-button, html.svhelp-theme-blue .mini-cart3 .mini-cart3-button {
+  background: #fff;
+  color: #000;
+  border: 2px solid #000; }
+  html.svhelp-theme-white .mini-cart3 .mini-cart3-button:hover, html.svhelp-theme-brown .mini-cart3 .mini-cart3-button:hover, html.svhelp-theme-blue .mini-cart3 .mini-cart3-button:hover {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff; }
+
+html.svhelp-theme-white .mini-cart3 .count, html.svhelp-theme-brown .mini-cart3 .count, html.svhelp-theme-blue .mini-cart3 .count {
+  color: #000;
+  background: #fff; }
+
+html.svhelp-theme-white .tabs .tabs-controls > .item, html.svhelp-theme-brown .tabs .tabs-controls > .item, html.svhelp-theme-blue .tabs .tabs-controls > .item {
+  background: transparent;
+  border: 1px solid #000; }
+
+html.svhelp-theme-white .tabs .tabs-controls > .item.active, html.svhelp-theme-brown .tabs .tabs-controls > .item.active, html.svhelp-theme-blue .tabs .tabs-controls > .item.active {
+  background: #000;
+  color: #fff; }
+
+html.svhelp-theme-white .tabs .tabs-list, html.svhelp-theme-brown .tabs .tabs-list, html.svhelp-theme-blue .tabs .tabs-list {
+  border-top: 1px solid #000; }
+
+html.svhelp-theme-white .tovar-container .tovar-reviews .tovar-reviews-wrapper .item, html.svhelp-theme-brown .tovar-container .tovar-reviews .tovar-reviews-wrapper .item, html.svhelp-theme-blue .tovar-container .tovar-reviews .tovar-reviews-wrapper .item {
+  border: 1px solid #000;
+  border-top: none; }
+
+html.svhelp-theme-white .tovar-container .tovar-reviews .tovar-reviews-wrapper .item:first-child, html.svhelp-theme-brown .tovar-container .tovar-reviews .tovar-reviews-wrapper .item:first-child, html.svhelp-theme-blue .tovar-container .tovar-reviews .tovar-reviews-wrapper .item:first-child {
+  border: 1px solid #000; }
+
+html.svhelp-theme-white .tovar-container .tovar-reviews .button-container .button2, html.svhelp-theme-brown .tovar-container .tovar-reviews .button-container .button2, html.svhelp-theme-blue .tovar-container .tovar-reviews .button-container .button2 {
+  color: #000; }
+  html.svhelp-theme-white .tovar-container .tovar-reviews .button-container .button2:hover, html.svhelp-theme-brown .tovar-container .tovar-reviews .button-container .button2:hover, html.svhelp-theme-blue .tovar-container .tovar-reviews .button-container .button2:hover {
+    color: #fff; }
+
+html.svhelp-theme-white .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .answer, html.svhelp-theme-brown .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .answer, html.svhelp-theme-blue .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .answer {
+  background: transparent;
+  border: 1px solid #000; }
+
+html.svhelp-theme-white footer .footer-desktop .footer-menu2 ul > li:hover > a, html.svhelp-theme-white footer .footer-desktop .footer-menu2 ul > li.selected > a, html.svhelp-theme-brown footer .footer-desktop .footer-menu2 ul > li:hover > a, html.svhelp-theme-brown footer .footer-desktop .footer-menu2 ul > li.selected > a, html.svhelp-theme-blue footer .footer-desktop .footer-menu2 ul > li:hover > a, html.svhelp-theme-blue footer .footer-desktop .footer-menu2 ul > li.selected > a {
+  text-decoration: underline;
+  color: #000; }
+
+html.svhelp-theme-white .block-text-color-white h1, html.svhelp-theme-white .block-text-color-white .h1,
+html.svhelp-theme-white .block-text-color-white h2, html.svhelp-theme-white .block-text-color-white .h2,
+html.svhelp-theme-white .block-text-color-white h3, html.svhelp-theme-white .block-text-color-white .h3,
+html.svhelp-theme-white .block-text-color-white h4, html.svhelp-theme-white .block-text-color-white .h4, html.svhelp-theme-brown .block-text-color-white h1, html.svhelp-theme-brown .block-text-color-white .h1,
+html.svhelp-theme-brown .block-text-color-white h2, html.svhelp-theme-brown .block-text-color-white .h2,
+html.svhelp-theme-brown .block-text-color-white h3, html.svhelp-theme-brown .block-text-color-white .h3,
+html.svhelp-theme-brown .block-text-color-white h4, html.svhelp-theme-brown .block-text-color-white .h4, html.svhelp-theme-blue .block-text-color-white h1, html.svhelp-theme-blue .block-text-color-white .h1,
+html.svhelp-theme-blue .block-text-color-white h2, html.svhelp-theme-blue .block-text-color-white .h2,
+html.svhelp-theme-blue .block-text-color-white h3, html.svhelp-theme-blue .block-text-color-white .h3,
+html.svhelp-theme-blue .block-text-color-white h4, html.svhelp-theme-blue .block-text-color-white .h4 {
+  color: #fff; }
+
+html.svhelp-theme-brown body,
+html.svhelp-theme-brown header .header-desktop .search-container input[type=search],
+html.svhelp-theme-brown .catalog-top .sort-select,
+html.svhelp-theme-brown .catalog-products .item,
+html.svhelp-theme-brown .catalog-sections .item .img-border {
+  background: #F7F3D6; }
+
+html.svhelp-theme-blue body,
+html.svhelp-theme-blue header .header-desktop .search-container input[type=search],
+html.svhelp-theme-blue .catalog-top .sort-select,
+html.svhelp-theme-blue .catalog-products .item,
+html.svhelp-theme-blue .catalog-sections .item .img-border {
+  background: #9DD1FF; }
+
+html.svhelp-theme-dark body {
+  color: #fff;
+  background: #000; }
+
+html.svhelp-theme-dark .placeholder {
+  color: #fff; }
+
+html.svhelp-theme-dark ::-webkit-input-placeholder {
+  color: #fff; }
+
+html.svhelp-theme-dark ::-moz-placeholder {
+  color: #fff; }
+
+html.svhelp-theme-dark :-ms-input-placeholder {
+  color: #fff; }
+
+html.svhelp-theme-dark ::-ms-input-placeholder {
+  color: #fff; }
+
+html.svhelp-theme-dark ::placeholder {
+  color: #fff; }
+
+html.svhelp-theme-dark :focus {
+  outline: 2px solid #d9534f; }
+
+html.svhelp-theme-dark input[type='text'],
+html.svhelp-theme-dark input[type='file'],
+html.svhelp-theme-dark input[type='password'],
+html.svhelp-theme-dark input[type='tel'],
+html.svhelp-theme-dark input[type='email'],
+html.svhelp-theme-dark input[type='search'],
+html.svhelp-theme-dark input[type='number'],
+html.svhelp-theme-dark input[type='date'],
+html.svhelp-theme-dark select, html.svhelp-theme-dark textarea {
+  border: 2px solid #fff;
+  background: #000;
+  color: #fff; }
+  html.svhelp-theme-dark input[type='text']:focus,
+  html.svhelp-theme-dark input[type='file']:focus,
+  html.svhelp-theme-dark input[type='password']:focus,
+  html.svhelp-theme-dark input[type='tel']:focus,
+  html.svhelp-theme-dark input[type='email']:focus,
+  html.svhelp-theme-dark input[type='search']:focus,
+  html.svhelp-theme-dark input[type='number']:focus,
+  html.svhelp-theme-dark input[type='date']:focus,
+  html.svhelp-theme-dark select:focus, html.svhelp-theme-dark textarea:focus {
+    outline: none;
+    -webkit-box-shadow: 0 0 0 2px #f4a70b;
+            box-shadow: 0 0 0 2px #f4a70b; }
+
+html.svhelp-theme-dark .button {
+  color: #000;
+  background: #fff;
+  border: 1px solid #fff; }
+  html.svhelp-theme-dark .button:hover {
+    background: #000;
+    color: #fff !important;
+    border: 1px solid #fff; }
+
+html.svhelp-theme-dark .button2 {
+  color: #fff;
+  border: 2px solid #fff; }
+  html.svhelp-theme-dark .button2:hover {
+    background: #fff;
+    border: 2px solid #fff;
+    color: #000; }
+
+html.svhelp-theme-dark .pagination .pagination-item {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+  html.svhelp-theme-dark .pagination .pagination-item:hover, html.svhelp-theme-dark .pagination .pagination-item.selected {
+    background: #fff;
+    color: #000 !important; }
+
+html.svhelp-theme-dark .block-padding[style*="background:"],
+html.svhelp-theme-dark .block-padding-small[style*="background:"],
+html.svhelp-theme-dark .block-bg {
+  background-image: none !important;
+  background-color: #000 !important;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff; }
+
+html.svhelp-theme-dark .modal {
+  background: #000; }
+
+html.svhelp-theme-dark .fancybox-close-small {
+  color: #fff; }
+
+html.svhelp-theme-dark a,
+html.svhelp-theme-dark h1, html.svhelp-theme-dark .h1,
+html.svhelp-theme-dark h2, html.svhelp-theme-dark .h2,
+html.svhelp-theme-dark h3, html.svhelp-theme-dark .h3,
+html.svhelp-theme-dark h4, html.svhelp-theme-dark .h4,
+html.svhelp-theme-dark .catalog-advantage.variant6 .item .text-container .text,
+html.svhelp-theme-dark .catalog-advantage.variant7 .item .text-container .name,
+html.svhelp-theme-dark .catalog-advantage.variant6 .item .text-container .name,
+html.svhelp-theme-dark .toTop,
+html.svhelp-theme-dark .vertical-menu ul.level1 > li.submenu > a:before,
+html.svhelp-theme-dark .news.widget .item .date,
+html.svhelp-theme-dark .catalog-gallery .item .name,
+html.svhelp-theme-dark .catalog-products .item .name,
+html.svhelp-theme-dark .catalog-products .item .price-container .old-price, html.svhelp-theme-dark .tovar-container .info .price-container .old-price,
+html.svhelp-theme-dark .catalog-products .item .catalog-item-bottom .catalog-item-compare .far, html.svhelp-theme-dark .tovar-container .info .tovar-links-container .item .far,
+html.svhelp-theme-dark .catalog-top .sort-select,
+html.svhelp-theme-dark .catalog-top .catalog-view .title,
+html.svhelp-theme-dark .breadcrumb li.active,
+html.svhelp-theme-dark .breadcrumb li.separator,
+html.svhelp-theme-dark .catalog-sections .item .name,
+html.svhelp-theme-dark .input-awesome.checkbox-awesome input:checked + label:before,
+html.svhelp-theme-dark .input-awesome.checkbox-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-dark .categories .item span,
+html.svhelp-theme-dark .faq .faq-container .item .item-info .date,
+html.svhelp-theme-dark .catalog-gallery-album .item .name,
+html.svhelp-theme-dark .news.one .date,
+html.svhelp-theme-dark .news.list.line.one-column .item .text-container .date, html.svhelp-theme-dark .news.list.line.two-columns .item .text-container .date,
+html.svhelp-theme-dark .news.list.line.one-column .item .text-container .title, html.svhelp-theme-dark .news.list.line.two-columns .item .text-container .title,
+html.svhelp-theme-dark .news.list.line.one-column .item .text-container a.link, html.svhelp-theme-dark .news.list.line.two-columns .item .text-container a.link,
+html.svhelp-theme-dark .news.list.rows .item .text-container .title,
+html.svhelp-theme-dark .news.list.rows .item .text-container .date,
+html.svhelp-theme-dark .news.list.line.one-column-anons .item .text-container .date,
+html.svhelp-theme-dark .news.list.line.one-column-anons .item .text-container .title,
+html.svhelp-theme-dark .news.list.line.three-columns .item .text-container .date,
+html.svhelp-theme-dark .news.list.line.three-columns .item .text-container .title,
+html.svhelp-theme-dark .input-awesome.radio-awesome input:checked + label:before,
+html.svhelp-theme-dark .input-awesome.radio-awesome input:not(:disabled) + label:hover:before,
+html.svhelp-theme-dark .cart-page .cart-page-part1 .cart-table .delete-button, html.svhelp-theme-dark .order-page .zakaz-table-container .cart-table .delete-button,
+html.svhelp-theme-dark .order-page .order-page-text .print-button,
+html.svhelp-theme-dark .order-page .order-page-text .print-button .fa,
+html.svhelp-theme-dark .tovar-container .info .buttons-tabs .buttons-item,
+html.svhelp-theme-dark .tovar-container .info .price-container .skidka-text,
+html.svhelp-theme-dark .tovar-container .info .buttons-tabs .buttons-item .fas,
+html.svhelp-theme-dark .tovar-container .tovar-documents .item .tovar-documents-info,
+html.svhelp-theme-dark .tovar-container .tovar-reviews a.link,
+html.svhelp-theme-dark .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .date,
+html.svhelp-theme-dark .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-title,
+html.svhelp-theme-dark .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star-o,
+html.svhelp-theme-dark .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .tovar-reviews-block-top .rating .rating-wrapper .fa-star,
+html.svhelp-theme-dark .vertical-menu ul.level2 > li > a,
+html.svhelp-theme-dark .catalog-products .item .price-container .price, html.svhelp-theme-dark .tovar-container .info .price-container .price,
+html.svhelp-theme-dark .news.widget .item .title,
+html.svhelp-theme-dark .tabs .tabs-controls > .item,
+html.svhelp-theme-dark .tovar-container .tovar-documents .item a.link,
+html.svhelp-theme-dark .reviews-slider .owl-carousel .item .text,
+html.svhelp-theme-dark .faq-mini .item .question a,
+html.svhelp-theme-dark .catalog-advantage.variant1 .item .title:hover,
+html.svhelp-theme-dark .catalog-advantage.variant2 .item .title:hover,
+html.svhelp-theme-dark .catalog-advantage.variant3 .item .title:hover,
+html.svhelp-theme-dark .catalog-advantage.variant4 a.item:hover .title,
+html.svhelp-theme-dark .sub-title,
+html.svhelp-theme-dark .price-block .documents-item .h3,
+html.svhelp-theme-dark .wherebuy-block .items-wrapper .item .item-more:before,
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before,
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:not(:disabled) + label:hover .icon,
+html.svhelp-theme-dark ul.ul-style li:before,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2-fullwidth-column [class*="col"] > li > .level2-title > a {
+  color: #fff;
+  opacity: 1; }
+
+html.svhelp-theme-dark .menu-top-container,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.flexMenu-popup,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level3,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3,
+html.svhelp-theme-dark .catalog-advantage.variant8 .item .text-container .name,
+html.svhelp-theme-dark .video-block .item,
+html.svhelp-theme-dark .video-block-fancybox .item,
+html.svhelp-theme-dark .catalog-advantage.variant6 .item,
+html.svhelp-theme-dark .vertical-menu ul.level2,
+html.svhelp-theme-dark .mini-cart2 .text-container,
+html.svhelp-theme-dark .faq-mini .item .answer,
+html.svhelp-theme-dark .table-responsive > .overflow > table,
+html.svhelp-theme-dark .map-block .contacts,
+html.svhelp-theme-dark .mini-cart .count,
+html.svhelp-theme-dark .mini-cart2 .btn-rollup .count {
+  background: #000;
+  opacity: 1; }
+
+html.svhelp-theme-dark .catalog-products .item,
+html.svhelp-theme-dark .catalog-sections .item .img-border,
+html.svhelp-theme-dark .table > tbody > tr > td, html.svhelp-theme-dark .table > tbody > tr > th, html.svhelp-theme-dark .table > thead > tr > td, html.svhelp-theme-dark .table > thead > tr > th, html.svhelp-theme-dark .table > tfoot > tr > td, html.svhelp-theme-dark .table > tfoot > tr > th,
+html.svhelp-theme-dark .catalog-gallery-album .item .img-border,
+html.svhelp-theme-dark .catalog-sections-rubric .item,
+html.svhelp-theme-dark .synced-slider1 .owl-carousel .item,
+html.svhelp-theme-dark .synced-slider2 .owl-carousel .item,
+html.svhelp-theme-dark .tovar-container .tovar-table td,
+html.svhelp-theme-dark .synced-slider-thumbs .item,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level1 > li > a,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2 > li > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.flexMenu-popup > li > a,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level3 > li > a {
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark .catalog-sections .item:hover .name,
+html.svhelp-theme-dark .catalog-gallery-album .item:hover .name,
+html.svhelp-theme-dark .catalog-gallery .item:hover .name,
+html.svhelp-theme-dark .catalog-advantage.variant1 .item a.title:hover,
+html.svhelp-theme-dark .catalog-advantage.variant2 .item a.title:hover,
+html.svhelp-theme-dark .catalog-advantage.variant4 a.item:hover .title {
+  text-decoration: underline; }
+
+html.svhelp-theme-dark header .header-desktop .search-container input[type=submit] {
+  color: #fff; }
+  html.svhelp-theme-dark header .header-desktop .search-container input[type=submit]:hover {
+    background: #fff;
+    color: #000; }
+
+html.svhelp-theme-dark .catalog-advantage.variant5 .item,
+html.svhelp-theme-dark .catalog-advantage.variant5 .item .name,
+html.svhelp-theme-dark .catalog-advantage.variant5 .item .text {
+  background: #000;
+  color: #fff; }
+
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level1 > li:hover > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level1 > li.selected > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level1 > li.active > a,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2 > li.selected > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2 > li > a:hover, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2 > li.active > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.flexMenu-popup > li.selected > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.flexMenu-popup > li > a:hover, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.flexMenu-popup > li.active > a,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level3 > li.selected > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level3 > li > a:hover, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level3 > li.active > a,
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.selected > a, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li > a:hover, html.svhelp-theme-dark .menu-top:not(.mm-menu) ul ul.level2:not(.level2-fullwidth-column) ul.level3 > li.active > a,
+html.svhelp-theme-dark .catalog-products .item .price-container .skidka, html.svhelp-theme-dark .tovar-container .info .price-container .skidka, html.svhelp-theme-dark .catalog-products .item .price-container .economy, html.svhelp-theme-dark .tovar-container .info .price-container .economy,
+html.svhelp-theme-dark .catalog-products .item .price-container .skidka, html.svhelp-theme-dark .tovar-container .info .price-container .skidka, html.svhelp-theme-dark .catalog-products .item .price-container .economy, html.svhelp-theme-dark .tovar-container .info .price-container .economy,
+html.svhelp-theme-dark .table > tbody > tr > th, html.svhelp-theme-dark .table > thead > tr > th, html.svhelp-theme-dark .table > tfoot > tr > th,
+html.svhelp-theme-dark .vertical-menu ul.level1 > li.selected > a,
+html.svhelp-theme-dark .sub-title:before,
+html.svhelp-theme-dark .price-block .documents-item .h3:before,
+html.svhelp-theme-dark .faq .faq-container .item .item-info .category,
+html.svhelp-theme-dark .news.list.line.one-column .item .text-container .category,
+html.svhelp-theme-dark .news.list.line.two-columns .item .text-container .category,
+html.svhelp-theme-dark .news.list.rows .item .text-container .category,
+html.svhelp-theme-dark .news.list.line.one-column-anons .item .text-container .category,
+html.svhelp-theme-dark .news.list.line.three-columns .item .text-container .category,
+html.svhelp-theme-dark .video-block .item .name,
+html.svhelp-theme-dark .video-block-fancybox .item .name {
+  background: #fff;
+  color: #000; }
+
+html.svhelp-theme-dark footer .footer-desktop.variant1, html.svhelp-theme-dark footer .footer-desktop.variant3, html.svhelp-theme-dark footer .footer-desktop.variant4 {
+  background: transparent;
+  border-top: 2px solid #fff; }
+
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2-fullwidth-column {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff; }
+
+html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2-fullwidth-column ul.level3 > li > a {
+  border: none; }
+  html.svhelp-theme-dark .menu-top:not(.mm-menu) ul.level2-fullwidth-column ul.level3 > li > a:hover {
+    background: transparent;
+    color: #fff; }
+
+html.svhelp-theme-dark .owl-carousel .owl-nav [class*=owl-] {
+  background: #000;
+  color: #fff;
+  opacity: 1;
+  text-shadow: none; }
+  html.svhelp-theme-dark .owl-carousel .owl-nav [class*=owl-]:hover {
+    background: #fff;
+    color: #000; }
+
+html.svhelp-theme-dark .owl-carousel .owl-dots .owl-dot span {
+  background: #000;
+  border: 2px solid #fff; }
+
+html.svhelp-theme-dark .owl-carousel .owl-dots .owl-dot:hover span {
+  border-color: #fff; }
+
+html.svhelp-theme-dark .owl-carousel .owl-dots .owl-dot.active span {
+  background: #fff;
+  border-color: #fff; }
+
+html.svhelp-theme-dark .owl-carousel .item.text-container-bg-enable .text-container .text-container-bg {
+  background-color: #000 !important; }
+
+html.svhelp-theme-dark .catalog-products .item,
+html.svhelp-theme-dark .catalog-sections .item .img-border,
+html.svhelp-theme-dark .catalog-gallery-album .item .img-border,
+html.svhelp-theme-dark .carousel-slider .owl-carousel .item,
+html.svhelp-theme-dark .reviews-slider .owl-carousel .item,
+html.svhelp-theme-dark .catalog-advantage.variant4 .item {
+  background: #000;
+  border: 2px solid #fff;
+  color: #fff;
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+
+html.svhelp-theme-dark .table tr:hover td,
+html.svhelp-theme-dark .faq-mini .item .question a:hover {
+  background: #3e3e3e; }
+
+html.svhelp-theme-dark .catalog-advantage.variant8 .item {
+  background: #000;
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark .catalog-advantage.variant9 .item {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: #000;
+  border: 2px solid #fff; }
+
+html.svhelp-theme-dark .vertical-menu ul.level1 {
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark .vertical-menu ul.level1 > li > a {
+  color: #fff;
+  border-bottom: 1px solid #fff; }
+
+html.svhelp-theme-dark .vertical-menu ul.level1 > li:last-child > a {
+  border: none; }
+
+html.svhelp-theme-dark .vertical-menu ul.level1 > li.active > a, html.svhelp-theme-dark .vertical-menu ul.level1 > li > a:hover {
+  background: #fff;
+  color: #000; }
+
+html.svhelp-theme-dark .vertical-menu ul.level1 > li.submenu.active > a:before, html.svhelp-theme-dark .vertical-menu ul.level1 > li.submenu > a:hover:before {
+  color: #000; }
+
+html.svhelp-theme-dark .news.widget .item,
+html.svhelp-theme-dark .news.list.line.one-column .item, html.svhelp-theme-dark .news.list.line.two-columns .item {
+  border-bottom: 1px solid #fff; }
+
+html.svhelp-theme-dark .catalog-top .catalog-view .item {
+  border: 1px solid #fff; }
+  html.svhelp-theme-dark .catalog-top .catalog-view .item .fa {
+    color: #fff; }
+  html.svhelp-theme-dark .catalog-top .catalog-view .item:hover, html.svhelp-theme-dark .catalog-top .catalog-view .item.selected {
+    background: #fff; }
+    html.svhelp-theme-dark .catalog-top .catalog-view .item:hover .fa, html.svhelp-theme-dark .catalog-top .catalog-view .item.selected .fa {
+      color: #000; }
+
+html.svhelp-theme-dark .catalog-products .item .tovars-counter input[type=number],
+html.svhelp-theme-dark .cart-page .cart-page-part1 .cart-table .tovars-counter input[type=number], html.svhelp-theme-dark .order-page .zakaz-table-container .cart-table .tovars-counter input[type=number],
+html.svhelp-theme-dark .tovar-container .info .tovars-counter input[type=number] {
+  border: 1px solid #fff;
+  background: transparent; }
+
+html.svhelp-theme-dark .catalog-products .item .tovars-counter .minus, html.svhelp-theme-dark .catalog-products .item .tovars-counter .plus,
+html.svhelp-theme-dark .cart-page .cart-page-part1 .cart-table .tovars-counter .minus, html.svhelp-theme-dark .order-page .zakaz-table-container .cart-table .tovars-counter .minus,
+html.svhelp-theme-dark .cart-page .cart-page-part1 .cart-table .tovars-counter .plus, html.svhelp-theme-dark .order-page .zakaz-table-container .cart-table .tovars-counter .plus,
+html.svhelp-theme-dark .tovar-container .info .tovars-counter .minus,
+html.svhelp-theme-dark .tovar-container .info .tovars-counter .plus {
+  border: 1px solid #fff;
+  color: #fff;
+  background: transparent; }
+  html.svhelp-theme-dark .catalog-products .item .tovars-counter .minus:hover, html.svhelp-theme-dark .catalog-products .item .tovars-counter .plus:hover,
+  html.svhelp-theme-dark .cart-page .cart-page-part1 .cart-table .tovars-counter .minus:hover, html.svhelp-theme-dark .order-page .zakaz-table-container .cart-table .tovars-counter .minus:hover,
+  html.svhelp-theme-dark .cart-page .cart-page-part1 .cart-table .tovars-counter .plus:hover, html.svhelp-theme-dark .order-page .zakaz-table-container .cart-table .tovars-counter .plus:hover,
+  html.svhelp-theme-dark .tovar-container .info .tovars-counter .minus:hover,
+  html.svhelp-theme-dark .tovar-container .info .tovars-counter .plus:hover {
+    color: #000;
+    background: #fff; }
+
+html.svhelp-theme-dark .faq .faq-container .item .item-text.text1 .text-container,
+html.svhelp-theme-dark .faq .faq-container .item .item-text.text2 .text-container {
+  background: transparent;
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark .catalog-sections-rubric .item .sections-container .rubric-container .link:hover {
+  color: #fff;
+  text-decoration: underline; }
+
+html.svhelp-theme-dark .faq-mini .item .question,
+html.svhelp-theme-dark .faq-mini .item.selected .question a {
+  background: transparent;
+  color: #fff; }
+
+html.svhelp-theme-dark .faq-mini .item {
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark .faq-mini .item.selected .question {
+  border-bottom: 1px solid #fff; }
+
+html.svhelp-theme-dark .faq-mini .item .question a:after {
+  color: #fff; }
+
+html.svhelp-theme-dark .cart-page .cart-page-order .cart-page-order-container,
+html.svhelp-theme-dark .order-page .buyer .buyer-container {
+  background: transparent;
+  border: 2px solid #fff; }
+
+html.svhelp-theme-dark .cart-page .cart-page-order .cart-page-order-container input, html.svhelp-theme-dark .cart-page .cart-page-order .cart-page-order-container textarea, html.svhelp-theme-dark .cart-page .cart-page-order .cart-page-order-container select {
+  border-color: #fff; }
+
+html.svhelp-theme-dark .table-striped tbody tr:nth-of-type(odd) {
+  background: transparent; }
+
+html.svhelp-theme-dark .mini-cart3 {
+  background: #000;
+  border-top: 2px solid #fff; }
+
+html.svhelp-theme-dark .mini-cart3 .mini-cart3-button {
+  background: #000;
+  color: #fff;
+  border: 2px solid #fff; }
+  html.svhelp-theme-dark .mini-cart3 .mini-cart3-button:hover {
+    background: #fff;
+    color: #000;
+    border: 2px solid #000; }
+
+html.svhelp-theme-dark .mini-cart3 .count {
+  color: #fff;
+  background: #000; }
+
+html.svhelp-theme-dark .tabs .tabs-controls > .item {
+  background: transparent;
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark .tabs .tabs-controls > .item.active {
+  background: #fff;
+  color: #000; }
+
+html.svhelp-theme-dark .tabs .tabs-list {
+  border-top: 1px solid #fff; }
+
+html.svhelp-theme-dark .tovar-container .tovar-reviews .tovar-reviews-wrapper .item {
+  border: 1px solid #fff;
+  border-top: none; }
+
+html.svhelp-theme-dark .tovar-container .tovar-reviews .tovar-reviews-wrapper .item:first-child {
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark .tovar-container .tovar-reviews .button-container .button2 {
+  color: #fff; }
+  html.svhelp-theme-dark .tovar-container .tovar-reviews .button-container .button2:hover {
+    color: #000; }
+
+html.svhelp-theme-dark .tovar-container .tovar-reviews .tovar-reviews-wrapper .item .answer {
+  background: transparent;
+  border: 1px solid #fff; }
+
+html.svhelp-theme-dark footer .footer-desktop .footer-menu2 ul > li:hover > a, html.svhelp-theme-dark footer .footer-desktop .footer-menu2 ul > li.selected > a {
+  text-decoration: underline;
+  color: #fff; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:checked + label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 input:checked + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+  html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:checked + label .icon:before, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 input:checked + label .icon:before {
+    color: #fff; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:not(:disabled) + label:hover .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 input:not(:disabled) + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:focus + label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:focus + label:hover .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:disabled + label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 input:disabled + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #6e6e6e;
+          box-shadow: 0 0 0 0.13em #6e6e6e; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant1 input:disabled:checked + label .icon:before, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant3 input:disabled:checked + label .icon:before {
+  color: #6e6e6e; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 label .icon {
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:checked + label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:checked + label .icon {
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+  html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:checked + label .icon:before, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:checked + label .icon:before {
+    color: #000; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:not(:disabled) + label:hover .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:not(:disabled) + label:hover .icon {
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:focus + label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:focus + label:hover .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:disabled + label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:disabled + label .icon {
+  background: #C5C5C5;
+  -webkit-box-shadow: 0 0 0 0.13em #C5C5C5;
+          box-shadow: 0 0 0 0.13em #C5C5C5; }
+
+html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon {
+  background: #C5C5C5; }
+  html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant2 input:disabled:checked + label .icon :before, html.svhelp-theme-dark .input-awesome.checkbox-awesome.variant4 input:disabled:checked + label .icon :before {
+    color: #fff; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 input:checked + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+  html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 input:checked + label .icon:before {
+    background: #fff; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 input:not(:disabled) + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 input:disabled + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #6e6e6e;
+          box-shadow: 0 0 0 0.13em #6e6e6e; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant1 input:disabled:checked + label .icon:before {
+  background: #6e6e6e; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 label .icon {
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 input:checked + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff;
+  background: #fff; }
+  html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 input:checked + label .icon:before {
+    background: #000; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 input:not(:disabled) + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff;
+          box-shadow: 0 0 0 0.13em #fff;
+  background: #fff; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 input:focus + label .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 input:focus + label:hover .icon {
+  -webkit-box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b;
+          box-shadow: 0 0 0 0.13em #fff, 0 0 0 0.23em #f4a70b; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 input:disabled + label .icon {
+  background: #C5C5C5;
+  -webkit-box-shadow: 0 0 0 0.13em #C5C5C5;
+          box-shadow: 0 0 0 0.13em #C5C5C5; }
+
+html.svhelp-theme-dark .input-awesome.radio-awesome.variant2 input:disabled:checked + label .icon {
+  background: #C5C5C5; }
+
+html.svhelp-theme-dark .svhelp .svhelp-button {
+  color: #fff;
+  border: 2px solid #fff; }
+  html.svhelp-theme-dark .svhelp .svhelp-button:hover {
+    background: #fff;
+    border: 2px solid #fff;
+    color: #000; }
+
+html.svhelp-theme-dark .svhelp .svhelp-container {
+  background: #000; }
+
+html.svhelp-theme-dark .svhelp .svhelp-item.svhelp-theme .svhelp-item-wrapper .item[data-svhelp-class='svhelp-theme-dark'] {
+  border: 2px solid #fff; }
+
+html.svhelp-theme-dark .svhelp .svhelp-item.svhelp-font-size .svhelp-item-wrapper .item,
+html.svhelp-theme-dark .svhelp .svhelp-item.svhelp-font .svhelp-item-wrapper .item {
+  color: #fff; }
+
+html.svhelp-theme-dark .mm-menu {
+  --mm-color-border: rgba(0, 0, 0, 0.3);
+  --mm-color-button: rgba(255, 255, 255, 0.4);
+  --mm-color-text: rgba(255, 255, 255, 0.85);
+  --mm-color-text-dimmed: rgba(255, 255, 255, 0.4);
+  --mm-color-background: #4f4f4f;
+  --mm-color-background-highlight: rgba(255, 255, 255, 0.08);
+  --mm-color-background-emphasis: #000;
+  --mm-shadow: 0 0 20px rgba(0, 0, 0, 0.5)
+    ; }
+
+html.svhelp-font-arial body {
+  font-family: arial; }
+
+html.svhelp-font-arial h1, html.svhelp-font-arial .h1,
+html.svhelp-font-arial h2, html.svhelp-font-arial .h2,
+html.svhelp-font-arial h3, html.svhelp-font-arial .h3,
+html.svhelp-font-arial h4, html.svhelp-font-arial .h4 {
+  font-family: arial; }
+
+html.svhelp-font-times body {
+  font-family: "Times New Roman"; }
+
+html.svhelp-font-times h1, html.svhelp-font-times .h1,
+html.svhelp-font-times h2, html.svhelp-font-times .h2,
+html.svhelp-font-times h3, html.svhelp-font-times .h3,
+html.svhelp-font-times h4, html.svhelp-font-times .h4 {
+  font-family: "Times New Roman"; }
+
+html.svhelp-font-size-small {
+  font-size: 18px; }
+  html.svhelp-font-size-small .page-content,
+  html.svhelp-font-size-small .catalog-advantage.variant1 .item .title,
+  html.svhelp-font-size-small .catalog-advantage.variant1 .item .text,
+  html.svhelp-font-size-small .catalog-advantage.variant2 .item .title,
+  html.svhelp-font-size-small .catalog-advantage.variant2 .item .text,
+  html.svhelp-font-size-small .catalog-advantage.variant3 .item .title,
+  html.svhelp-font-size-small .catalog-advantage.variant3 .item .text,
+  html.svhelp-font-size-small .catalog-advantage.variant4 .item .title,
+  html.svhelp-font-size-small .catalog-advantage.variant4 .item .text,
+  html.svhelp-font-size-small .catalog-advantage.variant5 .item .name,
+  html.svhelp-font-size-small .catalog-advantage.variant5 .item .text,
+  html.svhelp-font-size-small .catalog-advantage.variant6 .item .text-container .name,
+  html.svhelp-font-size-small .catalog-advantage.variant6 .item .text-container .text,
+  html.svhelp-font-size-small .catalog-advantage.variant7 .item .text-container .name,
+  html.svhelp-font-size-small .catalog-advantage.variant7 .item .text-container .text,
+  html.svhelp-font-size-small .catalog-advantage.variant8 .item .text-container,
+  html.svhelp-font-size-small .catalog-advantage.variant8 .item .text-container .text,
+  html.svhelp-font-size-small .catalog-products .item .name,
+  html.svhelp-font-size-small .tovar-container .info .tovar-container-title,
+  html.svhelp-font-size-small .tovar-container .info,
+  html.svhelp-font-size-small .faq .faq-container .item .item-text .text-container .name,
+  html.svhelp-font-size-small .faq .faq-container .item .item-text .title,
+  html.svhelp-font-size-small .vertical-menu ul.level1 > li > a,
+  html.svhelp-font-size-small .tovar-container .tovar-articles .item,
+  html.svhelp-font-size-small .menu-top:not(.mm-menu) ul.level1 > li > a,
+  html.svhelp-font-size-small .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level2 > .container > .row > [class*="col-"] > li > a, html.svhelp-font-size-small .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level2 > .container > .row > [class*="col-"] > .menu-top-podrazdel-level2-1 > li > a,
+  html.svhelp-font-size-small .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level3 li > a,
+  html.svhelp-font-size-small .categories .item span,
+  html.svhelp-font-size-small .fullwidth-slider .owl-carousel .item .text-container .text,
+  html.svhelp-font-size-small .catalog-sections-other .item .item-title,
+  html.svhelp-font-size-small .catalog-sections-other .item .sections-ul ul li a,
+  html.svhelp-font-size-small .catalog-sections-other .item .text,
+  html.svhelp-font-size-small.index-page .combine-block .text-block-two-columns,
+  html.svhelp-font-size-small .catalog-advantage.variant10 .item .title,
+  html.svhelp-font-size-small .index-articles .index-articles-wrapper ul li a,
+  html.svhelp-font-size-small .map-block .contacts .contacts-wrapper2 .contacts-table {
+    line-height: normal; }
+  html.svhelp-font-size-small .vertical-menu ul.level1 > li > a,
+  html.svhelp-font-size-small .vertical-menu ul.level2 > li > a,
+  html.svhelp-font-size-small .catalog-gallery .item .name,
+  html.svhelp-font-size-small .catalog-sections-other .item .text {
+    line-height: normal; }
+
+html.svhelp-font-size-medium {
+  font-size: 22px; }
+  html.svhelp-font-size-medium .page-content,
+  html.svhelp-font-size-medium .catalog-advantage.variant1 .item .title,
+  html.svhelp-font-size-medium .catalog-advantage.variant1 .item .text,
+  html.svhelp-font-size-medium .catalog-advantage.variant2 .item .title,
+  html.svhelp-font-size-medium .catalog-advantage.variant2 .item .text,
+  html.svhelp-font-size-medium .catalog-advantage.variant3 .item .title,
+  html.svhelp-font-size-medium .catalog-advantage.variant3 .item .text,
+  html.svhelp-font-size-medium .catalog-advantage.variant4 .item .title,
+  html.svhelp-font-size-medium .catalog-advantage.variant4 .item .text,
+  html.svhelp-font-size-medium .catalog-advantage.variant5 .item .name,
+  html.svhelp-font-size-medium .catalog-advantage.variant5 .item .text,
+  html.svhelp-font-size-medium .catalog-advantage.variant6 .item .text-container .name,
+  html.svhelp-font-size-medium .catalog-advantage.variant6 .item .text-container .text,
+  html.svhelp-font-size-medium .catalog-advantage.variant7 .item .text-container .name,
+  html.svhelp-font-size-medium .catalog-advantage.variant7 .item .text-container .text,
+  html.svhelp-font-size-medium .catalog-advantage.variant8 .item .text-container,
+  html.svhelp-font-size-medium .catalog-advantage.variant8 .item .text-container .text,
+  html.svhelp-font-size-medium .catalog-products .item .name,
+  html.svhelp-font-size-medium .tovar-container .info .tovar-container-title,
+  html.svhelp-font-size-medium .tovar-container .info,
+  html.svhelp-font-size-medium .faq .faq-container .item .item-text .text-container .name,
+  html.svhelp-font-size-medium .faq .faq-container .item .item-text .title,
+  html.svhelp-font-size-medium .vertical-menu ul.level1 > li > a,
+  html.svhelp-font-size-medium .tovar-container .tovar-articles .item,
+  html.svhelp-font-size-medium .menu-top:not(.mm-menu) ul.level1 > li > a,
+  html.svhelp-font-size-medium .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level2 > .container > .row > [class*="col-"] > li > a, html.svhelp-font-size-medium .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level2 > .container > .row > [class*="col-"] > .menu-top-podrazdel-level2-1 > li > a,
+  html.svhelp-font-size-medium .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level3 li > a,
+  html.svhelp-font-size-medium .categories .item span,
+  html.svhelp-font-size-medium .fullwidth-slider .owl-carousel .item .text-container .text,
+  html.svhelp-font-size-medium .catalog-sections-other .item .item-title,
+  html.svhelp-font-size-medium .catalog-sections-other .item .sections-ul ul li a,
+  html.svhelp-font-size-medium .catalog-sections-other .item .text,
+  html.svhelp-font-size-medium.index-page .combine-block .text-block-two-columns,
+  html.svhelp-font-size-medium .catalog-advantage.variant10 .item .title,
+  html.svhelp-font-size-medium .index-articles .index-articles-wrapper ul li a,
+  html.svhelp-font-size-medium .map-block .contacts .contacts-wrapper2 .contacts-table {
+    line-height: normal; }
+  html.svhelp-font-size-medium .vertical-menu ul.level1 > li > a,
+  html.svhelp-font-size-medium .vertical-menu ul.level2 > li > a,
+  html.svhelp-font-size-medium .catalog-gallery .item .name,
+  html.svhelp-font-size-medium .catalog-sections-other .item .text {
+    line-height: normal; }
+
+html.svhelp-font-size-big {
+  font-size: 26px; }
+  html.svhelp-font-size-big .page-content,
+  html.svhelp-font-size-big .catalog-advantage.variant1 .item .title,
+  html.svhelp-font-size-big .catalog-advantage.variant1 .item .text,
+  html.svhelp-font-size-big .catalog-advantage.variant2 .item .title,
+  html.svhelp-font-size-big .catalog-advantage.variant2 .item .text,
+  html.svhelp-font-size-big .catalog-advantage.variant3 .item .title,
+  html.svhelp-font-size-big .catalog-advantage.variant3 .item .text,
+  html.svhelp-font-size-big .catalog-advantage.variant4 .item .title,
+  html.svhelp-font-size-big .catalog-advantage.variant4 .item .text,
+  html.svhelp-font-size-big .catalog-advantage.variant5 .item .name,
+  html.svhelp-font-size-big .catalog-advantage.variant5 .item .text,
+  html.svhelp-font-size-big .catalog-advantage.variant6 .item .text-container .name,
+  html.svhelp-font-size-big .catalog-advantage.variant6 .item .text-container .text,
+  html.svhelp-font-size-big .catalog-advantage.variant7 .item .text-container .name,
+  html.svhelp-font-size-big .catalog-advantage.variant7 .item .text-container .text,
+  html.svhelp-font-size-big .catalog-advantage.variant8 .item .text-container,
+  html.svhelp-font-size-big .catalog-advantage.variant8 .item .text-container .text,
+  html.svhelp-font-size-big .catalog-products .item .name,
+  html.svhelp-font-size-big .tovar-container .info .tovar-container-title,
+  html.svhelp-font-size-big .tovar-container .info,
+  html.svhelp-font-size-big .faq .faq-container .item .item-text .text-container .name,
+  html.svhelp-font-size-big .faq .faq-container .item .item-text .title,
+  html.svhelp-font-size-big .vertical-menu ul.level1 > li > a,
+  html.svhelp-font-size-big .tovar-container .tovar-articles .item,
+  html.svhelp-font-size-big .menu-top:not(.mm-menu) ul.level1 > li > a,
+  html.svhelp-font-size-big .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level2 > .container > .row > [class*="col-"] > li > a, html.svhelp-font-size-big .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level2 > .container > .row > [class*="col-"] > .menu-top-podrazdel-level2-1 > li > a,
+  html.svhelp-font-size-big .menu-top:not(.mm-menu) ul.menu-top-podrazdel-level3 li > a,
+  html.svhelp-font-size-big .categories .item span,
+  html.svhelp-font-size-big .fullwidth-slider .owl-carousel .item .text-container .text,
+  html.svhelp-font-size-big .catalog-sections-other .item .item-title,
+  html.svhelp-font-size-big .catalog-sections-other .item .sections-ul ul li a,
+  html.svhelp-font-size-big .catalog-sections-other .item .text,
+  html.svhelp-font-size-big.index-page .combine-block .text-block-two-columns,
+  html.svhelp-font-size-big .catalog-advantage.variant10 .item .title,
+  html.svhelp-font-size-big .index-articles .index-articles-wrapper ul li a,
+  html.svhelp-font-size-big .map-block .contacts .contacts-wrapper2 .contacts-table {
+    line-height: normal; }
+  html.svhelp-font-size-big .vertical-menu ul.level1 > li > a,
+  html.svhelp-font-size-big .vertical-menu ul.level2 > li > a,
+  html.svhelp-font-size-big .catalog-gallery .item .name,
+  html.svhelp-font-size-big .catalog-sections-other .item .text {
+    line-height: normal; }
+
+@media only screen and (max-width: 767px) {
+  #panel-svhelp .svhelp-default .fa {
+    margin-right: 8px; }
+  #panel-svhelp .svhelp-item-title {
+    padding: 10px 20px;
+    text-decoration: underline; }
+  #panel-svhelp .svhelp-item {
+    padding: 10px 20px; }
+    #panel-svhelp .svhelp-item.svhelp-theme {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; }
+      #panel-svhelp .svhelp-item.svhelp-theme .item {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        text-decoration: none;
+        font-size: 35px;
+        margin-right: 10px;
+        line-height: normal; }
+        #panel-svhelp .svhelp-item.svhelp-theme .item:hover {
+          text-decoration: underline; }
+        #panel-svhelp .svhelp-item.svhelp-theme .item[data-svhelp-class='svhelp-theme-white'] {
+          background: #fff;
+          color: #000;
+          border: 2px solid #000; }
+        #panel-svhelp .svhelp-item.svhelp-theme .item[data-svhelp-class='svhelp-theme-dark'] {
+          background: #000;
+          color: #fff; }
+        #panel-svhelp .svhelp-item.svhelp-theme .item[data-svhelp-class='svhelp-theme-brown'] {
+          background: #F7F3D6;
+          color: #000; }
+        #panel-svhelp .svhelp-item.svhelp-theme .item[data-svhelp-class='svhelp-theme-blue'] {
+          background: #9DD1FF;
+          color: #000; }
+    #panel-svhelp .svhelp-item.svhelp-font-size .item {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+      margin-right: 10px;
+      line-height: 34px;
+      overflow: inherit;
+      padding: 3px;
+      background: #fff;
+      color: #000;
+      vertical-align: top; }
+      #panel-svhelp .svhelp-item.svhelp-font-size .item:hover {
+        text-decoration: underline; }
+      #panel-svhelp .svhelp-item.svhelp-font-size .item[data-svhelp-class='svhelp-font-size-small'] {
+        font-size: 18px; }
+      #panel-svhelp .svhelp-item.svhelp-font-size .item[data-svhelp-class='svhelp-font-size-medium'] {
+        font-size: 26px; }
+      #panel-svhelp .svhelp-item.svhelp-font-size .item[data-svhelp-class='svhelp-font-size-big'] {
+        font-size: 36px; }
+    #panel-svhelp .svhelp-item.svhelp-font .item {
+      color: #000;
+      padding: 3px;
+      background: #fff;
+      font-size: 18px;
+      display: inline-block;
+      margin-bottom: 3px;
+      text-decoration: none; }
+      #panel-svhelp .svhelp-item.svhelp-font .item:hover {
+        text-decoration: underline; }
+      #panel-svhelp .svhelp-item.svhelp-font .item[data-svhelp-class='svhelp-font-times'] {
+        font-family: "Times New Roman"; }
+      #panel-svhelp .svhelp-item.svhelp-font .item[data-svhelp-class='svhelp-font-arial'] {
+        font-family: Arial; }
+  html.svhelp-theme-white .mh-head .header-mobile-button-container, html.svhelp-theme-brown .mh-head .header-mobile-button-container, html.svhelp-theme-blue .mh-head .header-mobile-button-container {
+    background: #000; }
+  html.svhelp-theme-white .mh-head .header-mobile-button-container[data-button-name='search'] input[type=submit],
+  html.svhelp-theme-white .mm-menu,
+  html.svhelp-theme-white .mm-menu .mm-navbar a, html.svhelp-theme-white .mm-menu_theme-dark .mm-navbar > *,
+  html.svhelp-theme-white .mm-menu .mm-counter,
+  html.svhelp-theme-white #panel-phone a span, html.svhelp-theme-brown .mh-head .header-mobile-button-container[data-button-name='search'] input[type=submit],
+  html.svhelp-theme-brown .mm-menu,
+  html.svhelp-theme-brown .mm-menu .mm-navbar a, html.svhelp-theme-brown .mm-menu_theme-dark .mm-navbar > *,
+  html.svhelp-theme-brown .mm-menu .mm-counter,
+  html.svhelp-theme-brown #panel-phone a span, html.svhelp-theme-blue .mh-head .header-mobile-button-container[data-button-name='search'] input[type=submit],
+  html.svhelp-theme-blue .mm-menu,
+  html.svhelp-theme-blue .mm-menu .mm-navbar a, html.svhelp-theme-blue .mm-menu_theme-dark .mm-navbar > *,
+  html.svhelp-theme-blue .mm-menu .mm-counter,
+  html.svhelp-theme-blue #panel-phone a span {
+    color: #000;
+    opacity: 1; }
+  html.svhelp-theme-white .mh-head, html.svhelp-theme-brown .mh-head, html.svhelp-theme-blue .mh-head {
+    background: #000;
+    color: #fff; }
+  html.svhelp-theme-white .mh-head .mh-text,
+  html.svhelp-theme-white .mh-head .mh-text a,
+  html.svhelp-theme-white .mh-head .header-mobile-buttons .fa, html.svhelp-theme-brown .mh-head .mh-text,
+  html.svhelp-theme-brown .mh-head .mh-text a,
+  html.svhelp-theme-brown .mh-head .header-mobile-buttons .fa, html.svhelp-theme-blue .mh-head .mh-text,
+  html.svhelp-theme-blue .mh-head .mh-text a,
+  html.svhelp-theme-blue .mh-head .header-mobile-buttons .fa {
+    color: #fff; }
+  html.svhelp-theme-white .mh-head .header-mobile-buttons .fa.active, html.svhelp-theme-brown .mh-head .header-mobile-buttons .fa.active, html.svhelp-theme-blue .mh-head .header-mobile-buttons .fa.active {
+    background: #fff;
+    color: #000; }
+  html.svhelp-theme-white .mm-menu, html.svhelp-theme-brown .mm-menu, html.svhelp-theme-blue .mm-menu {
+    background: #fff; }
+  html.svhelp-theme-white .mm-menu .mm-btn:after, html.svhelp-theme-white .mm-menu .mm-btn:before,
+  html.svhelp-theme-white .mm-menu .mm-listview .mm-btn_next:after, html.svhelp-theme-brown .mm-menu .mm-btn:after, html.svhelp-theme-brown .mm-menu .mm-btn:before,
+  html.svhelp-theme-brown .mm-menu .mm-listview .mm-btn_next:after, html.svhelp-theme-blue .mm-menu .mm-btn:after, html.svhelp-theme-blue .mm-menu .mm-btn:before,
+  html.svhelp-theme-blue .mm-menu .mm-listview .mm-btn_next:after {
+    border-color: #000; }
+  html.svhelp-theme-white .mm-listitem.selected > a, html.svhelp-theme-brown .mm-listitem.selected > a, html.svhelp-theme-blue .mm-listitem.selected > a {
+    background: #000;
+    color: #fff; }
+  html.svhelp-theme-white .hamburger-inner, html.svhelp-theme-white .hamburger-inner::before, html.svhelp-theme-white .hamburger-inner::after, html.svhelp-theme-brown .hamburger-inner, html.svhelp-theme-brown .hamburger-inner::before, html.svhelp-theme-brown .hamburger-inner::after, html.svhelp-theme-blue .hamburger-inner, html.svhelp-theme-blue .hamburger-inner::before, html.svhelp-theme-blue .hamburger-inner::after {
+    background: #fff; }
+  html.svhelp-theme-white footer .footer-mobile, html.svhelp-theme-brown footer .footer-mobile, html.svhelp-theme-blue footer .footer-mobile {
+    background: #000;
+    color: #fff; }
+  html.svhelp-theme-white .index-slider .owl-carousel .item .mobile-title, html.svhelp-theme-white .fullwidth-slider .owl-carousel .item .mobile-title, html.svhelp-theme-brown .index-slider .owl-carousel .item .mobile-title, html.svhelp-theme-brown .fullwidth-slider .owl-carousel .item .mobile-title, html.svhelp-theme-blue .index-slider .owl-carousel .item .mobile-title, html.svhelp-theme-blue .fullwidth-slider .owl-carousel .item .mobile-title {
+    background: #000;
+    color: #fff !important; }
+  html.svhelp-theme-white .form-container .form-group.error.error:not(.agreement) .form-control:before, html.svhelp-theme-brown .form-container .form-group.error.error:not(.agreement) .form-control:before, html.svhelp-theme-blue .form-container .form-group.error.error:not(.agreement) .form-control:before {
+    top: 0; }
+  html.svhelp-theme-dark .hamburger-inner, html.svhelp-theme-dark .hamburger-inner::before, html.svhelp-theme-dark .hamburger-inner::after {
+    background: #fff; }
+  html.svhelp-theme-dark .mh-head .header-mobile-button-container {
+    background: #000; }
+  html.svhelp-theme-dark .mh-head .header-mobile-button-container[data-button-name='search'] input[type=submit],
+  html.svhelp-theme-dark .mm-menu,
+  html.svhelp-theme-dark .mm-menu .mm-navbar a, html.svhelp-theme-dark .mm-menu_theme-dark .mm-navbar > *,
+  html.svhelp-theme-dark .mm-menu .mm-counter,
+  html.svhelp-theme-dark #panel-phone a span {
+    color: #fff;
+    opacity: 1; }
+  html.svhelp-theme-dark .mh-head .header-mobile-button-container[data-button-name='search'] input[type=search] {
+    border: 2px solid #fff; }
+  html.svhelp-theme-dark .mh-head {
+    background: #000;
+    color: #fff; }
+  html.svhelp-theme-dark .mm-navbar .button {
+    color: #000 !important; }
+    html.svhelp-theme-dark .mm-navbar .button:hover {
+      color: #fff !important; }
+    html.svhelp-theme-dark .mm-navbar .button:active {
+      color: #000 !important; }
+  html.svhelp-theme-dark .mm-listitem.selected > a {
+    background: #fff;
+    color: #000; }
+  html.svhelp-theme-dark .mh-head .mh-text,
+  html.svhelp-theme-dark .mh-head .mh-text a,
+  html.svhelp-theme-dark .mh-head .header-mobile-buttons .fa {
+    color: #fff; }
+  html.svhelp-theme-dark .mh-head .header-mobile-buttons .fa.active {
+    background: #fff;
+    color: #000; }
+  html.svhelp-theme-dark .mm-menu {
+    background: #000; }
+  html.svhelp-theme-dark .mm-menu .mm-btn:after, html.svhelp-theme-dark .mm-menu .mm-btn:before,
+  html.svhelp-theme-dark .mm-menu .mm-listview .mm-btn_next:after {
+    border-color: #fff; }
+  html.svhelp-theme-dark footer .footer-mobile {
+    background: #000;
+    color: #fff; }
+  html.svhelp-theme-dark .index-slider .owl-carousel .item .mobile-title, html.svhelp-theme-dark .fullwidth-slider .owl-carousel .item .mobile-title {
+    background: #fff;
+    color: #000 !important; }
+  html.svhelp-theme-dark .index-slider .owl-carousel .owl-dots .owl-dot span, html.svhelp-theme-dark .fullwidth-slider .owl-carousel .owl-dots .owl-dot span {
+    background: #fff; }
+  html.svhelp-theme-dark .index-slider .owl-carousel .owl-dots .owl-dot.active span, html.svhelp-theme-dark .fullwidth-slider .owl-carousel .owl-dots .owl-dot.active span {
+    border-color: #fff;
+    background: #000; }
+  html.svhelp-theme-dark .form-container .form-group.error.error:not(.agreement) .form-control:before {
+    top: 0; }
+  html.svhelp-theme-dark #panel-svhelp .svhelp-item.svhelp-theme .item[data-svhelp-class='svhelp-theme-dark'] {
+    border: 2px solid #fff; } }
+
+/*==========  /ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ ==========*/

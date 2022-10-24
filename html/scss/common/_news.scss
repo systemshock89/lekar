@@ -1,0 +1,289 @@
+/*==========  NEWS  ==========*/
+.news-list{
+
+  // в виде колонок
+  &.news-columns{
+    .item{
+      height: 100%;
+
+      .img-container {
+        display: block;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 410px);
+        max-height: var(--img-height, 270px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(410, 270);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .text-container{
+        .title {
+          display: inline-block;
+          font-weight: bold;
+          color: $default-font-color;
+          line-height: 1.2;
+          .h2-title{
+            font-size: inherit;
+            font-weight: inherit;
+            margin-bottom: 0;
+          }
+        }
+        .category{
+          display: table;
+          padding: 3px;
+          background: $accent-color;
+          font-size: 14px;
+          color: #fff;
+          border-radius: 4px;
+          @include media((
+                  display: (sm: none)
+          ));
+        }
+        .date {
+          display: table;
+          color: #666;
+          font-size: 12px;
+          @include media((
+                  margin-bottom: (sm: 0!important)
+          ));
+        }
+        .text {
+          @include media((
+                  display: (sm: none)
+          ));
+        }
+        a.link{
+          display: table;
+          color: #666;
+          font-size: 14px;
+          @include media((
+                  display: (sm: none)
+          ));
+        }
+        > *:not(:last-child){
+          @include media((
+                  margin-bottom: (all: 10px, xs:7px),
+          ));
+        }
+      }
+
+      &:not(:last-child){
+        @include media((
+                margin-bottom: (all: 30px, md: 20px, sm: 30px, xs:15px),
+                padding-bottom: (all: 30px, md: 20px, sm: 0),
+                border-bottom: (all: 1px solid #eaebec, sm: none)
+        ));
+      }
+
+      > .row{
+        @media only screen and (max-width: 767px) {
+          @include row-mini(15px);
+        }
+      }
+    }
+
+    //@extend %news-mobile-mb-15;
+  }
+
+  // плиткой (в виде ячеек)
+  &.news-rows{
+    .item{
+      .img-container {
+        display: block;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--img-width, 545px);
+        max-height: var(--img-height, 259px);
+        width:100%; // fix max-width bug if parent display:flex
+        img{
+          max-height: 100%; //чтобы вписать в область длинную узкую картинку
+        }
+
+        // соотношение сторон переопределяется в cms
+        @include aspect-ratio(545, 359);
+
+        position: relative;
+        img,
+        .no-img{
+          @extend %img-centered;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .text-container{
+        .title{
+          display: inline-block;
+          font-weight: bold;
+          color: $default-font-color;
+          line-height: 1.2;
+          @include media((
+                  margin-top: (all: 15px, sm: 10px)
+          ));
+          .h2-title{
+            font-size: inherit;
+            font-weight: inherit;
+            margin-bottom: 0;
+          }
+        }
+        .category{
+          display: table;
+          padding: 3px;
+          background: $accent-color;
+          font-size: 14px;
+          color: #fff;
+          border-radius: 4px;
+          @include media((
+                  display: (sm: none)
+          ));
+        }
+        .date {
+          display: table;
+          color: #666;
+          font-size: 12px;
+          @include media((
+                  margin-bottom: (sm: 0!important)
+          ));
+        }
+        .text {
+          @include media((
+                  display: (sm: none)
+          ));
+        }
+
+        > *:not(:last-child){
+          @include media((
+                  margin-bottom: (all: 10px, xs:7px),
+          ));
+        }
+      }
+    }
+  }
+
+  // анонсы
+  &.news-list-anons{
+    h1, .h1,
+    h2, .h2,
+    h3, .h3{
+      a.link{
+        @include media((
+                font-size: (all: 16px, xs: 14px)
+        ));
+      }
+    }
+
+    .item{
+      .text-container{
+        .title {
+          font-weight: normal;
+          .h2-title{
+            font-size: inherit;
+            font-weight: inherit;
+            margin-bottom: 0;
+          }
+        }
+        .date {
+          display: table;
+          color: #666;
+          font-size: 12px;
+          @include media((
+                  margin-bottom: (sm: 5px)
+          ));
+        }
+      }
+
+      &:not(:last-child){
+        @include media((
+                margin-bottom: (all: 15px, sm: 30px, xs:15px),
+                padding-bottom: (all: 15px, sm: 0),
+                border-bottom: (all: 1px solid #eaebec, sm: none)
+        ));
+      }
+    }
+
+    //@extend %news-mobile-mb-15;
+
+  }
+}
+
+// новости - внутренняя
+.news-inner{
+  .date {
+    display: block;
+    color: #666666;
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+  .author{
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  @extend %text-block-float;
+
+  .text{
+    //@extend %text-elements;
+    margin-bottom: 1rem;
+  }
+}
+
+// виджет новостей в двухколоночном макете
+.news-widget{
+  .item {
+    @include media((
+            margin-bottom: (all: 20px, lg: 15px),
+            padding-bottom: (all: 20px, lg: 15px)
+    ));
+    border-bottom: 1px solid #eaebec;
+    .img-container {
+      display: block;
+      margin-bottom: 13px;
+      &:hover {
+        opacity: 0.8
+      }
+      img {
+
+      }
+    }
+    .date {
+      display: table;
+      color: #666666;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+    .title {
+      display: inline-block;
+      color: $default-font-color;
+      line-height: 1.2;
+      .h2-title{
+        font-size: inherit;
+        font-weight: inherit;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+/*==========  /NEWS  ==========*/
+/**/
+/**/

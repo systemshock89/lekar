@@ -1,0 +1,79 @@
+/*==========  TABS  ==========*/
+.tabs {
+  .tabs-controls {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -1px;
+    > .item {
+      @include media((
+              flex-basis: (all: 0, sm: auto), // чтобы ячейки были одинаковой ширине вне зависимости от их названия
+              width: (sm: 50%),
+              min-height: (all: 49px, sm: 40px),
+              line-height: (all: 1.2, sm: 1.1),
+
+              border: (all: 1px solid #ebeced, sm: 1px solid #f9fafb),
+              border-radius: (all: 4px 4px 0 0, sm: 0),
+      ));
+      flex-grow:1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5px 10px;
+      text-decoration: none;
+      &:not(:last-child){
+        @include media((
+                margin-right: (all: 6px, sm: 0),
+        ));
+      }
+
+      color: #000;
+      font-weight: bold;
+      background: #f9fafb;
+      cursor: pointer;
+
+      transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+      &:hover{
+        background: rgba(#f9fafb,.8);
+      }
+      &.active {
+        @include media((
+                border-bottom: (all: 1px solid #fff),
+                border: (sm: 1px solid #ebeced)
+        ));
+        background: #fff;
+        cursor: default;
+        transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+      }
+    }
+  }
+  .tabs-list{
+    border-top: 1px solid #ebeced;
+    padding-top: 25px;
+    > .item {
+      display: none;
+      &.active {
+        display: block;
+      }
+
+      // если во вкладках притянутые блоки, у которых должен быть container
+      // то у последнего элемента нулевой оступ
+      // а у последнего элемента с ячейками - отрицательный -30px отступ
+      .container{
+        > div:last-child:not(.row-mb-30-minus){
+          margin-bottom: 0;
+        }
+        div.row-mb-30-minus:last-child{
+          //margin-bottom: -30px;
+          @include media((
+                  margin-bottom: (all: -30px, xs: -15px)
+          ));
+        }
+      }
+
+    }
+  }
+}
+/*==========  /TABS  ==========*/
+/**/
+/**/

@@ -1,0 +1,191 @@
+/*==========  TOVAR PAGE  ==========*/
+.tovar-container{
+  .info{
+    .descr-short{
+      margin-bottom: 5px;
+    }
+    .tovar-container2{
+      margin-bottom: 30px;
+    }
+
+    .buttons-tabs{
+      .buttons-item{
+        display: inline-block;
+        color: #666;
+        font-size: 13px;
+        margin-right: 37px;
+        .fas{
+          margin-left: 3px;
+          color: #9B9B9B;
+          transition: color 0.1s ease-in-out;
+          font-size: 14px;
+        }
+        &:focus{
+          text-decoration: underline;
+        }
+        &:last-child{
+          margin-right: 0;
+        }
+        &:hover{
+          .fa{
+            color: $default-font-color;
+            transition: color 0.1s ease-in-out;
+          }
+        }
+      }
+    }
+
+    .price-container {
+      margin-top: 26px;
+      margin-bottom: 15px;
+      @extend %price-container;
+      .price{
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .old-price{
+        font-size: 18px;
+      }
+      .price-container-block2{
+        margin-top: 15px;
+      }
+      .skidka-text{
+        margin-top: 15px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color: #666;
+        line-height: 15px;
+      }
+    }
+    .tovars-counter {
+      @include tovars-counter();
+    }
+
+    .button.button-to-cart{
+      display: flex;
+      min-width: inherit;
+      min-height: 35px;
+      i{
+        margin-right: 5px;
+      }
+    }
+    .button2.order{
+      margin-top: 20px;
+      display: flex;
+      text-transform: none;
+    }
+
+    .not-available{
+      border-top:2px solid $default-font-color;
+      border-bottom:2px solid $default-font-color;
+      display: table;
+      margin-top: 15px;
+    }
+
+    .tovar-links-container{
+      margin-top: 15px;
+      .item{
+        @extend %tovar-compare;
+      }
+    }
+  }
+  .tovar-descr{
+    //@extend %text-elements;
+  }
+
+  .tovar-documents{
+    .item{
+      a.link{
+        color: #000;
+      }
+      .tovar-documents-info{
+        color: #666;
+      }
+      &:not(:last-child){
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .tovar-reviews{
+    .button{
+      margin-bottom: 30px;
+    }
+    .tovar-reviews-wrapper{
+      margin-bottom: 30px;
+      .item{
+        padding: 15px 25px;
+        border: 1px solid #ebeced;
+        border-top: none;
+        .tovar-reviews-block-top{
+          text-align: right;
+          margin-bottom: 3px;
+          .name{
+            display: inline-block;
+            margin-right: 10px;
+          }
+          .date{
+            color: #666;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 10px;
+          }
+          .rating{
+            display: inline-block;
+            .rating-title{
+              font-size: 13px;
+              color: #666;
+              display: inline-block;
+              margin-right: 10px;
+            }
+            .rating-wrapper{
+              display: inline-block;
+              .fa-star.far{
+                color: #D3D3D3;
+              }
+              .fa-star{
+                color: $orange_color;
+              }
+            }
+          }
+        }
+        .question{
+
+        }
+        .answer{
+          margin-top: 20px;
+          padding: 12px 20px;
+          background: #f9fafb;
+          .answer-title{
+            display: table-cell;
+            padding-right: 13px;
+          }
+          .answer-text{
+            display: table-cell;
+            .answer-name{
+              margin-top: 3px;
+              font-style: italic;
+            }
+          }
+        }
+        &:first-child{
+          border-top: 1px solid #ebeced;
+        }
+      }
+    }
+
+    .button-container{
+      .button2{
+        width: 263px;
+        text-transform: none;
+        color: #666;
+        &:hover{
+          color: #fff;
+        }
+      }
+    }
+  }
+
+}
+/*==========  /TOVAR PAGE  ==========*/
+/**/
+/**/

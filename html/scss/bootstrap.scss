@@ -1,0 +1,76 @@
+// Customization Bootstrap vars from "app/libs/bootstrap/scss/_variables.scss"
+$grid-gutter-width: 30px;
+$grid-columns: 12;
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1360px,
+        xxl:1930px
+);
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1320px,
+        //xxl: 1320px
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap-reboot.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+@import "../../node_modules/bootstrap/scss/_images.scss";
+@import "../../node_modules/bootstrap/scss/utilities/_display.scss";
+@import "../../node_modules/bootstrap/scss/utilities/_clearfix.scss";
+//@import "../../node_modules/bootstrap/scss/utilities/_sizing.scss";
+
+// 1. Вместо: a:hover{color:#0056b3;text-decoration:underline}
+// вставить: a:hover{text-decoration:underline}
+
+// 2. Для 5-колоночной сетки нужно разместить эти стили в _bootstrap.min.css в нужных местах
+
+//.col-5-column,
+//.col-5-column-sm,
+//.col-5-column-md,
+//.col-5-column-lg,
+//.col-5-column-xl,
+//.col-5-column-xxl{
+//  position: relative;
+//  width: 100%;
+//  padding-right: 15px;
+//  padding-left: 15px;
+//}
+//.col-5-column {
+//  flex: 0 0 20%;
+//  max-width: 20%;
+//}
+//@media (min-width: 576px) {
+//  .col-5-column-sm {
+//    flex: 0 0 20%;
+//    max-width: 20%;
+//  }
+//}
+//@media (min-width: 768px) {
+//  .col-5-column-md {
+//    flex: 0 0 20%;
+//    max-width: 20%;
+//  }
+//}
+//@media (min-width: 992px) {
+//  .col-5-column-lg {
+//    flex: 0 0 20%;
+//    max-width: 20%;
+//  }
+//}
+//@media (min-width: 1360px) {
+//  .col-5-column-xl {
+//    flex: 0 0 20%;
+//    max-width: 20%;
+//  }
+//}
+//@media (min-width: 1930px) {
+//  .col-5-column-xxl {
+//    flex: 0 0 20%;
+//    max-width: 20%;
+//  }
+//}

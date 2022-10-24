@@ -1,0 +1,134 @@
+/*==========  ПОИСК В NETCAT ==========*/
+.nc_search_form{
+  .nc_search{
+    position: relative;
+    input[type=search]{
+      width: 100%;
+      padding: 6px 30px 6px 12px;
+    }
+    input[type=submit]{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 35px;
+      height: 35px;
+      background: transparent;
+      border: none;
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      font-size: 1.3333333333333333em;
+      color: #cccccc;
+      padding: 0;
+      transition: color 0.1s ease-in-out;
+      cursor: pointer;
+      &:hover{
+        color: $default-font-color;
+        transition: color 0.1s ease-in-out;
+      }
+      &:active{
+        color: #cccccc;
+      }
+    }
+  }
+  .advancedlink{
+    margin-top: 10px;
+  }
+}
+.nc_search_results{
+  margin-top: 30px;
+  padding-left: 0;
+  .nc_search_range{
+    margin-bottom: 15px;
+  }
+  .nc_search_list{
+    margin-bottom: 10px;
+    li{
+      margin-left: 25px;
+    }
+    .nc_search_title{
+      font-size: 16px;
+    }
+  }
+}
+.nc_search_pages{
+  .nc_search_nav{
+    text-align: center;
+    strong{
+      display: none;
+    }
+    span{
+      margin: 0 5px;
+    }
+    .button2{
+      &.nc_search_inactive{
+        cursor: default;
+        color: #b6b7b9;
+        border: 1px solid #b6b7b9;
+        background: transparent;
+      }
+      &.nc_search_next,
+      &.nc_search_prev {
+        position: relative;
+        transition: background 0.1s ease-in-out, border 0.1s ease-in-out, box-shadow 0.1s ease-in-out, opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+        a{
+          text-decoration: none;
+          color: $accent-color;
+          &:before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        }
+        &:hover{
+          transition: background 0.1s ease-in-out, border 0.1s ease-in-out, box-shadow 0.1s ease-in-out, opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+          a{
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .pagination{
+    margin-top: 10px;
+  }
+}
+.nc_search_status.nc_search_no_results{
+  margin-top: 30px;
+  + .nc_search_range{
+    display: none;
+  }
+}
+.nc_search_extra_form-wrapper{
+  padding: 20px 30px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.nc_search_extra_form{
+  .nc_search_datetime_interval{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .interval_value{
+    display: inline-block;
+    vertical-align: middle;
+    width: 94px;
+    text-align: center;
+    margin-left: 10px;
+    padding: 6px 12px;
+    border: 1px solid #eaebec;
+    border-radius: 4px;
+    transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.2s;
+  }
+  .interval_unit{
+    width: 205px;
+    margin-top: 10px;
+  }
+  .submit.button{
+    padding:6px 16px;
+  }
+}
+/*==========  /ПОИСК В NETCAT ==========*/
+/**/
+/**/

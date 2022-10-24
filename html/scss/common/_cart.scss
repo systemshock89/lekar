@@ -1,0 +1,567 @@
+/*==========  CART PAGES  ==========*/
+/* верхняя миникорзина */
+.header-mini-cart .mini-cart-content {
+
+}
+
+/* правая миникорзина 1 */
+.mini-cart {
+  width: 70px;
+  height: 70px;
+  display: block;
+  position: absolute;
+  top: 217px;
+  right: 0;
+  z-index: 10;
+  text-decoration: none;
+  background: #c2c2c2;
+  border-radius: 50%;
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 14px;
+  @include media((
+          display: (sm: none!important)
+  ));
+  &:before{
+    color: #fff;
+    font-size: 24px;
+    line-height: 88px;
+    content: "\f07a";
+    font-family: 'Font Awesome 5 Free';
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+    font-weight: 900;
+  }
+  &.fixed{
+    position: fixed;
+    top: 68px;
+  }
+  .count{
+    width: 21px;
+    height: 21px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin-left: -10px;
+    line-height: 21px;
+    color: #fff;
+    text-align: center;
+    background: #8b8b8b;
+    border-radius: 50%;
+    transition: background 0.1s ease-in-out;
+  }
+  &:hover{
+    background: darken(#c2c2c2,10%);
+    .count{
+      background: darken(#8b8b8b,15%);
+      transition: background 0.1s ease-in-out;
+    }
+  }
+  &.active{
+    background: #bddb9c;
+    .count{
+      background: #82ba43;
+      transition: background 0.1s ease-in-out;
+    }
+    &:hover{
+      background: darken(#82ba43,1%);
+      .count{
+        background: darken(#82ba43,20%);
+      }
+    }
+  }
+}
+
+/* правая миникорзина 2 */
+.mini-cart2 {
+  display: block;
+  position: absolute;
+  top: 217px;
+  right: 0;
+  z-index: 10;
+  transition: width 0.1s ease-in-out;
+  width: 282px;
+  overflow: hidden;
+  font-size: 14px;
+  @include media((
+          display: (sm: none!important)
+  ));
+  &.fixed{
+    position: fixed;
+    top: 68px;
+  }
+  &.mini{
+    width: 50px;
+    transition: width 0.1s ease-in-out;
+  }
+  .mini-cart2-container{
+    width: 282px;
+  }
+  .btn-rollup {
+    display: block;
+    width: 50px;
+    height: 70px;
+    background: #c2c2c2;
+    border-radius: 4px 0 0 4px;
+    text-decoration: none;
+    float: left;
+    position: relative;
+    text-align: center;
+    &:before{
+      color: #fff;
+      font-size: 20px;
+      line-height: 41px;
+      content: "\f07a";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
+    .count{
+      width: 21px;
+      height: 21px;
+      display: block;
+      position: absolute;
+      bottom: 13px;
+      left: 50%;
+      margin-left: -9px;
+      line-height: 21px;
+      color: #fff;
+      text-align: center;
+      background: #8b8b8b;
+      border-radius: 50%;
+      transition: background 0.1s ease-in-out;
+    }
+    &:hover{
+      background: darken(#c2c2c2,10%);
+      .count{
+        background: darken(#8b8b8b,15%);
+        transition: background 0.1s ease-in-out;
+      }
+    }
+
+  }
+  &.active{
+    .btn-rollup{
+      background:#bddb9c;
+      .count{
+        background: #82ba43;
+        transition: background 0.1s ease-in-out;
+      }
+      &:hover{
+        background: darken(#82ba43,1%);
+        .count{
+          background: darken(#82ba43,20%);
+        }
+      }
+    }
+  }
+  .text-container{
+    float: left;
+    width: 232px;
+    background: #fff;
+    border: 1px solid #d7dee3;
+    padding: 14px 26px 20px 26px;
+    .title{
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .tovar{
+      line-height: 15px;
+      margin-top: 7px;
+      .tovar-count{
+        font-weight: bold;
+      }
+      .summ{
+        margin-top: 5px;
+      }
+    }
+    .button.oformit-zakaz{
+      min-width: 100%;
+      margin-top: 15px;
+    }
+    .button2.continue{
+      min-width: 100%;
+      margin-top: 15px;
+      text-transform: none;
+      padding: 5px;
+    }
+  }
+}
+
+/* правая миникорзина 3 */
+.mini-cart3{
+  position: sticky;
+  height: 42px;
+  background: #333333;
+  z-index: 10;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include media((
+          display: (sm: none!important)
+  ));
+  .title{
+    color: #fff;
+    margin-right: 12px;
+    .fa{
+      margin-right: 3px;
+      top: 1px;
+      position: relative;
+    }
+  }
+  .count{
+    display: inline-block;
+    vertical-align: middle;
+    width: 21px;
+    height: 21px;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+    background: #4f7614;
+    font-size: 13px;
+    margin-right: 22px;
+  }
+  .mini-cart3-button{
+    display: inline-block;
+    vertical-align: middle;
+    background: #63a400;
+    padding: 5px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    &:hover{
+      background: darken(#63a400, 8%);
+    }
+    &:active{
+      background: #63a400;
+    }
+  }
+}
+
+/* cart-page */
+.cart-page{
+  .cart-page-part1{
+    .cart-table{
+      @extend %cart-table;
+    }
+    .total{
+      font-size: 18px;
+    }
+    .button-order{
+      margin-top: 25px;
+    }
+  }
+  .cart-page-order{
+    margin-top: 30px;
+    .cart-page-order-title{
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+    .cart-page-order-container{
+      @include media((
+              padding: (all: 20px 30px, xs: 15px)
+      ));
+      background-color: #f8f9fa;
+      input,
+      textarea,
+      select{
+        border-color: #d7dee3;
+        &:focus{
+          box-shadow: 0 0 0 1pt #869791;
+        }
+      }
+    }
+  }
+
+  // Интернет-магазин netcat
+  .cart-page-btns-wrap{
+    .button,
+    .button2,
+    .button3{
+      margin-top: 15px;
+    }
+
+  }
+
+}
+
+// Интернет-магазин netcat (оформление заказа)
+.cart-page2{
+  .cart-page2-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+    @include media((
+            font-size: (all: 18px, lg: 16px),
+    ));
+  }
+
+  .cart-page2-item{
+    padding: 20px 30px;
+    background-color: #f8f9fa;
+    &:not(:last-child){
+      margin-bottom: 30px;
+    }
+  }
+
+  .cart-page2-form-text{
+    margin-bottom: 15px;
+    span{
+      color: $orange_color;
+    }
+  }
+
+  .cart-page2-table{
+    table{
+      @extend %cart-table;
+    }
+  }
+
+  .cart-page2-total-price{
+    font-size: 18px;
+    .cart-page2-table-total-title{
+      font-weight: bold;
+    }
+    .cart-page2-table-total-price{
+
+    }
+  }
+
+  .tpl-block-order-delivery{
+    .tpl-block-order-delivery-title{
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .tpl-block-order-delivery-method:not(:last-child){
+      margin-bottom: 15px;
+    }
+  }
+
+}
+
+.tpl-block-message.tpl-state-error{
+  color: $red_color;
+}
+
+%cart-table {
+  width: 100%;
+  margin-bottom: 30px;
+  .tovars-counter {
+    @include tovars-counter();
+    width: 114px;
+  }
+  .cart-number-td{
+    min-width: 50px;
+  }
+  .cart-photo-td{
+    min-width: 120px;
+
+    .img-container{
+      display: block;
+      text-decoration: none;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      max-width: var(--img-width, 100px);
+      max-height: var(--img-height, 67px);
+      width:100%; // fix max-width bug if parent display:flex
+      img{
+        max-height: 100%; //чтобы вписать в область длинную узкую картинку
+      }
+
+      // соотношение сторон переопределяется в cms
+      @include aspect-ratio(100, 67);
+
+      position: relative;
+      img,
+      .no-img{
+        @extend %img-centered;
+      }
+      .no-img{
+        font-size: 3rem;
+      }
+
+      //img{
+      //  max-width: 100px;
+      //  max-height: 100px;
+      //}
+      //.no-img{
+      //  max-width: 100px;
+      //  max-height: 100px;
+      //  margin-left: auto;
+      //  margin-right: auto;
+      //  font-size: 3rem;
+      //  @include aspect-ratio(300, 200);
+      //}
+      &:hover{
+        opacity: .8;
+      }
+    }
+  }
+  .cart-name-td {
+    text-align: left;
+    @include media((
+            min-width: (sm: 250px)
+    ));
+  }
+  .cart-count-td{
+    //width: 150px;
+    min-width: 150px;
+  }
+  .cart-price-td{
+    .price-container {
+      .price {
+        white-space: nowrap;
+      }
+      .old-price {
+        white-space: nowrap;
+        text-decoration: line-through;
+      }
+    }
+  }
+  .cart-summ-td{
+    white-space: nowrap;
+  }
+  .cart-delete-td{
+    //width: 80px;
+    min-width: 80px;
+  }
+  .delete-button {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    text-align: center;
+    color: #ACACAC;
+    text-decoration: none;
+
+    // стили для Интернет-магазина netcat
+    border: none;
+    background: transparent;
+    &:before{
+      font-size: 20px;
+      line-height: 35px;
+      content: "\f2ed";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 400;
+    }
+    &:hover {
+      color: #F44340;
+    }
+    &:active {
+      color: #ACACAC;
+    }
+  }
+}
+
+/* order-page */
+.order-page{
+  .zakaz-table-container{
+    margin-bottom: 30px;
+    .h3{
+      margin-bottom: 15px;
+    }
+    .total{
+      font-size: 18px;
+    }
+    .cart-table{
+      @extend %cart-table;
+    }
+  }
+  .order-page-text{
+    .print-button-container{
+      text-align: right;
+    }
+    .print-button{
+      display: inline-block;
+      text-align: center;
+      color: $default-font-color;
+      text-decoration: none;
+      .fa{
+        color: #D7D7D7;
+        font-size: 26px;
+        transition: color 0.1s ease-in-out;
+      }
+      div{
+        text-decoration: underline;
+      }
+      &:hover{
+        .fa{
+          color: $default-font-color;
+          transition: color 0.1s ease-in-out;
+        }
+        div{
+          text-decoration: none;
+        }
+      }
+    }
+
+  }
+
+  .buyer{
+    .h3{
+      margin-bottom: 15px;
+    }
+    .buyer-container{
+      padding: 20px 30px;
+      background-color: rgba(0, 0, 0, 0.05);
+      .item{
+        font-style: italic;
+        margin-bottom: 16px;
+      }
+      .item-container{
+        margin-bottom: 15px;
+        .title{
+          font-weight: bold;
+        }
+        .text{
+          font-style: italic;
+        }
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // Интернет-магазин netcat
+  .cart-page2-total-price{
+    font-size: 18px;
+    .cart-page2-table-total-title{
+      font-weight: bold;
+    }
+    .cart-page2-table-total-price{
+
+    }
+  }
+
+}
+
+@media only screen and (max-width: 575px) {
+  .order-page{
+    .order-page-text .print-button-container{
+      text-align: center;
+    }
+    .zakaz-table-container{
+      .total{
+        font-size: 16px;
+      }
+    }
+    .buyer{
+      .buyer-container{
+        font-size: 14px;
+        padding: 15px;
+      }
+    }
+  }
+}
+
+.visible-print-block{
+  display: none;
+}
+/*==========  /CART PAGES  ==========*/
+/**/
+/**/

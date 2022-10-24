@@ -1,0 +1,2701 @@
+/*==========  BASE ELEMENTS  ==========*/
+html {
+  @include media((
+          //font-size: (all: 16px, md: 16px, sm: 14px),
+          font-size: (
+                  all: $default-font-size,
+                  //lg: $default-font-size-lg,
+                  //md: $default-font-size-md,
+                  sm: $default-font-size-sm,
+                  //xs:$default-font-size-xs
+          )
+  ));
+}
+
+// Вариант, когда у html и body height: 100% не подходит из-за того,
+// что fancybox при запуске окна присваивает body height: auto
+//
+// Вариант, когда у .page min-height: 100vh; вызывает в chrome вертикальную полосу прокрутки
+// при запуске fancybox, если контента нет https://yadi.sk/i/vHbLT00Cp3KJbA
+// Но такой баг только в chrome 83, причем в режиме инкогнито его нет.
+
+body {
+  line-height: 1.43;
+  min-width: 320px;
+  font-family: $default-font;
+  color: $default-font-color;
+  position: relative;
+  overflow-x: hidden; // чтоб не появлялась горизонтальная прокрутка, если что-то вдруг выпирает за пределы экрана
+
+  // для фона у body
+  &.full-bg{
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    //background-image: url('../img/temp/text-block-bg.jpg');
+  }
+  &.content-color-bg{
+    .page{
+      background: #fcecdf;
+      max-width: 1360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .menu-top-container{
+      background: transparent;
+    }
+    .menu-top{
+      background: $accent-color;
+    }
+  }
+}
+
+input:focus:required:invalid,
+textarea:focus:required:invalid {
+  color: #666;
+}
+
+input:required:valid,
+textarea:required:valid {
+  color: #666;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: calc(100vh - var(--vh-offset, 0px)); // fix min-height: 100vh on mobile browsers (vh-check.min.js)
+
+  // если menu-top длиннее чем контент на странице, то overflow-y: hidden исправляет этот глюк https://yadi.sk/i/XoTj0kaw7TAEkw
+  // но при overflow-y: hidden перестает работать position:sticky у меню или хедера. Решения этой проблемы нет.
+  //overflow-y: hidden;
+}
+
+// Avoid Chrome to see Safari hack
+// https://github.com/postcss/postcss-100vh-fix
+@supports (-webkit-touch-callout: none) {
+  .page {
+    /* The hack for Safari */
+    min-height: -webkit-fill-available;
+  }
+}
+
+//.container {
+// для резинового контента
+//max-width: 1310px;
+//width: auto;
+//}
+
+//.container-fluid {
+// for 4k
+//max-width: 1903px;
+//}
+
+.page-content{
+  flex-grow: 1;
+  flex-shrink: 0;
+
+  //overflow: hidden; // для плавающей кнопки "запись на прием" в карточке врача
+
+  // Нужно для того, чтобы анимации с выплыванием сбоку/сверху/снизу не вызывали полосы прокрутки (а иначе полоса видна на мобильном во время анимации, но на десктопе не видна)
+  // используется overflow, а не overflow-x потому что при overflow-x может появиться вертикальная прокрутка, когда последний блок - это блок с ячейками
+
+  @include media((
+          padding-top: (all: 35px, lg:30px, md:56px, sm: 15px)
+          //padding-top: (all: 25px, sm: 15px)
+  ));
+
+  &.page-content-no-margin-top{
+    padding-top: 0;
+    margin-top: 0;
+  }
+  &.page-content-no-margin-bottom{
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  [class*="block-margin-"]:nth-child(1) > div{
+    @include media((
+            margin-top: (lg: 20px, md: 30px, sm: 0),
+    ));
+    [class*="block-margin-"]:nth-child(1){
+      margin-top: 0;
+    }
+  }
+}
+
+.page-content2{
+  @include media((
+          margin-top: (all: 78px, lg: 50px, md: 30px, sm: 0),
+  ));
+}
+
+.content-column,
+.sidebar,
+.container:not(.container-wrapper){
+  .container,
+  .container-fluid{
+    //width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left:inherit;
+    margin-right:inherit;
+  }
+}
+
+a {
+  //color: $default-font-color;
+  color: $accent-color;
+  text-decoration: none;
+  //text-decoration: underline;
+  //&:hover, &:focus {
+  //  text-decoration: none;
+  //}
+  &:hover{
+    color: $accent-color-yellow4;
+  }
+}
+
+a,
+input[type='button']{
+  transition: background 0.1s ease-in-out, border 0.1s ease-in-out, box-shadow 0.1s ease-in-out, opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+  &:hover {
+    transition: background 0.1s ease-in-out, border 0.1s ease-in-out, box-shadow 0.1s ease-in-out, opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+  }
+}
+
+%elements-form-base {
+  padding: 6px 12px;
+  //border: 1px solid #eaebec;
+  border: 2px solid $accent-color-gray1;
+  border-radius: 4px;
+  transition: border ease-in-out 0.2s, box-shadow ease-in-out 0.2s;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1pt #869791;
+  }
+  &:disabled{
+    background: $accent-color5;
+    opacity: 1;
+  }
+}
+
+input[type='text'],
+input[type='file'],
+input[type='password'],
+input[type='tel'],
+input[type='email'],
+input[type='search'],
+input[type='number'],
+input[type='date'],
+select,
+textarea{
+  @extend %elements-form-base;
+}
+
+input[type='text'],
+input[type='file'],
+input[type='password'],
+input[type='tel'],
+input[type='email'],
+input[type='search'],
+input[type='number'],
+input[type='date'],
+select{
+  @include media((
+          height: (all: 40px, xs: auto),
+  ));
+}
+
+textarea{
+  min-height: 2.5rem;
+}
+
+label,
+input[type='radio'],
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+%h-base{
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: 'MontserratAlternates';
+  color: $title-font-color;
+  @include media((
+          margin-bottom: (all:43px, lg: 30px, md: 20px, sm: 1rem)
+  ));
+  //margin-bottom: .5rem;
+}
+
+h1, .h1 {
+  @extend %h-base;
+  @include media((
+          font-size: (all: 40px, lg: 28px, md: 24px, sm: 20px, xs: 18px)
+  ));
+}
+
+h2, .h2 {
+  &:not(.h2-title){
+    @extend %h-base;
+    @include media((
+            font-size: (all: 30px, lg:24px, md: 20px, sm: 18px, xs: 16px)
+    ));
+  }
+}
+
+h3, .h3 {
+  @extend %h-base;
+  @include media((
+          font-size: (all: 25px, lg:20px, md: 18px, sm: 16px, xs: 14px)
+  ));
+}
+
+h4, .h4 {
+  @extend %h-base;
+  @include media((
+          font-size: (all: 20px, lg:18px, md: 16px, sm: 14px)
+  ));
+}
+
+h5, .h5{
+  @extend %h-base;
+  @include media((
+          font-size: (all: 18px, lg:16px, md: 14px)
+  ));
+}
+
+h6, .h6{
+  @extend %h-base;
+  @include media((
+          font-size: (all: 16px, lg: 14px)
+  ));
+  font-weight: bold;
+}
+
+.sub-title{
+  color: $accent-color;
+  font-weight: 700;
+  font-family: 'MontserratAlternates';
+  margin-left: 42px;
+  @include media((
+          font-size: (all: 30px, lg:24px, md: 20px, sm: 18px, xs: 16px),
+          margin-top: (all:-43px, lg: -30px, md: -20px, sm: -1rem),
+          margin-bottom: (all:43px, lg: 30px, md: 20px, sm: 1rem),
+          margin-left: (all:40px, lg: 30px, md: 20px, sm: 1rem)
+  ));
+}
+
+%button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  //min-width: 190px;
+  max-width: 100%; // чтобы при ширине контента меньше ширины кнопки, она сжималась, а не выпирала
+  @include media((
+          font-size: (all: 16px, sm: 14px),
+          min-height: (all: 50px, lg: 44px, sm: 40px),
+          width: (all: 220px, lg: 190px), // чтобы при ширине контента меньше ширины кнопки, она сжималась, а не выпирала
+  ));
+  line-height: 1.1;
+  padding: 5px 10px;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: top; // чтобы не было так https://yadi.sk/i/F2hkpOwD9Sg0eA
+  border-radius: 16px;
+  font-weight: 500;
+  color: $default-font-color;
+  &:hover{
+    color: $default-font-color;
+    text-decoration: none;
+  }
+
+  _:-ms-input-placeholder, :root & {
+    height: 0; // ie11 align-items: center fix
+  }
+}
+
+.button {
+  @extend %button-base;
+  border: none;
+  background-image: linear-gradient(to right, $accent-color-btn-gradient1 0%, $accent-color-btn-gradient2 100%);
+  &:hover {
+    background-image: linear-gradient(to right, $accent-color-yellow5 0%, $accent-color-yellow5 100%);
+  }
+  &:active {
+    background-image: linear-gradient(to right, $accent-color-btn-gradient1 0%, $accent-color-btn-gradient2 100%);
+  }
+}
+
+.button2 {
+  @extend %button-base;
+  background-color: transparent;
+  border: 2px solid #ffde83;
+  &:hover {
+    background-color: $accent-color-yellow5;
+  }
+  &:active {
+    background-color: transparent;
+  }
+}
+
+//.button, .button2{
+//  &.disabled{
+//    opacity: .4;
+//    cursor: not-allowed;
+//    box-shadow: none;
+//    color: rgba(0,0,0,.8);
+//    background-color: #E6E6E6;
+//    border-color: #E6E6E6;
+//  }
+//}
+
+.button-container{
+  text-align: center;
+  //@include media((
+  //        margin-top: (all: 10px, md:0)
+  //));
+}
+
+blockquote{
+  @include media((
+          margin-left: (all: 30px, sm: 20px),
+          padding-left: (all: 20px, sm: 10px),
+          border-left: (all: 5px solid #ccc, sm: 3px solid #ccc),
+  ));
+  font-style: italic;
+
+  p:last-child{
+    margin-bottom: 0;
+  }
+}
+
+$placeholder-color: #5f6868;
+.placeholder {
+  color: $placeholder-color;
+}
+
+::placeholder {
+  color: $placeholder-color
+}
+
+::selection {
+  //color: white;
+  //background: $accent-color;
+}
+
+/*
+  This will hide the focus indicator if the element receives focus via the mouse,
+  but it will still show up on keyboard focus.
+*/
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+:focus{
+  //outline-color: #869791;
+
+  outline: 2px solid #869791;
+  outline-offset: 2px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.nowrap{
+  white-space: nowrap;
+}
+
+.clear {
+  clear: both;
+}
+
+address{
+  margin-bottom: 0;
+}
+
+td, th {
+  padding: 5px;
+}
+
+.item-padding{
+  @include media((
+          padding: (all: 20px 15px, sm: 15px, xs: 10px)
+  ));
+  background-color: var(--item_bg);
+  border: 1px solid var(--item_border-color);
+}
+
+a.phone,
+a.phone2{
+  white-space: nowrap;
+}
+
+// для функционала svg иконок netcat6 этот стиль мешает
+//img.img-fluid[src$=".svg"]{
+//  //width: 100%;
+//  height: 100%;
+//}
+
+// универсальная заглушка при отсутствии фото
+.no-img{
+  background: #EEEEEE;
+  background: $accent-color5;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  //color: #BBBBBB;
+  color: $accent-color4;
+  font-size: 7rem;
+  &:after{
+    content: "\f03e";
+    font-family: 'Font Awesome 5 Free';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+//.no-img{
+//  background: #EEEEEE;
+//  width: 100%;
+//  height: 100%;
+//  position: relative;
+//  color: #BBBBBB;
+//  font-size: 7rem;
+//  .far{
+//    position: absolute;
+//    left: 50%;
+//    top: 50%;
+//    transform: translate(-50%, -50%);
+//  }
+//}
+//.no-img{
+//  background: #EEEEEE;
+//  width: 100%;
+//  height: 100%;
+//  position: relative;
+//  .far{
+//    position: absolute;
+//    left: 50%;
+//    top: 50%;
+//    transform: translate(-50%, -50%);
+//    color: #BBBBBB;
+//    font-size: 7rem;
+//  }
+//
+//  @include aspect-ratio(16, 9);
+//}
+
+.lazy:not(.loaded){
+  background: url('data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7');
+}
+
+//.lazy-container{
+//  //position: relative;
+//  overflow: hidden; // чтобы заглушка размером 1:1 не вылезала за пределы контейнера
+//
+//  margin-left: auto;
+//  margin-right: auto;
+//  //max-width: 545px;
+//  //max-height: 402px;
+//  width:100%; // fix max-width bug if parent display:flex
+//
+//  &:not(.loaded){
+//    background: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7);
+//  }
+//
+//  .img-container-padding{
+//    position: relative;
+//    width:100%; // fix max-width bug if parent display:flex
+//    @include aspect-ratio(16, 9);
+//  }
+//
+//  img.lazy{
+//    @extend %img-centered;
+//    //width: 100%;
+//    &:not([src]) {
+//      visibility: hidden;
+//    }
+//
+//    //opacity: 0;
+//    //&:not(.initial) {
+//    //  transition: opacity 1s;
+//    //}
+//    //&.initial,
+//    //&.loaded,
+//    //&.error {
+//    //  opacity: 1;
+//    //}
+//  }
+//  /* Fixes Firefox anomaly during image load */
+//  @-moz-document url-prefix() {
+//    img:-moz-loading {
+//      visibility: hidden;
+//    }
+//  }
+//}
+
+// простой lazyload без указания ширины и высоты изображения
+//.lazy-container-simple{
+//  &:not(.loaded){
+//    background: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7);
+//  }
+//  img.lazy{
+//    width: 100%;
+//  }
+//}
+
+.red-color{
+  color: $red_color2;
+}
+
+.mb-30{
+  //margin-bottom: 30px;
+  @include media((
+          margin-bottom: (all: 30px, xs: 15px)
+  ));
+}
+.mb-15{
+  margin-bottom: 15px;
+}
+.mb-12{
+  margin-bottom: 12px;
+}
+
+.float-start{
+  float: left;
+}
+
+.float-end{
+  float: right;
+}
+
+.float-none{
+  float: none;
+}
+
+.blur {
+  filter: blur(3px);
+  transition: all 0.3s;
+  transform: translate3d(0,0,0);
+}
+
+/* fancybox blur */
+body.fancybox-active {
+
+  // чтобы при запуске фэнсибокс не пропадал хедер, если у него position:fixed - filter применять к потомкам
+  // https://stackoverflow.com/questions/52937708/css-filter-on-parent-breaks-child-positioning
+
+  //> * {
+  //  @include media((
+  //          filter: (all: blur(3px), sm: none),
+  //          transition: (all: filter 0.1s, sm: inherit)
+  //  ));
+  //  transform: translate3d(0, 0, 0);
+  //}
+
+  .header-desktop,
+  .menu-top-container,
+  .page-content,
+  footer,
+  .widget-phone,
+  .toTop,
+  .mini-cart,
+  .mini-cart2,
+  .mini-cart3{
+    @include media((
+            filter: (all: blur(3px), sm: none),
+            transition: (all: filter 0.1s, sm: inherit)
+    ));
+  }
+  .fancybox-container {
+    filter: none;
+  }
+}
+
+/* показать лупу, если фэнсибокс увеличивает картинку */
+[data-fancybox] {
+  &.img-container, .img-container {
+    position: relative;
+
+    &:after {
+      @extend %img-centered;
+      width: 43px;
+      height: 60px;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+      content: "\f00e";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      font-size: 40px;
+      color: #fff;
+      text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+      pointer-events: none; // https://github.com/fancyapps/fancybox/issues/1546
+    }
+    &:hover {
+      &:after {
+        opacity: 0.8;
+        transition: opacity 0.1s ease-in-out;
+      }
+    }
+  }
+}
+
+/* preloader */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: none;
+  .spinner {
+    @extend %spinner;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+    z-index: 99999;
+  }
+  &.active{
+    display: block;
+  }
+}
+@keyframes preloader-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+%spinner {
+  border: 6px solid rgba(100, 100, 100, 0.4);
+  border-top: 6px solid rgba(255, 255, 255, 0.6);
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  animation: preloader-rotate .8s infinite linear;
+  background: transparent;
+  position: absolute;
+}
+
+.block-with-icon{
+  display: flex;
+  align-items: center;
+  &:before {
+    flex: none;
+    font-family: 'Font Awesome 5 Free';
+  }
+  &.block-with-icon-phone:before{
+    content: "\f095";
+    width: 1.28571429em;
+    text-align: center;
+    margin-right: 5px;
+    font-weight: 900;
+  }
+}
+
+.animated-hidden{
+  visibility: hidden!important;
+}
+
+.animate__animated,
+.animated-end{
+  visibility: visible!important;
+}
+
+.delay-0-2s {
+  animation-delay: 0.2s
+}
+.delay-0-4s {
+  animation-delay: 0.4s
+}
+.delay-0-6s {
+  animation-delay: 0.6s
+}
+.delay-0-8s {
+  animation-delay: 0.8s
+}
+.delay-1s {
+  animation-delay: 1s
+}
+
+
+@keyframes smoothly-show-items {
+  /* Анимация появления объектов, чтоб не было видно резкого скачка высоты*/
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .row{
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+    > .col,
+    > [class*="col-"],
+    > [class*="col15-"]{
+      padding-left: 7.5px;
+      padding-right: 7.5px;
+    }
+  }
+}
+/*==========  /BASE ELEMENTS  ==========*/
+/**/
+/**/
+/*==========  BREADCRUMB  ==========*/
+.breadcrumb-wrap{
+  @include media((
+          margin-top: (all: 30px, lg: 20px),
+          //margin-bottom: (all: 30px, lg: 20px),
+          display: (sm: none!important),
+  ));
+}
+
+.breadcrumb {
+  @extend %list-unstyled;
+  display: flex;
+  li {
+    display: flex;
+    align-items: center;
+
+    font-size: 14px;
+    line-height: 1;
+    a {
+      color: $title-font-color;
+      text-decoration: none;
+      &:hover{
+        color: $accent-color;
+      }
+    }
+    a, span{
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 450px;
+      overflow: hidden;
+    }
+    &:not(:last-child):after{
+      //content: "\f105";
+      //font-family: 'Font Awesome 5 Free';
+      //font-weight: 900;
+      color: #bacccc;
+      margin: 0 7px;
+
+      content: '/';
+      // возможно понадобиться отцентрировать кавычки по вертикали
+      // Также нужно убрать "font-weight: 900" и "font-family: 'Font Awesome 5 Free'"
+    }
+    &.active {
+      color: #5f6868;
+    }
+  }
+}
+/*==========  /BREADCRUMB  ==========*/
+/**/
+/**/
+/*==========  PAGINATION  ==========*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  //text-align: center;
+  //.pagination-wrapper{
+  //  display: inline-block;
+  //}
+  .pagination-item {
+    //display: inline-block; // flex не нужен, иначе margin и padding для блока будут некорректно работать!
+    // upd. Уже норм работают!
+    @include media((
+            width: (all: 40px, sm: 35px),
+            height: (all: 40px, sm: 35px),
+            //line-height: (all: 40px, sm: 30px),
+            margin: (all: 0 3px, sm: 0 2px)
+    ));
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    color: #000;
+    border: 1px solid #d7dee3;
+    text-decoration: none;
+    border-radius: 4px;
+    &.selected, &:hover {
+      color: #fff!important;
+      background: $accent-color;
+      border: 1px solid $accent-color;
+    }
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+.pagination-ajax{
+  display: none;
+}
+.button-container-pagination-ajax{
+  position: relative;
+}
+
+.pagination-ajax-loader {
+  @extend %spinner;
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  margin-left: -25px;
+}
+/*==========  /PAGINATION  ==========*/
+/**/
+/**/
+/*==========  CONTENT BLOCKS ==========*/
+.text-block,
+.text-block-two-columns,
+.text-block-three-columns,
+.text-block-float{
+
+  .text-block-item{
+
+    &:not(:last-child){
+      //margin-bottom: 30px;
+      @include media((
+              margin-bottom: (all: 30px, sm: 10px)
+      ));
+    }
+
+    > *:last-child{
+      margin-bottom: 0;
+    }
+
+    .text-container{
+      //@extend %text-elements-title;
+      .text{
+        //@extend %text-elements;
+      }
+    }
+
+  }
+
+}
+
+//.text-block-two-columns,
+//.text-block-three-columns,
+//.text-block-float{
+//  .text-container{
+//    .h1, h1,
+//    .h2, h2,
+//    .h3, h3{
+//      text-align: left;
+//    }
+//  }
+//}
+
+.text-block-two-columns,
+.text-block-three-columns{
+  @media only screen and (max-width: 991px) {
+    [class*="col-"]:not(:last-child){
+      .text-container{
+        //margin-bottom: 30px;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+.text-block-two-columns{
+  .text-block-item{
+
+    // картинка
+    .text-container{
+      .text{
+        .img-container{
+          //margin-right: 18px;
+          display: block;
+          @include media((
+                  margin-right: (all: 18px, sm: 0),
+          ));
+          img{
+            border-radius: 75px;
+          }
+        }
+      }
+    }
+
+    // текст
+    .col-md-7{
+      .text-container{
+        .text-wrap{
+          @include media((
+                  margin-left: (all: -88px, lg: -60px, sm: 0),
+          ));
+        }
+      }
+    }
+    .col-md-7,
+    .col-md-12{
+      .text-container{
+        .title-wrapper{
+          @include media((
+                  margin-bottom: (all:43px, lg: 20px, md: 15px, sm: 1rem),
+                  margin-top: (all:41px, lg: 20px, md: 15px, sm: 0),
+                  margin-left: (all:41px, lg: 20px, md: 5px, sm: 0),
+          ));
+        }
+        .text-wrap{
+          @include media((
+                  padding: (all: 40px, lg: 30px, sm: 20px),
+          ));
+          position: relative;
+          box-shadow: 12px 16px 50px rgba(55, 129, 110, 0.15);
+          border-radius: 30px;
+          background-color: #ffffff;
+          &:before{
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+            border-radius: 20px;
+            border: 1px dashed $accent-color-gray2;
+          }
+        }
+        .text{
+          position: relative;
+          h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{
+            color: $accent-color;
+            font-family: $default-font;
+          }
+        }
+      }
+    }
+
+  }
+
+  &.doctor-inner{
+    .text-block-item{
+      // текст
+      .col-md-7{
+        .text-container{
+          @include media((
+                  margin-top: (all: 50px, lg: 20px, sm: 15px, xs: 0),
+          ));
+        }
+      }
+      .col-md-7,
+      .col-md-12{
+        .text-container{
+          .prof{
+            @include media((
+                    font-size: (all: 16px, lg: 14px),
+            ));
+          }
+          .doctor-inner-title{
+            margin-top: 1rem;
+            color: $accent-color;
+            font-weight: 700;
+            margin-bottom: .5rem!important;
+            @include media((
+                    font-size: (all: 16px, md: 14px),
+            ));
+            a{
+              display: inline-block;
+              color: $accent-color;
+              text-decoration: none;
+              line-height: 1;
+              @include media((
+                      margin-left: (all: 15px, lg: 10px, xs: 5px),
+              ));
+              border-bottom: 1px dashed $accent-color;
+              &:hover{
+                color: $accent-color-yellow4;
+                border-bottom: 1px dashed $accent-color-yellow4;
+              }
+            }
+            &:not(:last-child){
+              @include media((
+                      margin-bottom: (md: 0.25rem!important)
+              ));
+            }
+          }
+          .table-time-wrap{
+            &.loading{
+              aspect-ratio: 495 / 145;
+              background: #FAFAFA;
+              position: relative;
+              &:before {
+                content: '';
+                @extend %spinner;
+                top: 50%;
+                left: 50%;
+                margin-top: -25px;
+                margin-left: -25px;
+              }
+            }
+
+            .table-time-hidden{
+              display: none;
+            }
+            .table-time-btn{
+              margin-top: 10px;
+              font-size: 14px;
+              width: 190px;
+              margin-left: auto;
+              margin-right: auto;
+              display: flex;
+              @include media((
+                      min-height: (all: 40px, lg: 40px, sm: 40px),
+              ));
+            }
+          }
+          .time{
+            th, td{
+              font-size: 12px;
+              height: auto;
+              background: transparent;
+              border:none;
+              text-align: left;
+              vertical-align: top;
+              padding: 5px 3px;
+            }
+            th{
+              width: 120px;
+              @include media((
+                      padding-right: (all: 27px!important, lg: 12px!important, md: 7px!important),
+              ));
+            }
+            td{
+              white-space: break-spaces;
+              line-height: 1.4;
+            }
+
+            tr {
+              td, th {
+                transition: background 0.1s ease-in-out, border 0.1s ease-in-out;
+              }
+              &:hover{
+                td, th {
+                  transition: background 0.1s ease-in-out, border 0.1s ease-in-out;
+                  background-color: $accent-color5;
+                }
+              }
+            }
+          }
+          .button{
+            position: sticky;
+            top: 100px;
+            box-shadow: 0 10px 20px rgba(209, 126, 6, 0.25);
+            @include media((
+                    margin-top: (all: 20px, lg: 1rem),
+                    display: (lg: flex),
+                    margin-left: (lg: auto),
+                    margin-right: (lg: auto),
+            ));
+            &:hover{
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.text-block-three-columns{
+  .text-block-item{
+    .title-wrapper{
+      .sub-title{
+        @include media((
+                margin-bottom: (all: -22px, lg: -19px, xs: -16px),
+        ));
+      }
+    }
+    > .row{
+      @include media((
+              padding: (all: 46px 40px, lg: 30px, sm: 20px),
+      ));
+      position: relative;
+      &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        @include media((
+                width: (all: calc(100% - 30px), xs: calc(100% - 20px)),
+                left: (all: 15px, xs: 10px),
+        ));
+        height: 100%;
+        border-radius: 30px;
+        border: 7px solid $accent-color-gray1;
+        z-index: -1;
+      }
+
+    }
+  }
+}
+
+.text-block-float{
+  @extend %text-block-float;
+}
+
+.text-block-two-columns2{
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+
+  .text-block-item{
+    width: 100%; // для слайдера из этих текстовых блоков
+  }
+
+  .text-block-item + .container{
+    margin-top: 30px;
+  }
+  .text-block-item > .row + .container{
+    margin-top: 30px;
+  }
+
+  .img-container-bg{
+    display: block;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @include aspect-ratio(952, 560);
+  }
+  .video-container{
+    height: 100%;
+  }
+  .text-col{
+    display: flex;
+    align-items: center;
+    @include media((
+            min-height: (all: 560px, lg: 400px, md: 292px, sm: auto)
+    ));
+  }
+  .text-container{
+    @include media((
+            padding-top: (all: 80px, lg: 60px, md: 30px),
+            padding-bottom: (all: 80px, lg: 60px, md: 30px)
+    ));
+    //@extend %text-elements-title;
+    .text{
+      //@extend %text-elements;
+    }
+  }
+
+  [class*="col-"]:nth-child(1),
+  [class*="col-"]:nth-child(2){
+    .text-container{
+      @include media((
+              width: (all: (1320px / 2), lg: (960px / 2), md: (720px / 2), sm: 540px),
+      ));
+    }
+  }
+  [class*="col-"]:nth-child(1){
+    &.text-col{
+      @include media((
+              justify-content: (all: flex-end, sm: center)
+      ));
+    }
+    .text-container{
+      padding-left: 15px;
+      @include media((
+              padding-right: (all: 120px, lg: 80px, md: 15px),
+      ));
+    }
+  }
+
+  [class*="col-"]:nth-child(2){
+    &.text-col{
+      @include media((
+              justify-content: (all: flex-start, sm: center)
+      ));
+    }
+    .text-container{
+      padding-right: 15px;
+      @include media((
+              padding-left: (all: 120px, lg: 80px, md: 15px),
+      ));
+    }
+  }
+}
+
+// Верстка текстового блока с обтекаемой картинкой
+// а также внутренней новости
+%text-block-float{
+  .img-container {
+    @include media((
+            max-width: (lg: 40%),
+            margin-bottom: (all: 30px, sm:15px)
+    ));
+    @media only screen and (max-width: 575px) {
+      float: none!important;
+      margin-left: auto!important;
+      margin-right: auto!important;
+      max-width: inherit!important;
+      display: block;
+      text-align: center;
+    }
+    &.float-start{
+      @include media((
+              margin-right: (all: 30px, sm:15px)
+      ));
+    }
+    &.float-end{
+      @include media((
+              margin-left: (all: 30px, sm:15px)
+      ));
+    }
+  }
+
+  a.img-container{
+    img{
+      transition: box-shadow 0.1s ease-in-out;
+    }
+    &:hover{
+      img{
+        box-shadow: 0 2px 10px 0 #b3b6ba;
+        transition: box-shadow 0.1s ease-in-out;
+      }
+    }
+  }
+}
+
+.tpl-block-list-objects{
+  > *:last-child{
+    margin-bottom: 0;
+  }
+}
+
+/* ФОРМАТИРОВАНИЕ ТЕКСТА И ЭЛЕМЕНТОВ В ТЕКСТЕ */
+%text-elements{
+  > * {
+    &:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6):not(.title-wrapper){
+      margin-bottom: 1rem;
+    }
+    &:last-child{
+      margin-bottom: 0!important;
+    }
+  }
+
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,
+  .sub-title,
+  .title-wrapper{
+    margin-bottom: .5rem;
+  }
+  .sub-title{
+    margin-top: 0!important;
+  }
+
+  // по умолчанию в  ckeditor к img добавляется класс img-fluid, но на всякий случай дублируется и случай без класса
+  img{
+    max-width: 100%;
+    height: auto;
+  }
+  .img-container{
+    text-align: center;
+  }
+  a.img-container{
+    display: inline-block;
+    img{
+      transition: box-shadow 0.1s ease-in-out;
+    }
+    &:hover{
+      img{
+        box-shadow: 0 2px 10px 0 #b3b6ba;
+        transition: box-shadow 0.1s ease-in-out;
+      }
+    }
+  }
+
+  // по умолчанию в  ckeditor добавляется адаптивная таблица с дивами, но на всякий случай дублируется и случай
+  // для таблицы без дивов и классов
+  table{
+    @extend %table;
+  }
+
+  ul, ol{
+    li{
+      &:not(:last-child){
+        margin-bottom: 5px;
+      }
+    }
+
+    // чтобы маркеры списка при float не выпирали https://yadi.sk/i/PO0TslM3FHgvwQ , а располагались так https://yadi.sk/i/utMc1mYbgJz1sQ
+    // ранее использовался overflow: hidden; но при нем длинный список не переносится https://yadi.sk/i/dNP4FTHqekgZxg
+    //overflow: hidden;
+    margin-left: -20px;
+    > li{
+      position: relative;
+      left: 20px;
+      padding-right: 20px;
+    }
+  }
+  ul{
+    padding-left: 20px;
+     //@extend %ul-style; // для кастомизации маркированного списка
+    > li{
+      &::marker{
+        color: $accent-color;
+      }
+    }
+    ul{
+      // padding-left: 30px; // для другого отступа у вложенных списков
+    }
+  }
+
+  ul, ol{
+
+  }
+
+  ol{
+    padding-left: 30px;
+    > li {
+      &::marker{
+        color: $accent-color;
+        font-weight: bold;
+      }
+    }
+    ol{
+      // padding-left: 30px; // для другого отступа у вложенных списков
+    }
+  }
+
+  //ul:not(.ul-style){
+  //  padding-left: 17px;
+  //
+  //  //
+  //  font-size: 20px;
+  //}
+  //ul, ol{
+  //  overflow: hidden;
+  //  //margin-bottom: 1rem;
+  //  li{
+  //    margin-bottom: 5px;
+  //    &:last-child{
+  //      margin-bottom: 0;
+  //    }
+  //  }
+  //  > li {
+  //    > ul, ol{
+  //      margin-bottom: 5px;
+  //    }
+  //  }
+  //}
+
+  @extend %video-elements;
+
+  // clearfix для float-ов в тексте
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+
+}
+
+// форматирование заголовков в тексте
+%text-elements-title{
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,
+  .sub-title,
+  .title-wrapper{
+    margin-bottom: .5rem;
+    &:last-child{
+      margin-bottom: 0!important;
+    }
+  }
+}
+.text-elements-title{
+  @extend %text-elements-title;
+}
+
+// универстальный класс для текстового блока с форматированием элементов
+.text-elements{
+  @extend %text-elements;
+}
+
+.text-top,
+.text-bottom{
+  //@extend %text-elements;
+}
+
+// список с иконками. когда иконка списка - fontawesome
+%ul-style{
+  @extend %list-unstyled;
+  padding-left: 0;
+  > li{
+    position: relative;
+    @include media((
+            padding-left: (all: 30px, md: 25px, sm: 20px),
+    ));
+    &:before{
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      content: "\f058";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      color: $accent-color-yellow4;
+    }
+    ul{
+      @extend %list-unstyled;
+    }
+  }
+}
+
+%ul-style2{
+  @extend %list-unstyled;
+  padding-left: 0;
+  > li{
+    position: relative;
+    padding-left: 10px;
+    &:before{
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      content: "-";
+    }
+    ul{
+      @extend %list-unstyled;
+    }
+  }
+}
+
+// список с иконками. когда иконка списка - картинка
+//%ul-style{
+//  @extend %list-unstyled;
+//  overflow: inherit!important;
+//  padding-left: 0;
+//  > li{
+//    position: relative;
+//    padding-left: 30px;
+//    margin-bottom: 20px!important;
+//    &:before{
+//      position: absolute;
+//      top: -5px;
+//      left: 0;
+//      margin-right: 10px;
+//
+//      content: "";
+//      background: url('../img/ul-style-icon.png');
+//      background: $accent-color;
+//      width: 21px;
+//      height: 32px;
+//    }
+//    ul{
+//      overflow: inherit!important;
+//      margin-top: 20px;
+//      @extend %list-unstyled;
+//    }
+//  }
+//}
+
+ul.ul-style{
+  @extend %ul-style;
+}
+
+ul.ul-style2{
+  @extend %ul-style2;
+}
+
+// список - цифры (при этом способе не работает атрибут start, но больше возможностей для кастомизации)
+%ol-style{
+  @extend %list-unstyled;
+  counter-reset: my-awesome-counter;
+  li{
+    position: relative;
+    @include media((
+            padding-left: (all: 25px, md:20px),
+            margin-bottom: (all: 10px, md:8px),
+    ));
+    &:before{
+      counter-increment: my-awesome-counter;
+      content: counter(my-awesome-counter) ". ";
+      color: $accent-color;
+      font-weight: bold;
+      @include media((
+              font-size: (all: 18px, lg:16px, md:14px)
+      ));
+
+      position: absolute;
+      top: -1px;
+      left: 0;
+
+    }
+    //&:last-child{
+    //  margin-bottom: 0;
+    //}
+  }
+}
+
+table[class=""]{
+  margin-bottom: 1rem;
+}
+
+.text-left {
+  text-align: left!important;
+  &.title-wrapper{
+    > * {
+      text-align: left!important;
+    }
+    .sub-title:before{
+      margin-left: inherit!important;
+      margin-right: inherit!important;
+    }
+  }
+}
+.text-right {
+  text-align: right!important;
+  &.title-wrapper{
+    > * {
+      text-align: right!important;
+    }
+    .sub-title:before{
+      margin-left: auto!important;
+      margin-right: inherit!important;
+    }
+  }
+}
+.text-center {
+  text-align: center!important;
+  &.title-wrapper{
+    > * {
+      text-align: center!important;
+    }
+    .sub-title:before{
+      margin-left: auto!important;
+      margin-right: auto!important;
+    }
+  }
+}
+.text-justify {
+  text-align: justify!important;
+  &.title-wrapper{
+    > * {
+      text-align: justify!important;
+    }
+    .sub-title:before{
+      margin-left: auto!important;
+      margin-right: auto!important;
+    }
+  }
+}
+/* /ФОРМАТИРОВАНИЕ ТЕКСТА И ЭЛЕМЕНТОВ В ТЕКСТЕ */
+
+
+/* ОТСТУПЫ И ДР СТИЛИ БЛОКОВ */
+.block-margin-bottom{
+  @include media((
+          margin-bottom: (all: 150px, lg:50px, md: 30px!important)
+  ));
+}
+
+.block-margin-bottom-small{
+  @include media((
+          margin-bottom: (all: 50px, lg: 30px, md: 30px!important)
+  ));
+}
+
+.block-margin-bottom-disabled{
+  // даже если ошибочно задан индивидуальный отступ в админке, то все равно будет 0
+  margin-bottom: 0!important;
+}
+
+.block-padding{
+  @include media((
+          padding-top: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important),
+          padding-bottom: (all: 120px, lg: 50px, md: 40px!important, sm : 30px!important)
+  ));
+}
+
+.block-padding-small{
+  @include media((
+          padding-top: (all: 50px, lg:30px, sm : 30px!important),
+          padding-bottom: (all: 50px, lg:30px, sm : 30px!important)
+  ));
+}
+
+// У блоков нижние элементы (пагинация, кнопка, текст снизу и т.д.)
+// отделены друг от друга нижним оступом с помощью класса mb-30
+// Для корректного отображения у блока внешнего отступа снизу и внутренних отступов
+// у последнего блока в контейнере ставится  margin-bottom: 0
+.block-margin-bottom,
+.block-margin-bottom-small,
+.block-margin-bottom-disabled,
+.block-padding,
+.block-padding-small,
+
+.block-bg-green,
+//.block-bg3,
+.block-bg4{
+
+  > .container:last-child{ // last-child - т.е. последний container (а например в галерее на всю ширину контейнеров может быть несколько)
+
+    // обертка объетов netcat 6
+    > .tpl-block-list-objects{
+      @include media((
+              margin-bottom: (all: 30px, xs: 15px)
+      ));
+    }
+
+    // Случаи, когда последним элементом ялвяется любой, кроме row c ячейками:
+    > div:last-child:not(.row-mb-30-minus){
+      margin-bottom: 0;
+    }
+  }
+
+  // Случай, когда последним блоком является блок row с ячейками, у которых есть нижний отступ mb-30.
+  // Такому блоку необходимо подставить к row класс row-mb-30-minus, добавив тем самым отрицательный отступ к row
+
+  // Примечание: в случае, кодгда добавлен класс без внутренних отступов "block-padding-disabled" этого делать не надо,
+  // т.к. в этом случае работает не совсем корректно.
+  // Двигать row отрицательным оступом не получится, т.к. один блок наедет на другой https://yadi.sk/i/eCyv0jYskdsBMQ
+  // поэтому отступ снизу у ячеек останется в любом случае https://yadi.sk/i/xVhRkKALli5Xvg
+  &:not(.block-padding-disabled){
+    > .container:last-child{
+      //ячейки
+      > div.row-mb-30-minus:last-child,
+      > .tpl-block-list-objects > div.row-mb-30-minus:last-child{
+        //margin-bottom: -30px;
+        @include media((
+                margin-bottom: (all: -30px, xs: -15px)
+        ));
+      }
+    }
+  }
+
+}
+
+.block-padding-disabled{
+  // даже если ошибочно задан индивидуальный отступ в админке, то все равно будет 0
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}
+
+// отступы слева и справа при колоночном макете
+.content-column{
+  .block-padding,
+  .block-padding-small,
+  .block-padding-disabled{
+    @include media((
+            padding-left: (all: 30px,  sm : 15px),
+            padding-right: (all: 30px, sm : 15px)
+    ));
+    @media only screen and (max-width: 575px) {
+      &:not(.index-slider){
+        margin-left: -15px;
+        margin-right: -15px;
+        .container {
+          padding-right: 15px;
+          padding-left: 15px;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+.block-bg{
+  background-position: top center;
+}
+
+// временный фон, пока не загрузилась фоновая картинка
+[data-bg]:not(.loaded){
+  background-color: #EEEEEE;
+  &.block-text-color-white {
+    background-color: #BBBBBB;
+  }
+}
+//.block-bg:not([style^="background"]){
+//  background-color: #EEEEEE;
+//  &.block-text-color-white {
+//    background-color: #BBBBBB;
+//  }
+//}
+
+.block-bg-repeat{
+  background-repeat: repeat;
+}
+
+.block-bg-no-repeat{
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-bg {
+  background-position: center center;
+  background-attachment: fixed;
+  //background-repeat: no-repeat;
+  //background-size: cover;
+}
+
+.block-text-color-white{
+  color: #fff;
+
+  .h1, .h2, .h3, .h4, .h5, .h6,
+  h1, h2, h3, h4, h5, h6,
+  a:not(.button):not(.button2),
+  &.catalog-advantage.variant7 .item .text-container .name,
+  &.catalog-advantage.variant8 .item .text-container .text ul li a,
+  .sub-title,
+  ol:not(.breadcrumb) li:before{
+    color: #fff;
+  }
+
+  a:not([class]){
+    color: #fff;
+    text-decoration: underline;
+    &:hover{
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  .button2{
+    border: 1px solid #fff;
+    color: #fff;
+    &:hover{
+      background: rgba(#fff,.5);
+    }
+  }
+
+  .input-awesome{
+    &.checkbox-awesome.variant1,
+    &.checkbox-awesome.variant3{
+      label{
+        .icon{
+          box-shadow: 0 0 0 0.13em #fff;
+        }
+      }
+      input:checked + label .icon{
+        box-shadow: 0 0 0 0.13em #fff;
+        &:before {
+          color: #fff;
+        }
+      }
+      input:not(:disabled) + label:hover .icon{
+        box-shadow: 0 0 0 0.13em #fff;
+      }
+      input:focus + label .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:focus + label:hover .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:disabled + label{
+        .icon{
+          box-shadow: 0 0 0 0.13em #6e6e6e;
+        }
+      }
+      input:disabled:checked + label{
+        .icon:before {
+          color: #6e6e6e;
+        }
+      }
+    }
+    &.checkbox-awesome.variant2,
+    &.checkbox-awesome.variant4{
+      label{
+        .icon{
+          background: #fff;
+          box-shadow: 0 0 0 0.13em #fff;
+        }
+      }
+      input:checked + label .icon{
+        background: #fff;
+        box-shadow: 0 0 0 0.13em #fff;
+        &:before {
+          color: #000;
+        }
+      }
+      input:not(:disabled) + label:hover .icon{
+        background: #fff;
+        box-shadow: 0 0 0 0.13em #fff;
+      }
+      input:focus + label .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:focus + label:hover .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:disabled + label{
+        .icon{
+          background: #C5C5C5;
+          box-shadow: 0 0 0 0.13em #C5C5C5;
+        }
+      }
+      input:disabled:checked + label{
+        .icon{
+          background: #C5C5C5;
+          :before {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    &.radio-awesome.variant1{
+      label{
+        .icon{
+          box-shadow: 0 0 0 0.13em #fff;
+        }
+      }
+      input:checked + label .icon{
+        box-shadow: 0 0 0 0.13em #fff;
+        &:before {
+          background: #fff;
+        }
+      }
+      input:not(:disabled) + label:hover .icon{
+        box-shadow: 0 0 0 0.13em #fff;
+      }
+      input:focus + label .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:focus + label:hover .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:disabled + label{
+        .icon{
+          box-shadow: 0 0 0 0.13em #6e6e6e;
+        }
+      }
+      input:disabled:checked + label{
+        .icon:before {
+          background: #6e6e6e;
+        }
+      }
+    }
+
+    &.radio-awesome.variant2{
+      label{
+        .icon{
+          background: #fff;
+          box-shadow: 0 0 0 0.13em #fff;
+        }
+      }
+      input:checked + label .icon{
+        box-shadow: 0 0 0 0.13em #fff;
+        background: #fff;
+        &:before {
+          background: #000;
+        }
+      }
+      input:not(:disabled) + label:hover .icon{
+        box-shadow: 0 0 0 0.13em #fff;
+        background: #fff;
+      }
+      input:focus + label .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:focus + label:hover .icon{
+        box-shadow:
+                0 0 0 0.13em #fff,
+                0 0 0 0.23em $orange_color;
+      }
+      input:disabled + label{
+        .icon{
+          background: #C5C5C5;
+          box-shadow: 0 0 0 0.13em #C5C5C5;
+        }
+      }
+      input:disabled:checked + label{
+        .icon{
+          background: #C5C5C5;
+        }
+      }
+    }
+
+  }
+
+  .sub-title:before{
+    background: rgba(#fff,.5);
+  }
+
+  &.video-bg,
+  &.one-slide{
+    .container{
+      .h1, .h2, .h3,
+      h1, h2, h3{
+        position: relative;
+      }
+    }
+  }
+
+}
+
+.block-text-color-black{
+  color: $default-font-color;
+}
+
+.video-bg{
+  position: relative;
+  overflow: hidden;
+
+  .video-bg-block{
+    position: absolute!important;
+    width: 100%;
+    height: 100%!important;
+    background: #FAFAFA;
+  }
+
+  .inline-YTPlayer{
+    position: absolute!important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+}
+/* /ОТСТУПЫ И ДР СТИЛИ БЛОКОВ */
+/*==========  CONTENT BLOCKS  ==========*/
+/**/
+/**/
+/*==========  MODAL WINDOWS AND FORMS  ==========*/
+/*modal windows*/
+.modal{
+  padding: 24px;
+  padding-top: 35px;
+  max-width: 95%;
+  transition: top 0.2s, transform  0.2s;
+  @include media((
+          min-width: (all: 480px, xs: inherit),
+          width: (xs: 95%)
+  ));
+
+  .h2{
+    margin-bottom: 20px;
+    font-size: 24px;
+    &:before,
+    &:after{
+      display: none;
+    }
+  }
+  .form-container .form-group{
+    @include media((
+            margin-bottom: (xs: 15px)
+    ));
+    .col-form-label{
+      @include media((
+              display: (xs: none)
+      ));
+    }
+  }
+  .other-html{
+    max-width: 600px;
+  }
+  &.modal-success{
+    min-width: 300px;
+    @include media((
+            width: (xs: auto)
+    ));
+    .success-text{
+      text-align: center;
+    }
+  }
+  &.modal-widget-phone{
+    @include media((
+            min-width: (all: 350px, xs: 300px),
+            width: (xs: 300px)
+    ));
+    .h2{
+      font-size: 18px;
+    }
+    .button{
+      display: flex;
+      width: 100%;
+    }
+  }
+  &.modal-zakaz{
+    .img-container{
+      @include media((
+              margin-top: (sm: 10px),
+              text-align: (xs: center)
+      ));
+      img{
+        max-width: 200px;
+        max-height: 200px;
+      }
+    }
+  }
+  &.modal-slide{
+    max-width: 1000px;
+    text-align: center;
+    .img-container{
+
+    }
+    .text-container{
+      margin-top: 15px;
+      .title{
+        @include media((
+                font-size: (all: 32px, sm: 20px)
+        ));
+      }
+      .text{
+        margin-top: 10px;
+      }
+      .button{
+        margin-top: 10px;
+      }
+    }
+    //.fancybox-button svg{
+    //  background: $orange_color;
+    //  color: #fff;
+    //  &:hover{
+    //    background: darken($orange_color, 5);
+    //  }
+    //}
+  }
+
+  &.modal-zapis{
+
+  }
+}
+
+// fix datepicker btns
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next{
+  top: 2px!important;
+}
+.ui-datepicker .ui-datepicker-prev{
+  left: 2px!important;
+}
+.ui-datepicker .ui-datepicker-next {
+  right: 2px!important;
+}
+
+.fancybox-slide--current .modal {
+  animation: modal-open-amimation 0.2s ease-in-out;
+}
+
+@keyframes modal-open-amimation {
+  0% {
+    top: -200px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.fancybox-is-closing .modal {
+  top: 0;
+  transform: scale(1.5);
+}
+
+/*forms*/
+.form-container{
+  .h2{
+    text-align: center;
+  }
+  .form-group{
+    margin-bottom: 15px;
+    @include media((
+            margin-bottom: (all: 15px, xs: 10px)
+    ));
+    .col-form-label{
+      margin-bottom: 0;
+      padding-top: calc(.5rem - 1px * 2);
+      padding-bottom: calc(.5rem - 1px * 2);
+    }
+    .form-control{
+      input[type='text'],
+      input[type='file'],
+      input[type='password'],
+      input[type='tel'],
+      input[type='email'],
+      input[type='search'],
+      input[type='number'],
+      select,
+      textarea {
+        width: 100%;
+      }
+      .form-control-feedback{
+        margin-top: 5px;
+        display: none;
+      }
+    }
+    .marker{
+      color: $orange_color;
+    }
+    &.error{
+      .col-form-label,
+      .marker,
+      .form-control .form-control-feedback{
+        color: $red_color;
+      }
+      .form-control{
+        position: relative;
+        input[type='text'],
+        input[type='file'],
+        input[type='password'],
+        input[type='tel'],
+        input[type='email'],
+        input[type='search'],
+        input[type='number'],
+        textarea {
+          border-color: $red_color;
+          transition: border 0.1s ease-in-out;
+        }
+        textarea{
+          min-height: 40px;
+        }
+        select{
+          border-color: $red_color;
+          transition: border 0.1s ease-in-out;
+        }
+        .form-control-feedback{
+          display: block;
+        }
+      }
+      &.error:not(.agreement){
+        .form-control:before {
+          content: "\f06a";
+          font-family: 'Font Awesome 5 Free';
+          position: absolute;
+          @include media((
+                  top: (all: 7px, sm: 5px)
+          ));
+          right: 20px;
+          color: #C30000;
+          font-size: 23px;
+          font-weight: 900;
+          line-height: 1;
+        }
+      }
+    }
+    &.agreement{
+      font-size: 13px;
+      label{
+        margin-bottom: 0;
+      }
+      .input-awesome.checkbox-awesome label .icon{
+        top: 1px;
+      }
+    }
+  }
+  .button-container{
+    margin-top: 0;
+    .button{
+      min-width: 200px;
+    }
+  }
+}
+
+.form-in-page{
+  .form-container{
+    .form-group{
+      @include media((
+              margin-bottom: (all: 0, md: 15px)
+      ));
+      &.agreement{
+        margin-top: 10px;
+        text-align: center;
+        .form-group-agreement-wrapper{
+          display: inline-block;
+          @include media((
+                  text-align: (all: left, sm:center)
+          ));
+          .form-control-feedback{
+            @include media((
+                    margin-left: (all: 24px, sm:0)
+            ));
+          }
+        }
+      }
+    }
+  }
+  .button-container{
+    @include media((
+            text-align: (md: center)
+    ));
+    .button{
+      min-height: 36px;
+      @include media((
+              display: (all: flex, md: inline-flex),
+              min-width: (all: 100%, sm: 200px),
+      ));
+      //padding: 6px 12px;
+    }
+  }
+}
+
+.form-in-page2{
+  .form-container{
+    .form-group{
+      textarea{
+        min-height: 4.5rem;
+      }
+      &.agreement{
+        text-align: center;
+      }
+    }
+  }
+  .button-container{
+    .button{
+      padding: 6px 12px;
+    }
+  }
+}
+/*==========  /MODAL WINDOWS AND FORMS  ==========*/
+/**/
+/**/
+/*==========  CHECKBOX, RADIO AWESOME ICONS  ==========*/
+.input-awesome{
+  input{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .icon{
+    &:before{
+      font-family: 'Font Awesome 5 Free';
+      transition: color 0.1s ease-in-out, background 0.1s ease-in-out;
+    }
+  }
+
+  &.checkbox-awesome.variant1{
+    label{
+      padding-left: 20px;
+      position: relative;
+      .icon{
+        position: absolute;
+        margin-left: -20px;
+        @include media((
+                top: (all: 3px, sm: 1px),
+        ));
+
+        width: 14px;
+        height: 14px;
+        //background: #fff;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+        border-radius: 1px;
+        transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        &:before {
+          content: "\f00c";
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: transparent;
+          font-size: 11px;
+        }
+      }
+    }
+    input:checked + label .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+      &:before {
+        color: $accent-color;
+        transition: color 0.1s ease-in-out;
+      }
+    }
+    input:not(:disabled) + label:hover .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label .icon{
+      box-shadow:
+              0 0 0 0.13em #6e6e6e,
+              0 0 0 0.23em #869791;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label:hover .icon{
+      box-shadow:
+              0 0 0 0.13em $accent-color,
+              0 0 0 0.23em #869791;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:disabled + label{
+      cursor: not-allowed;
+      .icon{
+        opacity: .6;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+      }
+    }
+    input:disabled:checked + label{
+      .icon:before {
+        color: #6e6e6e;
+      }
+    }
+  }
+
+  &.checkbox-awesome.variant2{
+    label{
+      padding-left: 20px;
+      position: relative;
+      .icon{
+        position: absolute;
+        margin-left: -20px;
+        @include media((
+                top: (all: 3px, sm: 1px),
+        ));
+
+        width: 14px;
+        height: 14px;
+        background: #6e6e6e;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+        border-radius: 1px;
+        transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        &:before {
+          content: "\f00c";
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: transparent;
+          font-size: 11px;
+        }
+      }
+    }
+    input:checked + label .icon{
+      background: $accent-color;
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+      &:before {
+        color: #fff;
+        transition: color 0.1s ease-in-out;
+      }
+    }
+    input:not(:disabled) + label:hover .icon{
+      background: $accent-color;
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label .icon{
+      box-shadow:
+              0 0 0 0.13em #6e6e6e,
+              0 0 0 0.23em $orange_color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label:hover .icon{
+      box-shadow:
+              0 0 0 0.13em $accent-color,
+              0 0 0 0.23em $orange_color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:disabled + label{
+      cursor: not-allowed;
+      .icon{
+        background: #C5C5C5;
+        box-shadow: 0 0 0 0.13em #C5C5C5;
+      }
+    }
+    input:disabled:checked + label{
+      .icon{
+        background: #C5C5C5;
+        :before {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &.checkbox-awesome.variant3{
+    label{
+      padding-left: 22px;
+      position: relative;
+      .icon{
+        position: absolute;
+        margin-left: -22px;
+        @include media((
+                top: (all: 2px, sm: 1px),
+        ));
+
+        width: 16px;
+        height: 16px;
+        //background: #fff;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+        border-radius: 50%;
+        transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        &:before {
+          content: "\f00c";
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: transparent;
+          font-size: 11px;
+          position: relative;
+          top: 1px;
+        }
+      }
+    }
+    input:checked + label .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+      &:before {
+        color: $accent-color;
+        transition: color 0.1s ease-in-out;
+      }
+    }
+    input:not(:disabled) + label:hover .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label .icon{
+      box-shadow:
+              0 0 0 0.13em #6e6e6e,
+              0 0 0 0.23em #869791;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label:hover .icon{
+      box-shadow:
+              0 0 0 0.13em $accent-color,
+              0 0 0 0.23em #869791;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:disabled + label{
+      cursor: not-allowed;
+      .icon{
+        opacity: .6;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+      }
+    }
+    input:disabled:checked + label{
+      .icon:before {
+        color: #6e6e6e;
+      }
+    }
+  }
+
+  &.checkbox-awesome.variant4{
+    label{
+      padding-left: 22px;
+      position: relative;
+      .icon{
+        position: absolute;
+        margin-left: -22px;
+        @include media((
+                top: (all: 2px, sm: 1px),
+        ));
+
+        width: 16px;
+        height: 16px;
+        background: #6e6e6e;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+        border-radius: 50%;
+        transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        &:before {
+          content: "\f00c";
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: transparent;
+          font-size: 11px;
+          position: relative;
+          top: 1px;
+        }
+      }
+    }
+    input:checked + label .icon{
+      background: $accent-color;
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+      &:before {
+        color: #fff;
+        transition: color 0.1s ease-in-out;
+      }
+    }
+    input:not(:disabled) + label:hover .icon{
+      background: $accent-color;
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label .icon{
+      box-shadow:
+              0 0 0 0.13em #6e6e6e,
+              0 0 0 0.23em $orange_color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label:hover .icon{
+      box-shadow:
+              0 0 0 0.13em $accent-color,
+              0 0 0 0.23em $orange_color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:disabled + label{
+      cursor: not-allowed;
+      .icon{
+        background: #C5C5C5;
+        box-shadow: 0 0 0 0.13em #C5C5C5;
+      }
+    }
+    input:disabled:checked + label{
+      .icon{
+        background: #C5C5C5;
+        :before {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &.radio-awesome.variant1{
+    label{
+      padding-left: 22px;
+      position: relative;
+      .icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        margin-left: -22px;
+        @include media((
+                top: (all: 2px, sm: 1px),
+        ));
+
+        width: 16px;
+        height: 16px;
+        //background: #fff;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+        border-radius: 50%;
+        transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        &:before {
+          content: "";
+          width: 6px;
+          height: 6px;
+          background: transparent;
+          border-radius: 50%;
+        }
+      }
+    }
+    input:checked + label .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+      &:before {
+        background: $accent-color;
+        transition: background 0.1s ease-in-out;
+      }
+    }
+    input:not(:disabled) + label:hover .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label .icon{
+      box-shadow:
+              0 0 0 0.13em #6e6e6e,
+              0 0 0 0.23em #869791;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label:hover .icon{
+      box-shadow:
+              0 0 0 0.13em $accent-color,
+              0 0 0 0.23em #869791;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:disabled + label{
+      cursor: not-allowed;
+      .icon{
+        opacity: .6;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+      }
+    }
+    input:disabled:checked + label{
+      .icon:before {
+        background: #6e6e6e;
+      }
+    }
+  }
+
+  &.radio-awesome.variant2{
+    label{
+      padding-left: 22px;
+      position: relative;
+      .icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        margin-left: -22px;
+        @include media((
+                top: (all: 2px, sm: 1px),
+        ));
+
+        width: 16px;
+        height: 16px;
+        background: #6e6e6e;
+        box-shadow: 0 0 0 0.13em #6e6e6e;
+        border-radius: 50%;
+        transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        &:before {
+          content: "";
+          width: 6px;
+          height: 6px;
+          background: transparent;
+          border-radius: 50%;
+        }
+      }
+    }
+    input:checked + label .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      background: $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+      &:before {
+        background: #fff;
+        transition: background 0.1s ease-in-out;
+      }
+    }
+    input:not(:disabled) + label:hover .icon{
+      box-shadow: 0 0 0 0.13em $accent-color;
+      background: $accent-color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label .icon{
+      box-shadow:
+              0 0 0 0.13em #6e6e6e,
+              0 0 0 0.23em $orange_color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:focus + label:hover .icon{
+      box-shadow:
+              0 0 0 0.13em $accent-color,
+              0 0 0 0.23em $orange_color;
+      transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    }
+    input:disabled + label{
+      cursor: not-allowed;
+      .icon{
+        background: #C5C5C5;
+        box-shadow: 0 0 0 0.13em #C5C5C5;
+      }
+    }
+    input:disabled:checked + label{
+      .icon{
+        background: #C5C5C5;
+      }
+    }
+  }
+}
+/*==========  /CHECKBOX, RADIO AWESOME ICONS  ==========*/
+/**/
+/**/

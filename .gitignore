@@ -1,0 +1,28 @@
+# сначала все в игнор
+*
+
+# исключить из игнора папки с содержимым
+!html
+!html/*
+!html/**
+
+# исключить из игнора файлы
+!.gitignore
+!.npmrc
+!gulpfile.js
+!ht.access
+!package.json
+!robots.txt
+!sitemap.xml
+!soglasie.docx
+
+# Обычный gitignore
+# /node_modules/
+# /.git/
+# /**/Thumbs.db
+# /**/*.DS_Store
+#
+# /dist/
+# /.idea/
+# *.sql
+# \/**/package-lock.json

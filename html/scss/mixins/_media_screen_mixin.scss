@@ -1,0 +1,259 @@
+$breakpoints: (
+        xl: 1929,
+        lg: 1359,
+        md: 991,
+        sm: 767,
+        xs: 575
+) !default;
+$media-direction: max !default;
+
+@mixin css_property($property, $value, $screen){
+    // если у font-size задан размер без единиц измерения, то конвертируем в rem с фолбэком
+    // величина rem зависит от шрифта по умлочанию для этого экрана
+    @if $property == 'font-size' and type_of($value) == number and unitless($value) {
+        font-size: #{$value}px;
+        font-size: #{$value / strip-unit(default-font-size($screen)) }rem;
+    }@else {
+
+        @if type_of($value) == string{
+            #{$property}: unquote($value);
+        }@else{
+            #{$property}: $value;
+        }
+
+    }
+}
+
+// функция, обрезающая величину и оставляющая только само число
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+// ф-я отдает размер шрифта по умолчанию в зависимости от размера экрана
+@function default-font-size($screen){
+
+    @if ($screen == 'all') {
+        @return $default-font-size;
+    }
+
+    @else if ($screen == 'xl') {
+        @if $default-font-size-xl != null {
+            @return $default-font-size-xl;
+        }
+        @else {
+            @return $default-font-size;
+        }
+    }
+
+    @else if ($screen == 'lg') {
+        @if $default-font-size-lg != null {
+            @return $default-font-size-lg;
+        }
+        @else if $default-font-size-xl != null {
+            @return $default-font-size-xl;
+        }
+        @else {
+            @return $default-font-size;
+        }
+
+    }
+
+    @else if ($screen == 'md') {
+        @if $default-font-size-md != null {
+            @return $default-font-size-md;
+        }
+        @else if $default-font-size-lg != null {
+            @return $default-font-size-lg;
+        }
+        @else if $default-font-size-xl != null {
+            @return $default-font-size-xl;
+        }
+        @else {
+            @return $default-font-size;
+        }
+    }
+
+    @else if ($screen == 'sm') {
+        @if $default-font-size-sm != null {
+            @return $default-font-size-sm;
+        }
+        @else if $default-font-size-md != null {
+            @return $default-font-size-md;
+        }
+        @else if $default-font-size-lg != null {
+            @return $default-font-size-lg;
+        }
+        @else if $default-font-size-xl != null {
+            @return $default-font-size-xl;
+        }
+        @else {
+            @return $default-font-size;
+        }
+    }
+
+    @else if ($screen == 'xs') {
+        @if $default-font-size-xs != null {
+            @return $default-font-size-xs;
+        }
+        @else if $default-font-size-sm != null {
+            @return $default-font-size-sm;
+        }
+        @else if $default-font-size-md != null {
+            @return $default-font-size-md;
+        }
+        @else if $default-font-size-lg != null {
+            @return $default-font-size-lg;
+        }
+        @else if $default-font-size-xl != null {
+            @return $default-font-size-xl;
+        }
+        @else {
+            @return $default-font-size;
+        }
+    }
+}
+
+// дефолтная ф-я css_property
+//@mixin css_property($property, $value){
+//    @if type_of($value) == string{
+//        #{$property}: unquote($value);
+//    }@else{
+//        #{$property}: $value;
+//    }
+//}
+
+@function splitScreens($string, $seperator){
+    $string: inspect(quote($string));
+    $sepId: str-index(quote($string), $seperator);
+    @if($sepId){
+        $array: (quote(str-slice($string, 0, $sepId - 1)), quote(str-slice($string, $sepId + 1)));
+        @return $array;
+    }@else{
+        @return $string;
+    }
+}
+//@media screen
+@mixin media($properties, $orientation: false){
+
+    @each $property, $value in $properties {
+        @if type_of($value) == 'map' {
+            @each $screen, $val in $value {
+                $screen: splitScreens($screen, '-');
+                @if type_of($screen) == 'list'{
+                    $min_screen: nth($screen, 1);
+                    $max_screen: nth($screen, 2);
+                    @if $min_screen == min or $min_screen == max{
+                        $media-direction: $min_screen;
+                        @if $orientation {
+                            @if map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (#{$media-direction}-width: map-get($breakpoints, $max_screen) + 'px') and (orientation: $orientation){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            }@else{
+                                @media only screen and (#{$media-direction}-width: $max_screen + 'px')  and (orientation: $orientation){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            }
+                        } @else {
+                            @if map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (#{$media-direction}-width: map-get($breakpoints, $max_screen) + 'px'){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            }@else{
+                                @media only screen and (#{$media-direction}-width: $max_screen + 'px') {
+                                    @include css_property($property, $val, $screen);
+                                }
+                            }
+                        }
+                    } @else {
+                        @if $orientation {
+                            @if map-has-key($breakpoints,  $min_screen) and map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (min-width: map-get($breakpoints, $min_screen) + 'px') and (max-width: map-get($breakpoints, $max_screen) + 'px') and (orientation: $orientation){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else if map-has-key($breakpoints,  $min_screen) and not map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (min-width: map-get($breakpoints, $min_screen) + 'px') and (max-width: $max_screen + 'px') and (orientation: $orientation){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else if not map-has-key($breakpoints,  $min_screen) and map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (min-width: $min_screen + 'px') and (max-width: map-get($breakpoints, $max_screen) + 'px') and (orientation: $orientation){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else {
+                                @media only screen and (min-width: $min_screen + 'px') and (max-width: $max_screen + 'px') and (orientation: $orientation){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            }
+                        } @else {
+                            @if map-has-key($breakpoints,  $min_screen) and map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (min-width: map-get($breakpoints, $min_screen) + 'px') and (max-width: map-get($breakpoints, $max_screen) + 'px'){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else if map-has-key($breakpoints,  $min_screen) and not map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (min-width: map-get($breakpoints, $min_screen) + 'px') and (max-width: $max_screen + 'px'){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else if not map-has-key($breakpoints,  $min_screen) and map-has-key($breakpoints,  $max_screen){
+                                @media only screen and (min-width: $min_screen + 'px') and (max-width: map-get($breakpoints, $max_screen) + 'px'){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else {
+                                @media only screen and (min-width: $min_screen + 'px') and (max-width: $max_screen + 'px'){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            }
+                        }
+                    }
+                }@else{
+                    @if $screen == 'print' {
+                        @media print{
+                            @include css_property($property, $val, $screen);
+                        }
+                    } @else {
+                        @if $orientation {
+                            @if map-has-key($breakpoints, $screen){
+                                @media only screen and (#{$media-direction}-width: map-get($breakpoints, $screen) + 'px') and (orientation: $orientation){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else {
+                                @if $screen == all {
+                                    @media only screen and (orientation: $orientation) {
+                                        @include css_property($property, $val, $screen);
+                                    }
+                                } @else {
+                                    @media only screen and (#{$media-direction}-width: $screen + 'px') and (orientation: $orientation) {
+                                        @include css_property($property, $val, $screen);
+                                    }
+                                }
+                            }
+                        } @else {
+                            @if map-has-key($breakpoints, $screen){
+                                @media only screen and (#{$media-direction}-width: map-get($breakpoints, $screen) + 'px'){
+                                    @include css_property($property, $val, $screen);
+                                }
+                            } @else {
+                                @if $screen == all {
+                                    @include css_property($property, $val, $screen);
+                                } @else {
+                                    @media only screen and (#{$media-direction}-width: $screen + 'px'){
+                                        @include css_property($property, $val, $screen);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } @else {
+            @if $property == 'extend' {
+                @extend #{unquote($value)} !optional;
+            }@else {
+                @include css_property($property, $value);
+            }
+        }
+    }
+};

@@ -1,0 +1,144 @@
+/*==========  WIDGET-PHONE  ==========*/
+.widget-phone {
+  display: none;
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  z-index: 98;
+  opacity: .6;
+  bottom: -13px;
+  right: 14%;
+  @include media((
+          display: (sm: none!important)
+  ));
+  .widget-phone-circle {
+    border: 2px solid #00aff2;
+    opacity: .5;
+    animation: widget-phone-circle-anim 2.2s infinite ease-in-out;
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+  .widget-phone-circle-fill {
+    background-color: #00aff2;
+    opacity: .75;
+    animation: widget-phone-circle-fill-anim 2.3s infinite ease-in-out;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    border: 2px solid transparent;
+  }
+  .widget-phone-img {
+    opacity: 0.7;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    background: #00aff2;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    text-align: center;
+
+    transform: scaleX(-1);
+    &:before{
+      color: #fff;
+      font-size: 33px;
+      line-height: 60px;
+      content: "\f095";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
+  }
+  &:hover {
+    opacity: 1;
+    .widget-phone-circle {
+      border: 2px solid #75eb50;
+      animation: widget-phone-circle-anim 1.2s infinite ease-in-out;
+    }
+    .widget-phone-circle-fill {
+      background-color: #75eb50;
+      opacity: 0.5;
+    }
+    .widget-phone-img {
+      opacity: 1;
+      background-color: #75eb50;
+      animation: widget-phone-img-anim 1s infinite ease-in-out;
+    }
+  }
+  //@extend  %outline-none;
+}
+
+@keyframes widget-phone-circle-anim {
+  0% {
+    transform: rotate(0deg) scale(0.5) skew(1deg);
+    opacity: 0.1;
+  }
+  30% {
+    transform: rotate(0deg) scale(0.7) skew(1deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(0deg) scale(1) skew(1deg);
+    opacity: 0.1;
+  }
+}
+
+@keyframes widget-phone-circle-fill-anim {
+  0% {
+    transform: rotate(0deg) scale(0.7) skew(1deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: rotate(0deg) scale(1) skew(1deg);
+    opacity: 0.2;
+  }
+  100% {
+    transform: rotate(0deg) scale(0.7) skew(1deg);
+    opacity: 0.2;
+  }
+}
+
+@keyframes widget-phone-img-anim {
+  0% {
+    transform: rotate(0deg) scale(1) skew(1deg) scaleX(-1);
+  }
+  10% {
+    transform: rotate(-25deg) scale(1) skew(1deg) scaleX(-1);
+  }
+  20% {
+    transform: rotate(25deg) scale(1) skew(1deg) scaleX(-1);
+  }
+  30% {
+    transform: rotate(-25deg) scale(1) skew(1deg) scaleX(-1);
+  }
+  40% {
+    transform: rotate(25deg) scale(1) skew(1deg) scaleX(-1);
+  }
+  50% {
+    transform: rotate(0deg) scale(1) skew(1deg) scaleX(-1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1) skew(1deg) scaleX(-1);
+  }
+}
+/*==========  /WIDGET-PHONE  ==========*/
+/**/
+/**/

@@ -1,0 +1,214 @@
+$default-font: "Montserrat", sans-serif;
+$default-font-color: #000;
+$title-font-color: #292f2f;
+$title-font-color2: #9affce;
+$default-font-size: 14px;
+$default-font-size-xl: null;
+$default-font-size-lg: null;
+$default-font-size-md: null;
+$default-font-size-sm: 14px;
+$default-font-size-xs: null;
+
+$accent-color-btn-gradient1: #ffdf83;
+$accent-color-btn-gradient2: #ffc26c;
+
+$accent-color: #358f79;
+$accent-color2: #36907a;
+$accent-color3: #39a68c;
+$accent-color4: #4ea58f;
+$accent-color5: #e0f7ef;
+
+$accent-color-yellow1: #ffc932;
+$accent-color-yellow2: #ffde82;
+$accent-color-yellow3: #fff8e6;
+$accent-color-yellow4: #ffc770;
+$accent-color-yellow4: #f1ac49;
+$accent-color-yellow5: #ffd57b;
+
+$accent-color-gray1: #e9f5f5;
+$accent-color-gray2: #c6cecb;
+
+$orange_color: #f4a70b;
+$red_color: #d9534f;
+$red_color2: #ff5400;
+
+%list-unstyled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+%img-centered {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/*
+Кастомный скроллбар на стилях
+- стрелки есть только в firefox и только такого цвета. Закруглений там не сделать.
+- А во всех остальных браузерах стрелок нет, но есть закругления.
+- Еще в firefox кастомный скролл только блоков, а у body обычный
+ */
+%scrollbar {
+  $scrollbarWidth: 20px;
+  $scrollbarBg: #15283a;
+  $scrollbarThumb: #2a3a5b;
+  scrollbar-width: $scrollbarWidth;
+  scrollbar-color: $scrollbarThumb $scrollbarBg;
+  &::-webkit-scrollbar {
+    width: $scrollbarWidth;
+  }
+  &::-webkit-scrollbar-track {
+    background: $scrollbarBg;
+    //border-radius: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $scrollbarThumb;
+    border-radius: 10px;
+    border: 3px solid $scrollbarBg;
+
+  }
+}
+
+@mixin row-mini($row-mini-gutter: 12px) {
+  margin-left: -$row-mini-gutter/2;
+  margin-right: -$row-mini-gutter/2;
+  > .col,
+  > [class*="col-"],
+  > [class*="col15-"]{
+    padding-left: $row-mini-gutter/2;
+    padding-right: $row-mini-gutter/2;
+  }
+}
+
+.row-mini{
+  @include row-mini();
+}
+
+.row-mini20{
+  @include row-mini(20px);
+}
+
+@mixin tovars-counter($height: 35px) {
+  display: inline-flex;
+  height: $height;
+  font-size: 14px;
+  input[type=number] {
+    flex-grow: 1;
+
+    width: 100%;
+    min-width: 30px;
+    height: inherit;
+    text-align: center;
+    background: #f7f7f7;
+
+    border: 1px solid #e5e5e5;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+
+    -moz-appearance: textfield;
+    //@extend %outline-none;
+    &:focus{
+      outline: none;
+      box-shadow: none;
+      border: 1px solid #869791;
+    }
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .minus,
+  .plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-shrink: 0;
+
+    width: 32px;
+    height: inherit;
+    text-decoration: none;
+
+    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+    color: #888888;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    &:hover {
+      color: $default-font-color;
+      border-color: #869791;
+    }
+    &:active{
+      color: #888888;
+      border-color: #e5e5e5;
+    }
+    &:focus{
+      z-index: 1; // https://yadi.sk/i/7KxmdebQypZtZQ
+    }
+  }
+  .minus {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-size: 10px;
+  }
+  .plus {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+@mixin aspect-ratio($width, $height) {
+  &:before {
+    content: "";
+    display: block;
+
+    $padding: ($height / $width) * 100%;
+    $padding_ceil_decimal: ceil($padding * 100)/100; // округляем до сотых (чтоб было одинакове округление в netcat)
+    //padding-top: $padding_ceil_decimal;
+    padding-top: var(--img-padding-top, $padding_ceil_decimal);
+
+    //padding-top: ($height / $width) * 100%; // без округления (пять знаков после запятой)
+    //padding-top: floor(($height / $width) * 100%); // округлят до целых в меньшую сторону (иногда у картинки может возникнуть тонкий отступ в несколько пикселей)
+  }
+}
+
+[class*="col-"]{
+
+}
+
+table:not([style]){
+
+}
+
+//&:not(:last-child):after{ }
+
+//transform: translate3d(0, 0, 0);
+
+// br в одну строку с пробелом
+//br {
+//  content: ' ';
+//  &:after {
+//    content: ' '
+//  }
+//}
+
+// уменьшение отступов между ячейками на различных разрешениях
+//@media only screen and (max-width: 575px) {
+//  > .container > .row,
+//  > .container-fluid > .row{
+//    @include row-mini(10px);
+//  }
+//  .mb-30:not(.pagination):not(.pagination-wrapper){
+//    margin-bottom: 10px;
+//  }
+//  .pagination,
+//  .button-container{
+//    margin-top: 10px;
+//  }
+//}

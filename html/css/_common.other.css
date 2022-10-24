@@ -1,0 +1,78 @@
+/* Стили для всего сайта */
+/* ( в том числе 4k (xxl): ≥ 1930px ) */
+
+
+
+/* /Стили для всего сайта */
+
+
+/* Extra large (xl): ≤ 1929px */
+@media only screen and (max-width: 1929px) {
+
+
+
+}
+/* Extra large (xl): ≤ 1929px */
+
+
+/* Large (lg): ≤ 1359px */
+@media only screen and (max-width: 1359px) {
+
+
+
+}
+/* /Large (lg): ≤ 1359px */
+
+
+/* Medium (md): ≤ 991px */
+@media only screen and (max-width: 991px) {
+
+
+
+}
+/* /Medium (md): ≤ 991px */
+
+
+/* Small (sm): ≤ 767px */
+@media only screen and (max-width: 767px) {
+
+
+
+}
+/* /Small (sm): ≤ 767px */
+
+
+/* Extra small: ≤ 575px */
+@media only screen and (max-width: 575px) {
+
+
+
+}
+/* /Extra small: ≤ 575px */
+
+
+/* Mobile L: ≤ 425 */
+@media only screen and (max-width: 425px) {
+
+
+
+}
+/* /Mobile L: ≤ 425 */
+
+
+/* Mobile M: ≤ 375 */
+@media only screen and (max-width: 375px) {
+
+
+
+}
+/* Mobile M: ≤ 375 */
+
+
+/* Mobile S: ≤ 320 */
+@media only screen and (max-width: 320px) {
+
+
+
+}
+/* Mobile S: ≤ 320 */

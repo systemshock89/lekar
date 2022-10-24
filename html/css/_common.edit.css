@@ -1,0 +1,34 @@
+.page-content {
+  overflow: inherit; }
+
+.documents-block .item .table-responsive > .overflow > table .row1,
+.price-block .item .table-responsive .row1 {
+  position: relative; }
+
+.text-block-float .text-container .text .nc-ckeditor-inline {
+  display: block !important; }
+
+.menu-top-container {
+  z-index: 9999; }
+
+.catalog-advantage-variant1 .nc-editable-image-container,
+.catalog-advantage-variant2 .nc-editable-image-container,
+.catalog-advantage-variant3 .nc-editable-image-container,
+.catalog-advantage-variant4 .nc-editable-image-container,
+.catalog-advantage-variant5 .nc-editable-image-container,
+.catalog-advantage-variant6 .nc-editable-image-container,
+.catalog-advantage-variant7 .nc-editable-image-container,
+.catalog-advantage-variant8 .nc-editable-image-container,
+.catalog-advantage-variant9 .nc-editable-image-container,
+.catalog-products .nc-editable-image-container,
+.catalog-products2 .nc-editable-image-container,
+.catalog-products3 .nc-editable-image-container,
+.catalog-gallery-album .nc-editable-image-container,
+.catalog-gallery .nc-editable-image-container,
+.catalog-gallery-album-fluid .nc-editable-image-container,
+.catalog-gallery-fluid .nc-editable-image-container,
+.catalog-sections .nc-editable-image-container,
+.video-block-fancybox .nc-editable-image-container,
+.news-list .nc-editable-image-container {
+  display: block;
+  position: static; }
